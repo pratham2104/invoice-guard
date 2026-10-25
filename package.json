@@ -13,11 +13,8 @@
     "db:load": "tsx src/db/load.ts",
     "data:build": "python3 data/scripts/build_data.py",
     "demo": "tsx src/pipeline/demo.ts",
-<<<<<<< Updated upstream
-    "vision": "tsx src/vision/cli.ts"
-=======
+    "vision": "tsx src/vision/cli.ts",
     "api": "tsx src/api/server.ts"
->>>>>>> Stashed changes
   },
   "license": "MIT",
   "devDependencies": {
@@ -28,11 +25,8 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-<<<<<<< Updated upstream
     "@napi-rs/canvas": "^0.1.100",
-=======
     "express": "^5.1.0",
->>>>>>> Stashed changes
     "mailparser": "^3.7.4",
     "pdfjs-dist": "^4.10.38"
   }
