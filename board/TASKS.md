@@ -11,7 +11,7 @@ Status: `open` → `claimed` → `in-progress` → `done` (or `blocked`).
 | T03 | App skeleton: Node/Express API + SQLite schema (vendors, invoices, payments, holds, callbacks) | done | pratham-2 | | Schema + loader + package.json done. Express routes split out as T03b |
 | T03b | Express API routes over the DB (vendors, invoices, holds, callbacks); add deps to package.json | open | | `src/api/` | Schema in ARCHITECTURE.md Interfaces |
 | T04 | AP control rules (deterministic pass/hold) | open | | `src/rules/` | Needs T03 schema |
-| T05 | Vendor fingerprint: profile per vendor + Qwen "what's different" compare | done | pratham-2 | | Rules done + tested; Qwen language checks written, mocked in tests, NOT yet tried on the real GB10 model |
+| T05 | Vendor fingerprint: profile per vendor + Qwen "what's different" compare | in-progress | pratham-2 | `src/fingerprint/` | Reopened: red-team fixes from pratham-1 (combosquat, plural, freemail, bank-change wording) |
 | T06 | Invoice vision check: Qwen compares new invoice image vs last real one | open | | `src/vision/` | Test speed/accuracy by 12:30; fallback = compare text fields |
 | T07 | OpenClaw tools: lookup_vendor, check_invoice, hold_payment, post_alert, create_callback_task | open | | `agent/` | No release tool, by design |
 | T08 | Inbox watcher: folder of .eml/PDF (backup) + Gmail IMAP (live demo) | open | | `src/inbox/` | |
