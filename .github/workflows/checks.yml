@@ -1,0 +1,39 @@
+name: checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Scan for secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip if no package.json yet
+        id: has_pkg
+        run: |
+          if [ -f package.json ]; then echo "yes=true" >> "$GITHUB_OUTPUT"; else echo "No package.json yet, skipping"; fi
+      - uses: actions/setup-node@v4
+        if: steps.has_pkg.outputs.yes == 'true'
+        with:
+          node-version: 22
+      - name: Install
+        if: steps.has_pkg.outputs.yes == 'true'
+        run: if [ -f package-lock.json ]; then npm ci; else npm install; fi
+      - name: Typecheck
+        if: steps.has_pkg.outputs.yes == 'true'
+        run: npm run typecheck --if-present
+      - name: Test
+        if: steps.has_pkg.outputs.yes == 'true'
+        run: npm test --if-present
