@@ -117,6 +117,36 @@ export function lastRealInvoice(db: DB, paths: Paths, vendorId: string | null): 
   };
 }
 
+/** Any stored invoice by id, as an InvoiceView (for the dashboard's invoice list). */
+export function invoiceById(db: DB, paths: Paths, id: string): (InvoiceView & { id: string; vendorId: string; status: string }) | null {
+  const i = db.prepare("SELECT * FROM invoices WHERE id = ?").get(id) as any;
+  if (!i) return null;
+  const lines = db.prepare("SELECT * FROM invoice_lines WHERE invoice_id = ? ORDER BY line_no").all(i.id) as any[];
+  return {
+    id: i.id, vendorId: i.vendor_id, status: i.status,
+    invoiceNumber: i.invoice_number, invoiceDate: i.invoice_date, poNumber: i.po_number, amount: i.amount,
+    bankName: i.bank_name, routingLast4: last4(i.routing), accountLast4: last4(i.account), remitAddress: i.remit_address,
+    lines: lines.map((l) => ({ lineNo: l.line_no, description: l.description, qty: l.qty, unitPrice: l.unit_price, amount: l.amount })),
+    pdfUrl: pdfUrlFor(paths, `${i.invoice_number}.pdf`),
+  };
+}
+
+/** Every invoice the dashboard lists: open/closed cases first (newest first), then stored invoices (newest first). */
+export async function invoiceListViews(db: DB, cache: CaseCache) {
+  const caseRows = (await listCaseViews(db, cache)).map((c: any) => ({
+    id: c.id, kind: "case" as const, caseId: c.id, vendorName: c.vendorName, invoiceNumber: c.invoiceNumber ?? null,
+    date: c.createdAt, amount: c.amount ?? null,
+    risk: c.state === "APPROVED" ? "cleared" : c.outcome === "HOLD_FRAUD_RISK" ? "fraud" : c.outcome === "HOLD_CONFIRM" ? "confirm" : "cleared",
+    state: c.state,
+  }));
+  const stored = (db.prepare(`SELECT i.id, i.invoice_number, i.invoice_date, i.amount, i.status, v.name AS vendor_name
+                              FROM invoices i JOIN vendors v ON v.id = i.vendor_id
+                              WHERE i.status IN ('paid','approved') ORDER BY i.invoice_date DESC, i.id DESC`).all() as any[])
+    .map((r) => ({ id: r.id, kind: "invoice" as const, caseId: null, vendorName: r.vendor_name, invoiceNumber: r.invoice_number,
+                   date: r.invoice_date, amount: r.amount, risk: "cleared" as const, state: r.status === "paid" ? "PAID" : "APPROVED" }));
+  return [...caseRows, ...stored];
+}
+
 /** Per-case derived data, cached: the PDF parse is the only slow part. Clear on demo reset. */
 export class CaseCache {
   private invoices = new Map<string, Promise<InvoiceView | null>>();

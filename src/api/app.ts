@@ -10,7 +10,7 @@ import { openDb, loadFixtures, REPO_ROOT, type DB } from "../db/index.js";
 import { processEml } from "../pipeline/index.js";
 import { isLocalHost, localLlm } from "../fingerprint/index.js";
 import * as cases from "../cases/index.js";
-import { CaseCache, alertViews, caseDetail, listCaseViews, statusCounts, vendorViews } from "./views.js";
+import { CaseCache, alertViews, caseDetail, invoiceById, invoiceListViews, listCaseViews, statusCounts, vendorViews } from "./views.js";
 
 export const MODEL_ID = "nvidia/Qwen3.6-35B-A3B-NVFP4";
 
@@ -185,6 +185,16 @@ export function createApi(opts: ApiOptions) {
   app.get("/api/cases/:id", async (req, res) => { res.json(await detail(req.params.id)); });
   app.get("/api/alerts", (_req, res) => { res.json(alertViews(db)); });
   app.get("/api/vendors", (_req, res) => { res.json(vendorViews(db)); });
+  app.get("/api/invoices", async (_req, res) => { res.json(await invoiceListViews(db, cache)); });
+  app.get("/api/invoices/:id", async (req, res) => {
+    const id = req.params.id;
+    if (/^HOLD-/i.test(id)) { res.json({ kind: "case", ...(await detail(id)) }); return; }
+    const inv = invoiceById(db, paths, id);
+    if (!inv) throw new HttpError(404, `No such invoice: ${id}`);
+    const v = db.prepare("SELECT id, name, domain, phone_on_file FROM vendors WHERE id = ?").get(inv.vendorId) as any;
+    res.json({ kind: "invoice", invoice: inv, vendor: v ? { id: v.id, name: v.name, domain: v.domain, phoneOnFile: v.phone_on_file } : null,
+               verdict: inv.status === "paid" ? "Paid. Matched this vendor's normal pattern." : "Approved. Matched this vendor's normal pattern." });
+  });
   app.get("/api/users", (_req, res) => {
     res.json(Object.entries(cases.users()).map(([id, role]) => ({ id, role: role === "ap_manager" ? "manager" : role === "ap_clerk" ? "clerk" : role })));
   });
