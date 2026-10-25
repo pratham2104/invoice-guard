@@ -7,7 +7,7 @@ Status: `open` → `claimed` → `in-progress` → `done` (or `blocked`).
 | ID | Task | Status | Owner | Folders | Notes |
 |----|------|--------|-------|---------|-------|
 | T01 | GB10: NemoClaw + Qwen running, model answers locally | in-progress | pratham-1 | `docs/SETUP.md` | Model copied from USB; installer next |
-| T02 | Fake data: 1 real vendor with 20 normal emails + 3 real invoices, 3 attack emails/invoices, SQLite seed | open | | `data/` | See PRODUCT.md "Demo scenarios". Do this first, everything tests against it |
+| T02 | Fake data: 1 real vendor with 20 normal emails + 3 real invoices, 3 attack emails/invoices, SQLite seed | in-progress | pratham-2 | `data/` | See PRODUCT.md "Demo scenarios". Do this first, everything tests against it |
 | T03 | App skeleton: Node/Express API + SQLite schema (vendors, invoices, payments, holds, callbacks) | open | | `src/api/`, `src/db/`, `package.json` | Publish schema in ARCHITECTURE.md "Interfaces" |
 | T04 | AP control rules (deterministic pass/hold) | open | | `src/rules/` | Needs T03 schema |
 | T05 | Vendor fingerprint: profile per vendor + Qwen "what's different" compare | open | | `src/fingerprint/` | Core feature. Needs T02 |
