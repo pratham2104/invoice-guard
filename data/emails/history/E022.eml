@@ -4,9 +4,9 @@ Subject: Invoice ACME-1051
 Date: Thu, 01 Oct 2026 09:30:00 -0700
 Message-ID: <e022@demo.invoice-guard>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3946654537735441645=="
+Content-Type: multipart/mixed; boundary="===============8018086641375346680=="
 
---===============3946654537735441645==
+--===============8018086641375346680==
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -18,7 +18,7 @@ on line 6.
 Thanks,
 Maria
 
---===============3946654537735441645==
+--===============8018086641375346680==
 Content-Type: application/pdf
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="ACME-1051.pdf"
@@ -94,4 +94,4 @@ CjAwMDAwMDAwNTggMDAwMDAgbiAKMDAwMDAwMDExNSAwMDAwMCBuIAowMDAwMDAwMjUxIDAwMDAw
 IG4gCjAwMDAwMDM1NjkgMDAwMDAgbiAKMDAwMDAwMzYzOSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9T
 aXplIDcgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjM3MTQKJSVFT0YK
 
---===============3946654537735441645==--
+--===============8018086641375346680==--

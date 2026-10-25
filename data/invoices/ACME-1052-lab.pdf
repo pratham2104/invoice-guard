@@ -1,0 +1,74 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 2263 >>
+stream
+0.07 0.2 0.4 rg 50 712 90 40 re f
+BT 1 1 1 rg /F2 20 Tf 62 726 Td (ACME) Tj ET
+BT 0.07 0.2 0.4 rg /F2 14 Tf 150 736 Td (Acme School Supply) Tj ET
+BT 0.35 0.35 0.35 rg /F1 9 Tf 150 722 Td (1200 Industrial Way, Fresno, CA 93721) Tj ET
+BT 0.07 0.2 0.4 rg /F2 20 Tf 440 736 Td (INVOICE) Tj ET
+BT 0 0 0 rg /F2 9 Tf 420 712 Td (Invoice #) Tj ET
+BT 0 0 0 rg /F1 9 Tf 480 712 Td (ACME-1052) Tj ET
+BT 0 0 0 rg /F2 9 Tf 420 698 Td (Date) Tj ET
+BT 0 0 0 rg /F1 9 Tf 480 698 Td (2026-10-14) Tj ET
+BT 0 0 0 rg /F2 9 Tf 420 684 Td (Terms) Tj ET
+BT 0 0 0 rg /F1 9 Tf 480 684 Td (Net 30) Tj ET
+BT 0.35 0.35 0.35 rg /F2 9 Tf 50 670 Td (BILL TO) Tj ET
+BT 0 0 0 rg /F2 10 Tf 50 656 Td (Valley Unified School District) Tj ET
+BT 0 0 0 rg /F1 10 Tf 50 643 Td (Accounts Payable) Tj ET
+BT 0 0 0 rg /F1 10 Tf 50 630 Td (500 Education Blvd, Fresno, CA 93710) Tj ET
+0.93 0.95 0.98 rg 50 586 512 18 re f
+BT 0 0 0 rg /F2 9 Tf 56 590 Td (Description) Tj ET
+BT 0 0 0 rg /F2 9 Tf 360 590 Td (Qty) Tj ET
+BT 0 0 0 rg /F2 9 Tf 410 590 Td (Unit) Tj ET
+BT 0 0 0 rg /F2 9 Tf 490 590 Td (Amount) Tj ET
+BT 0 0 0 rg /F1 9 Tf 56 568 Td (1. Compound microscopes) Tj ET
+BT 0 0 0 rg /F1 9 Tf 360 568 Td (6) Tj ET
+BT 0 0 0 rg /F1 9 Tf 410 568 Td (520.00) Tj ET
+BT 0 0 0 rg /F1 9 Tf 490 568 Td (3,120.00) Tj ET
+BT 0 0 0 rg /F1 9 Tf 56 552 Td (2. Prepared slide kits) Tj ET
+BT 0 0 0 rg /F1 9 Tf 360 552 Td (12) Tj ET
+BT 0 0 0 rg /F1 9 Tf 410 552 Td (90.00) Tj ET
+BT 0 0 0 rg /F1 9 Tf 490 552 Td (1,080.00) Tj ET
+0.93 0.95 0.98 rg 380 520 182 22 re f
+BT 0 0 0 rg /F2 10 Tf 390 526 Td (TOTAL DUE \(USD\)) Tj ET
+BT 0 0 0 rg /F2 10 Tf 490 526 Td (4,200.00) Tj ET
+0.07 0.2 0.4 RG 50 200 300 78 re S
+BT 0.07 0.2 0.4 rg /F2 9 Tf 60 262 Td (REMIT PAYMENT BY ACH TO) Tj ET
+BT 0 0 0 rg /F1 9 Tf 60 246 Td (Bank: First Valley Bank) Tj ET
+BT 0 0 0 rg /F1 9 Tf 60 233 Td (Routing: 999000111    Account: 4410023378) Tj ET
+BT 0 0 0 rg /F1 9 Tf 60 220 Td (Remit address: PO Box 4410, Fresno, CA 93744) Tj ET
+BT 0.35 0.35 0.35 rg /F1 8 Tf 60 207 Td (Reference the invoice number with your payment.) Tj ET
+BT 0.35 0.35 0.35 rg /F1 8 Tf 50 90 Td (Questions about this invoice? Maria Lopez  \(559\) 555-0142  maria.lopez@acme-supply.com) Tj ET
+BT 0.35 0.35 0.35 rg /F1 8 Tf 50 78 Td (Thank you for supporting Valley schools.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000002566 00000 n 
+0000002636 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+2711
+%%EOF

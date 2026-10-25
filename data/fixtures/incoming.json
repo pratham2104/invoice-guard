@@ -114,7 +114,9 @@
     "date": "2026-10-14T10:20:00-07:00",
     "subject": "Invoice ACME-1052",
     "body": "Hi Janet,\n\nAttached is ACME-1052 for the lab equipment order.\n\nThanks,\nMaria",
-    "attachments": [],
+    "attachments": [
+      "ACME-1052-lab.pdf"
+    ],
     "kind": "incoming",
     "scenario": "4-surprise-invoice",
     "invoice": {
@@ -123,6 +125,20 @@
       "po_number": null,
       "amount": 4200.0,
       "description": "Lab equipment (microscopes, slide kits)",
+      "lines": [
+        {
+          "description": "Compound microscopes",
+          "qty": 6,
+          "unit_price": 520.0,
+          "amount": 3120.0
+        },
+        {
+          "description": "Prepared slide kits",
+          "qty": 12,
+          "unit_price": 90.0,
+          "amount": 1080.0
+        }
+      ],
       "bank": {
         "bank_name": "First Valley Bank",
         "routing": "999000111",

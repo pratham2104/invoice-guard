@@ -95,16 +95,24 @@ CREATE TABLE IF NOT EXISTS emails (
   scenario    TEXT
 );
 
--- Written only by the rules engine (T04). Released only by a human.
+-- One row per case (T15). Opened by the agent when rules say HOLD; only humans move it forward.
 CREATE TABLE IF NOT EXISTS holds (
-  id          TEXT PRIMARY KEY,
-  invoice_id  TEXT,
-  email_id    TEXT,
-  vendor_id   TEXT,
-  reason      TEXT NOT NULL,
-  findings    TEXT NOT NULL,                -- JSON array of Findings
+  id          TEXT PRIMARY KEY,             -- HOLD-0001
+  invoice_id  TEXT,                         -- invoice number, if known
+  email_id    TEXT,                         -- Message-ID of the email that triggered it
+  vendor_id   TEXT,                         -- null = sender not in the vendor master
+  reason      TEXT NOT NULL,                -- decision reason (plain sentence)
+  findings    TEXT NOT NULL,                -- JSON array of Findings, long numbers masked
   status      TEXT NOT NULL DEFAULT 'held', -- held | released | rejected
+  outcome     TEXT,                         -- HOLD_FRAUD_RISK | HOLD_CONFIRM
+  next_step   TEXT,                         -- phone_callback | requester_confirmation
+  state       TEXT NOT NULL DEFAULT 'OPEN', -- OPEN | AWAITING_VENDOR | AWAITING_REQUESTER | READY_FOR_APPROVAL | APPROVED | REJECTED
+  severity    TEXT,
+  score       INTEGER,
+  source_file TEXT,
+  verification_started_by TEXT,
   created_at  TEXT NOT NULL,
+  updated_at  TEXT,
   resolved_at TEXT,
   resolved_by TEXT                          -- a human's name, never the agent
 );
@@ -119,4 +127,54 @@ CREATE TABLE IF NOT EXISTS callbacks (
   outcome     TEXT,
   created_at  TEXT NOT NULL,
   completed_at TEXT
+);
+
+-- "Did you order this?" checks sent to the internal PO requester (HOLD_CONFIRM). Never the vendor.
+CREATE TABLE IF NOT EXISTS requester_checks (
+  id           TEXT PRIMARY KEY,
+  hold_id      TEXT NOT NULL REFERENCES holds(id),
+  recipient_name    TEXT,
+  recipient_contact TEXT,                   -- internal staff contact; null = route to the AP lead
+  recipient_department TEXT,
+  text         TEXT NOT NULL,
+  source       TEXT NOT NULL,               -- llm | template
+  status       TEXT NOT NULL DEFAULT 'open', -- open | confirmed | denied
+  reply        TEXT,
+  created_at   TEXT NOT NULL,
+  completed_at TEXT
+);
+
+-- Tamper-evident audit log (port of prerna-1's case_events): each row hashes the previous one.
+CREATE TABLE IF NOT EXISTS audit_events (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  case_id     TEXT NOT NULL,
+  ts          TEXT NOT NULL,
+  actor       TEXT NOT NULL,                -- "agent" or a human user
+  action      TEXT NOT NULL,
+  detail_json TEXT NOT NULL,
+  prev_hash   TEXT NOT NULL,
+  hash        TEXT NOT NULL
+);
+
+-- Idempotency: each email is processed once.
+CREATE TABLE IF NOT EXISTS processed_messages (
+  message_id   TEXT PRIMARY KEY,
+  file         TEXT,
+  processed_at TEXT NOT NULL,
+  outcome      TEXT NOT NULL,
+  case_id      TEXT
+);
+
+-- In-app alert feed (T09). Same DDL as src/alerts ensureAlertsTable().
+CREATE TABLE IF NOT EXISTS alerts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  case_id TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  vendor_name TEXT,
+  outcome TEXT NOT NULL,
+  state TEXT,
+  headline TEXT NOT NULL,
+  reason TEXT NOT NULL,
+  slack_sent INTEGER NOT NULL DEFAULT 0,
+  slack_note TEXT
 );

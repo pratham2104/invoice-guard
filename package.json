@@ -11,15 +11,18 @@
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
     "db:load": "tsx src/db/load.ts",
-    "data:build": "python3 data/scripts/build_data.py"
+    "data:build": "python3 data/scripts/build_data.py",
+    "demo": "tsx src/pipeline/demo.ts"
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/mailparser": "^3.4.6",
     "@types/node": "^22.18.8",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "mailparser": "^3.7.4",
     "pdfjs-dist": "^4.10.38"
   }
 }

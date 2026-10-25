@@ -50,7 +50,7 @@ export function loadFixtures(db: DB, dir = FIXTURES_DIR): Record<string, number>
 
   db.exec("BEGIN");
   try {
-    for (const t of ["callbacks", "holds", "emails", "payments", "invoice_lines", "invoices",
+    for (const t of ["audit_events", "requester_checks", "alerts", "processed_messages", "callbacks", "holds", "emails", "payments", "invoice_lines", "invoices",
                      "purchase_orders", "vendor_banks", "vendor_contacts", "vendors"]) {
       db.exec(`DELETE FROM ${t}`);
     }

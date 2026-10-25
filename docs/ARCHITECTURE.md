@@ -1,26 +1,23 @@
 # Architecture
 
-## Flow
+## Flow (as built: `src/pipeline/processEml`, run it with `npm run demo`)
 
 ```
-AP Inbox (Gmail IMAP for live demo · folder of .eml/PDF as backup)
-   ▼
-OpenClaw agent (inside a NemoClaw / OpenShell sandbox, local-only network policy)
-   ▼
-Qwen (vLLM on the GB10):
-  • extract fields: vendor, amount, invoice #, bank details, requested changes
-  • compare to the vendor fingerprint (style, rhythm, amounts, contacts)
-  • compare invoice image to the vendor's last real invoice (vision)
-  → produces FINDINGS (a list of "what's different"), never a decision
-   ▼
-AP control rules (deterministic code): PASS or HOLD
-   ▼                         ▼
-log                  HOLD → callback task (phone number ON FILE)
-                          → alert (Slack summary + in-app feed)
-                          → 7 am briefing
-                                ▼
-                     AP employee releases or rejects
-                     (the agent has no release tool)
+.eml (AP inbox folder; Gmail IMAP later)
+   ▼  parseEml: sender, reply-to, Authentication-Results, body, PDF attachments → temp files
+fingerprint(db, msg)              src/fingerprint   resolve vendor · rule checks · PDF hidden text · rhythm
+   │                                                · local Qwen language checks (optional, fails soft)
+   ▼  + messageChecks(msg, auth)  src/rules         prompt-injection wording · SPF/DKIM/DMARC failures
+decide(findings)                  src/rules         deterministic: PASS | HOLD_FRAUD_RISK | HOLD_CONFIRM
+   ▼                     ▼                                  ▼
+ PASS → log      HOLD_FRAUD_RISK                    HOLD_CONFIRM
+                 openCase → callback script to       openCase → draftRequesterConfirmation()
+                 vendors.phone_on_file               to the internal PO requester
+                          └──────────────┬──────────────────┘
+                                         ▼
+                 audit_events (hash chain) · raiseAlert → Slack summary (if SLACK_WEBHOOK_URL) + in-app feed
+                                         ▼
+                 humans only: start_verification → record_confirmation → approve (manager, not the verifier)
 ```
 
 ## Decision flow
@@ -86,9 +83,14 @@ against it without reading your code.
 - `invoice_lines(invoice_id, line_no, description, qty, unit_price, amount)`
 - `payments(id, invoice_id, vendor_id, amount, paid_on, routing, account, method)`
 - `emails(id, vendor_id, from_addr, from_name, reply_to, to_addr, date, subject, body, attachments JSON, kind history|incoming, scenario)`
-- `holds(id, invoice_id, email_id, vendor_id, reason, findings JSON, status held|released|rejected, created_at, resolved_at, resolved_by)`:
-  written only by the rules engine; `resolved_by` is always a human.
+- `holds(id HOLD-0001, invoice_id, email_id, vendor_id, reason, findings JSON (6+ digit numbers masked), status held|released|rejected,
+  outcome, next_step, state, severity, score, source_file, verification_started_by, created_at, updated_at, resolved_at, resolved_by)`:
+  one row per case; `resolved_by` is always a human.
 - `callbacks(id, hold_id, vendor_id, phone, script, status open|confirmed_fraud|confirmed_legit|no_answer, outcome, created_at, completed_at)`
+- `requester_checks(id, hold_id, recipient_name, recipient_contact, recipient_department, text, source llm|template, status open|confirmed|denied, reply, created_at, completed_at)`
+- `audit_events(id, case_id, ts, actor, action, detail_json, prev_hash, hash)`: hash chain, see "Case workflow".
+- `processed_messages(message_id, file, processed_at, outcome, case_id)`: each email processed once.
+- `alerts(...)`: in-app feed, see "Alert format".
 
 ### API routes
 - Not built yet. Express routes are open as **T03b** on the board.
@@ -155,4 +157,23 @@ confirmation. Else **PASS**. `unknown` findings add no points and never clear a 
 - Content: vendor, decision, top 1–3 reasons as fixed plain phrases (`PHRASES`), case id, state. Never invoice
   numbers, amounts, sender addresses or bank numbers; `scrub()` strips any digit run of 5+ and any address as a backstop.
 - Webhook only: no interactive buttons (they need a public URL). Humans act on cases in the app/CLI.
+
+### Case workflow (T15, `src/cases/index.ts`), ported from prerna-1's `cases.py`
+```
+OPEN ─startVerification─▶ AWAITING_VENDOR (fraud: phone)  │ AWAITING_REQUESTER (confirm: requester)
+AWAITING_* ─recordConfirmation(yes)─▶ READY_FOR_APPROVAL ─approve─▶ APPROVED
+AWAITING_* ─recordConfirmation(no)──▶ REJECTED ;  any non-terminal ─reject─▶ REJECTED
+```
+- `openCase(db, { decision, vendorId, messageId, invoiceNumber, msg })` is the only agent action: creates the hold,
+  drafts the callback (phone from `vendors.phone_on_file`) or the requester question, writes audit events.
+- `startVerification`, `recordConfirmation`, `approve`, `reject` are human-only (`ControlError` for the agent or an
+  unknown user). `approve` needs role `ap_manager`, state `READY_FOR_APPROVAL`, and a different person from whoever
+  started verification. Users/roles: `IG_USERS` JSON env, default `janet.kim` (clerk), `omar.reyes`, `pat.lee` (managers).
+- Audit chain: `hash = sha256(prev_hash|case_id|ts|actor|action|detail_json)`, one global chain.
+  `verifyAuditChain(db)` → `{ ok, firstBadId, events }`; any edited, deleted or reordered row breaks it.
+
+### Pipeline (T15, `src/pipeline/index.ts`)
+- `processEml(db, path, { llm?, slackWebhookUrl?, fetchImpl? })` → `{ file, messageId, skipped, decision, vendorId, vendorName, caseId, alert? }`.
+  `processDir(db, dir, opts)` runs every `.eml` in filename order. Idempotent by Message-ID.
+- `npm run demo`: fresh `data/demo.db`, all of `data/emails/incoming`, prints a table. Uses the model only if `LLM_BASE_URL` is set.
 

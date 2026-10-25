@@ -5,9 +5,9 @@ Subject: Invoice ACME-1051 (corrected remittance)
 Date: Sun, 25 Oct 2026 06:12:00 -0700
 Message-ID: <in-attack-3@demo.invoice-guard>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0997750100152726578=="
+Content-Type: multipart/mixed; boundary="===============5783840141814648963=="
 
---===============0997750100152726578==
+--===============5783840141814648963==
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -19,7 +19,7 @@ r payment.
 
 Acme School Supply Billing
 
---===============0997750100152726578==
+--===============5783840141814648963==
 Content-Type: application/pdf
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="ACME-1051-corrected.pdf"
@@ -97,4 +97,4 @@ IDAwMDAwIG4gCjAwMDAwMDAwNTggMDAwMDAgbiAKMDAwMDAwMDExNSAwMDAwMCBuIAowMDAwMDAw
 MjUxIDAwMDAwIG4gCjAwMDAwMDM2OTIgMDAwMDAgbiAKMDAwMDAwMzc2MiAwMDAwMCBuIAp0cmFp
 bGVyCjw8IC9TaXplIDcgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjM4MzcKJSVFT0YK
 
---===============0997750100152726578==--
+--===============5783840141814648963==--

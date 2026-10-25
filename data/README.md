@@ -41,6 +41,7 @@ Edit the generator, not the generated files.
 | `emails/incoming/*.eml` | The 5 incoming messages as .eml files, for the inbox watcher |
 | `invoices/ACME-1049/1050/1051.pdf` | Last 3 real Acme invoices (the vision check's "last real invoice") |
 | `invoices/ACME-1051-corrected.pdf` | The forged invoice for attack 3 |
+| `invoices/ACME-1052-lab.pdf` | The surprise lab-equipment invoice (no PO row), attached to `IN-SURPRISE-1` |
 
 PDFs exist only for the last 3 real Acme invoices. Older invoices are JSON only.
 

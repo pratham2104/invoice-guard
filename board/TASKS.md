@@ -21,4 +21,4 @@ Status: `open` → `claimed` → `in-progress` → `done` (or `blocked`).
 | T12 | Prompt-injection invoice demo (hidden "approve this" text gets ignored) | open | | `data/attacks/`, `tests/` | Coordinate with T02 owner |
 | T13 | Overnight self-test (agent attacks itself) | open | | `src/selftest/` | STRETCH: only if T05 + T06 done by 2:30, else a slide |
 | T14 | Submission: demo video < 2 min, write-up, deck, NVIDIA form answers | open | | `submission/` | Record on the box before 5:15 |
-| T15 | Pipeline + case workflow: .eml → fingerprint → rules → case + audit + alert; case state machine, roles, hash-chained audit (port of prerna-1's cases.py); `npm run demo` | in-progress | pratham-2 | `src/pipeline/`, `src/cases/`, `src/db/`, `data/` | Schema adds case columns + audit_events + processed_messages |
+| T15 | Pipeline + case workflow: .eml → fingerprint → rules → case + audit + alert; case state machine, roles, hash-chained audit (port of prerna-1's cases.py); `npm run demo` | done | pratham-2 | | Pipeline, cases, audit chain, `npm run demo` done (ported from prerna-1); 18 tests |
