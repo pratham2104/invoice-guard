@@ -29,6 +29,10 @@ The phone rings → greeting → question 1 → beep → answer → question 2 �
 Output lists the recordings: `/var/spool/asterisk/recording/HOLD-0003-q1.wav`, `-q2.wav`.
 Listen: `sudo play /var/spool/asterisk/recording/HOLD-0003-q1.wav` (sox).
 
+## Try it on a Mac first (Docker, no install)
+`voice/mac-test.sh` starts the same Asterisk config in Docker and prints the Linphone login and call commands
+(fake-phone test needs no phone at all). `voice/mac-test.sh stop` removes it.
+
 ## If it doesn't work
 | Symptom | Check |
 |---|---|
