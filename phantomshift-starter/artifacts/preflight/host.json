@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-25T10:50:06+0000",
+  "collected": "2026-10-25T20:53:12+0000",
   "arch": "x86_64",
   "os": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
   "gpu": [
@@ -7,7 +7,7 @@
     "NVIDIA GeForce RTX 3090, 535.288.01, 24576 MiB"
   ],
   "ram_gib": 125.5,
-  "disk_free_gib": 509.5,
+  "disk_free_gib": 506.5,
   "python": "3.13.12",
   "tools": {
     "docker": {

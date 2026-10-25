@@ -1,0 +1,29 @@
+{
+  "config": {
+    "name": "context_bound",
+    "label": "C. Context-bound: sensitive args must trace to trusted sources",
+    "deny_tools": [],
+    "domain_allowlist": null,
+    "bind_params": {
+      "pay_invoice": [
+        "account",
+        "amount",
+        "invoice_id",
+        "currency"
+      ],
+      "send_email": [
+        "to"
+      ],
+      "http_post": [
+        "url"
+      ]
+    },
+    "egress_label_rules": {
+      "secret": "deny",
+      "pii": "trusted_destination"
+    }
+  },
+  "digest": "1baaad58fec7a9dd1f9793bf458d2c300a6a394827ec5d9cd55bc236655565be",
+  "finding_id": "manual",
+  "expected_version": "baseline"
+}

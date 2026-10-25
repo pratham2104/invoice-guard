@@ -174,3 +174,27 @@ Getting local inference + a real channel working by ~11:15 PT. Everything else i
   - Created `tests/test_skills_autopatch.py` (8 test methods).
   - Added CLI test in `tests/test_autopatch.py` covering outbox draining.
   - Total unit test suite: **546 passing tests** across 15 test modules with zero failures and zero errors.
+
+## Master Prompt Phase 1–8 Verification & Delivery (2026-10-25 ~20:50Z)
+- **Phase 1: Local Model Serving & Verification (`scripts/verify_qwen_route.py`)**:
+  - Implemented standalone verifier testing host GPU evidence, model weight inventory, `/v1/models`, chat completion, structured tool calls, prompt injection interception, and airgap integrity.
+  - Audited model checkpoint: `Qwen3.6-35B-A3B-NVFP4` is missing on dev host (`QWEN_WEIGHTS_MISSING`); served staged local fallback `nemotron-3-nano-4b` via `llama-server` on `http://127.0.0.1:8000/v1` through guardrail admission launcher (`run_limited_v2.sh cpu --ram 8`). Protected GPU 0 (PID 1151066 external run); GPU 1 idle.
+  - Plain chat completion: Verified in 1.155s, 44 tokens, model reported `nemotron-3-nano-4b`.
+  - Structured tool calling: Verified `finish_reason: "tool_calls"`, parsed `tool_calls` object for `phantomshift_submit_payment` with exact arguments (no JSON strings printed in assistant text).
+  - Malicious prompt injection: Injected invoice instruction proposing redirect to offshore account `ATTACKER-SWISS-999` intercepted by `ToolFirewall` (`state: DENIED, reason_code: REQUESTER_DENIED / RECIPIENT_MISMATCH, ledger_unchanged: True`).
+  - Egress audit: Zero remote provider keys set; loopback only; fully airgapped.
+  - Machine-readable evidence persisted to `artifacts/runtime-verification/model_verification.json` and `artifacts/gb10/qwen_route.json`.
+- **Phase 2 & 3: Ingestion & Interception Pipeline**:
+  - `phantomshift acceptance`: Verified full pipeline (`firewall_blocks_malicious_payment`, ledger unchanged, acceptance `PASS`).
+  - Hash-chained event store: Recorded verified live run `inc-e60b396776bc` in `artifacts/events.sqlite` (9 state machine events, `verify['ok'] == True`).
+- **Phase 4 & 5: AUTOPATCH & Discord Approvals**:
+  - Ran `phantomshift autopatch --research-once`, computing RWCR score ($3I+2E+3R+N+2Q-2D = 40$, severity critical).
+  - Hardened outbox dedupe keys (`finding-{finding_id}`).
+  - Ran `phantomshift autopatch --drain-outbox`, sending real finding embed to Discord channel `#approvals` (`{"sent": 1, "failed": 0}`, subsequent runs idempotent `{"sent": 0, "failed": 0}`).
+  - Deployed `context_bound` candidate policy via `PolicyDeployService`, passing verification acceptance.
+- **Phase 6: BLACKSITE 2D UI & Evidence Sync**:
+  - Tested dashboard server at `127.0.0.1:8765`, confirmed `/api/dashboard/status`, `/api/incidents`, `/api/autopatch/findings` reflecting accurate live statuses.
+- **Phase 8: Machine-Readable Gate Verification**:
+  - `python3 scripts/verify_hackathon.py --mode prep`: H07 `PASS` (`docs/CLAIMS_AUDIT.md`), H06 confirms valid demo evidence in `artifacts/runtime-verification/demo.json` and `artifacts/gb10/demo.json` bound to `srva` while honestly reporting `NOT TESTED` for GB10 hardware on prep host.
+  - Generated `artifacts/gb10/demo.json`, `artifacts/gb10/qwen_route.json`, and `artifacts/gb10/verify.json`.
+  - Test suite remains 100% green: **546 passing tests** across 15 test modules with zero failures and zero errors.

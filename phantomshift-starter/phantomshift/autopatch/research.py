@@ -105,7 +105,7 @@ def run_research_cycle(store: AutopatchStore, *, scenario_id: str = "invoice_red
     if blocked:
         store.enqueue_outbox(
             "approvals",
-            f"finding-{fp}",
+            f"finding-{finding_id}",
             {"finding_id": finding_id, "digest": selected["digest"] if selected else pd, "severity": rwcr["severity"]},
         )
 
