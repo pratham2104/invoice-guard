@@ -1,0 +1,32 @@
+From: Mara Chen <mara.chen@bluepeakjanitorial.example>
+To: ap@ridgeview-usd.example
+Subject: Invoice INV-8820 - PO-4412
+Date: Sun, 25 Oct 2026 10:12:00 +0000
+Message-ID:
+ <179295697679.20520.10844309370875911217.05_over_po_amount@fixtures.example>
+Authentication-Results:
+ mx.ridgeview-usd.example; spf=pass; dkim=pass; dmarc=pass
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============0376258812705672295=="
+
+--===============0376258812705672295==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hello,
+
+Invoice INV-8820 against PO-4412. Total due: $18,450.00 (includes additional =
+services performed in October).
+
+Mara
+Bluepeak Janitorial
+
+--===============0376258812705672295==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="INV-8820.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQgZmFrZQ==
+
+--===============0376258812705672295==--

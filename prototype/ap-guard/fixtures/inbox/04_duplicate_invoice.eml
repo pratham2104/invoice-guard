@@ -1,0 +1,31 @@
+From: Luis Ortega <luis.ortega@northwindfacilities.example>
+To: ap@ridgeview-usd.example
+Subject: Invoice INV-7714 (resend)
+Date: Sun, 25 Oct 2026 10:12:00 +0000
+Message-ID: <179295697679.20520.1195358224413044900.04_duplicate_invoice@fixtures.example>
+Authentication-Results:
+ mx.ridgeview-usd.example; spf=pass; dkim=pass; dmarc=pass
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============2427993645983910470=="
+
+--===============2427993645983910470==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi AP,
+
+Resending invoice INV-7714 for PO-3250. Total due: $5,395.50.
+Please confirm payment date.
+
+Luis
+Northwind Facilities
+
+--===============2427993645983910470==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="INV-7714.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQgZmFrZQ==
+
+--===============2427993645983910470==--
