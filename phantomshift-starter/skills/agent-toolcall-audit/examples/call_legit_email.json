@@ -1,0 +1,5 @@
+{
+  "tool": "send_email",
+  "args": {"to": "dana@customer.example", "body": "Your export failed because the file exceeded the size limit."},
+  "provenance": {"to": "registry", "body": "untrusted"}
+}

@@ -1,0 +1,13 @@
+{
+  "deploy_id": "dep-28a76bacef",
+  "state": "VERIFIED",
+  "ok": true,
+  "finding_id": "find-sample-001",
+  "candidate_hash": "1baaad58fec7a9dd1f9793bf458d2c300a6a394827ec5d9cd55bc236655565be",
+  "verified": true,
+  "timestamp": 1792925645.33,
+  "reason": "verified against acceptance suite (ledger unmutated, 0 harmful executions, 2/2 legit tasks completed)",
+  "receipt_digest": "9c6f7432f3c14d4037e35b792ce4041b5b8ae8429c8779718433cd2c22097541",
+  "rollback_prepared": true,
+  "backup_policy_digest": "a6bde81998e44c989f9781b46f0f566811cfc6bc8881aa5053690f8cb524f10b"
+}

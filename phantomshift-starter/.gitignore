@@ -1,0 +1,9 @@
+node_modules/
+payguard-ui/node_modules/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.venv/
+artifacts/runtime-verification/*.secret

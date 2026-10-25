@@ -1,0 +1,20 @@
+{
+  "finding_id": "find-sample-001",
+  "operation_id": "op-8f2a1b9c",
+  "nonce": "c735ef1315f887a8",
+  "candidate_policy_hash": "1baaad58fec7a9dd1f9793bf458d2c300a6a394827ec5d9cd55bc236655565be",
+  "expected_policy_version": "baseline",
+  "authorized_operators": ["operator-1", "operator-admin"],
+  "target_sandbox": "openclaw-finance-sandbox-01",
+  "expires_in_s": 900.0,
+  "created_at": 1792925681.0,
+  "expires_at": 1792926581.0,
+  "ui_evidence_url": "http://127.0.0.1:8765/payguard/#fix",
+  "recommended_action": "Deploy context-bound policy patch to test sandbox",
+  "controls": [
+    "Approve once",
+    "Reject",
+    "Request changes",
+    "View evidence"
+  ]
+}

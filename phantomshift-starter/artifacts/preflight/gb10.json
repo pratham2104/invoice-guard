@@ -1,0 +1,13 @@
+{
+  "collected": "2026-10-25T10:26:23Z",
+  "arch": "x86_64",
+  "os": "Ubuntu 24.04.5 LTS",
+  "gpu": "NVIDIA GeForce RTX 3090, 535.288.01, 24576 MiB, 8.6",
+  "gpu_name": "NVIDIA GeForce RTX 3090",
+  "ram_gib": 125,
+  "disk_free_gib": 510,
+  "docker": "Docker version 29.8.1, build 4a63305",
+  "docker_daemon_reachable": "no",
+  "nemoclaw": "nemoclaw v0.0.137",
+  "looks_like_gb10": "no"
+}

@@ -1,0 +1,6 @@
+# Optional UI metadata for agents that read agents/openai.yaml. Not required by SKILL.md loading.
+# Unverified: no OpenClaw or NemoClaw source in the pinned refs reads this file.
+interface:
+  display_name: "Agent Tool-Call Audit"
+  short_description: "Screen one proposed tool call against a trusted scope record."
+  default_prompt: "Use $agent-toolcall-audit to audit this proposed tool call against the trusted scope file."

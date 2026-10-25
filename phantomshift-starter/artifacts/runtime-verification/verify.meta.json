@@ -1,0 +1,7 @@
+{
+  "generated_at": "2026-10-25T10:50:07+00:00",
+  "host": "srva",
+  "gate_count": 7,
+  "gates_sha256": "c7dbbb0401f2588b35401797f4b67569a0d4d293979dc0c2c2d9249c6e30a121",
+  "note": "sha256 of json.dumps(verify.json, sort_keys=True, separators=(',',':'))"
+}

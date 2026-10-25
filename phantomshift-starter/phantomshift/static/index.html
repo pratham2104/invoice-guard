@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>PHANTOMSHIFT incident console</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to incident</a>
+<header class="wrap">
+  <h1>Phantomshift <span class="badge mode-badge" id="mode-badge">[SYNTHETIC REPLAY / FIXTURE MODE]</span></h1>
+  <p class="lede">An agent read a hostile document and tried to act on it. Here is what held it, what each defensive policy would have done, and the fix a human approves.</p>
+  <p class="honesty">All data on this page is synthetic. No live OpenClaw agent is connected: every outcome below is a scripted policy replay on fixtures.</p>
+  <div class="tabs" id="tabs" role="group" aria-label="Scenarios"></div>
+  <nav class="jump" aria-label="Sections">
+    <a href="/payguard/">BLACKSITE 2D Control Workspace</a>
+    <a href="#control">Control plane</a>
+    <a href="#graph">Attack graph</a>
+    <a href="#futures">Three futures</a>
+    <a href="#fix">Fix and receipt</a>
+  </nav>
+</header>
+<div class="wrap" id="banner" role="alert" aria-live="assertive"></div>
+<main class="wrap" id="main" tabindex="-1">
+  <section id="control" aria-labelledby="h-control">
+    <h2 id="h-control">Control plane</h2>
+    <div id="control-body" class="loading">Loading incident record...</div>
+  </section>
+  <section id="graph" aria-labelledby="h-graph">
+    <h2 id="h-graph">Attack graph</h2>
+    <p class="sect-note">Built from the trace events of this run. Select a node to read the event it records.</p>
+    <div id="graph-body" class="loading">Loading trace...</div>
+  </section>
+  <section id="futures" aria-labelledby="h-futures">
+    <h2 id="h-futures">Three futures</h2>
+    <div id="futures-body" class="loading">Loading policy forks...</div>
+  </section>
+  <section id="fix" aria-labelledby="h-fix">
+    <h2 id="h-fix">Fix and receipt</h2>
+    <div id="fix-body" class="loading">Loading receipt...</div>
+    <h3 id="h-measure">Measurement</h3>
+    <div id="measure-body" class="loading">Loading evaluation...</div>
+  </section>
+</main>
+<footer class="wrap foot">Local only. Synthetic fixtures. Nothing on this page is sent anywhere; the download button saves the record you are looking at.</footer>
+<script src="/app.js"></script>
+</body>
+</html>

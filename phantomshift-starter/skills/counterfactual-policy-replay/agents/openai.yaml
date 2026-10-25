@@ -1,0 +1,6 @@
+# Optional UI metadata for agents that read agents/openai.yaml. Not required by SKILL.md loading.
+# Unverified: no OpenClaw or NemoClaw source in the pinned refs reads this file.
+interface:
+  display_name: "Counterfactual Policy Replay"
+  short_description: "Compare candidate policies on a locked fixture set with explicit numerators."
+  default_prompt: "Use $counterfactual-policy-replay to compare these policies on the locked fixture set."

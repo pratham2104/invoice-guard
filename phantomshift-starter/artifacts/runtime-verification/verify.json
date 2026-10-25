@@ -1,0 +1,58 @@
+[
+  {
+    "id": "H01",
+    "gate": "Autonomous always-on trigger",
+    "status": "NOT TESTED",
+    "detail": "no AGENT_STARTED event from a real OpenClaw agent (fixture runs do not count)",
+    "generated_at": "2026-10-25T10:50:07+00:00",
+    "host": "srva"
+  },
+  {
+    "id": "H02",
+    "gate": "Runs on Dell Pro Max GB10",
+    "status": "NOT TESTED",
+    "detail": "arch=x86_64 gpu=['NVIDIA GeForce RTX 3090', 'NVIDIA GeForce RTX 3090']",
+    "generated_at": "2026-10-25T10:50:07+00:00",
+    "host": "srva"
+  },
+  {
+    "id": "H03",
+    "gate": "Local inference, no remote LLM",
+    "status": "NOT TESTED",
+    "detail": "no model server on 127.0.0.1:8000/11434",
+    "generated_at": "2026-10-25T10:50:07+00:00",
+    "host": "srva"
+  },
+  {
+    "id": "H04",
+    "gate": "NemoClaw + OpenClaw + OpenShell present",
+    "status": "NOT TESTED",
+    "detail": "binaries found but no registered sandbox; a real tool call still needs proof",
+    "generated_at": "2026-10-25T10:50:07+00:00",
+    "host": "srva"
+  },
+  {
+    "id": "H05",
+    "gate": "Discord/Slack/Telegram via OpenClaw",
+    "status": "NOT TESTED",
+    "detail": "no OpenClaw channel proof file",
+    "generated_at": "2026-10-25T10:50:07+00:00",
+    "host": "srva"
+  },
+  {
+    "id": "H06",
+    "gate": "Final demo on the GB10",
+    "status": "NOT TESTED",
+    "detail": "demo.json: no file",
+    "generated_at": "2026-10-25T10:50:07+00:00",
+    "host": "srva"
+  },
+  {
+    "id": "H07",
+    "gate": "Evidence + claims audit present",
+    "status": "PASS",
+    "detail": "docs/CLAIMS_AUDIT.md",
+    "generated_at": "2026-10-25T10:50:07+00:00",
+    "host": "srva"
+  }
+]

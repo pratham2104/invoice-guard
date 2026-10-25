@@ -1,0 +1,63 @@
+{
+  "policies": [
+    {
+      "name": "baseline",
+      "type": "allow_all",
+      "label": "Reference: no controls"
+    },
+    {
+      "name": "lockdown",
+      "type": "deny_all_sensitive",
+      "label": "Deny every money, mail and network tool",
+      "sensitive_tools": [
+        "pay_invoice",
+        "send_email",
+        "http_post"
+      ]
+    },
+    {
+      "name": "allowlist",
+      "type": "allowlist",
+      "label": "Egress to known domains only",
+      "egress_params": {
+        "send_email": "to",
+        "http_post": "url"
+      },
+      "allowed_domains": [
+        "acme.example",
+        "customer.example",
+        "partner.example"
+      ]
+    },
+    {
+      "name": "context_bound",
+      "type": "context_bound",
+      "label": "Sensitive args must trace to trusted sources",
+      "bind_params": {
+        "pay_invoice": [
+          "account",
+          "amount",
+          "vendor_id"
+        ],
+        "send_email": [
+          "to"
+        ],
+        "http_post": [
+          "url"
+        ]
+      },
+      "trusted_sources": [
+        "user",
+        "registry"
+      ],
+      "egress_params": {
+        "send_email": "to",
+        "http_post": "url"
+      },
+      "egress_label_rules": {
+        "secret": "deny",
+        "pii": "trusted_destination"
+      }
+    }
+  ]
+}

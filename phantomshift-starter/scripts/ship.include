@@ -1,0 +1,61 @@
+# Single source of truth for what leaves this machine. Used by BOTH scripts/sync_to_gb10.sh (rsync) and
+# scripts/package_offline.sh (which stages with the same rsync rules, then tars the staged tree), so the
+# two can never diverge. rsync filter syntax (read via --exclude-from, where "+ " and "- " lines are rules), first match wins, paths anchored at the repo root.
+#
+# 0. Exact-path exceptions to the denies below: a synthetic fixture whose name contains "secret", and the
+#    committed env template (it holds placeholders, never values).
++ /.env.example
++ /fixtures/samples/log_secret_post.json
+# 1. Hard denies, anywhere in the tree (defence in depth: they win over the allow-list below).
+- .env
+- .env.*
+- *.env
+- .envrc
+- *.pem
+- *.key
+- *.p12
+- *.pfx
+- *.crt
+- id_*
+- .netrc
+- .npmrc
+- .pypirc
+- .git/
+- .venv/
+- __pycache__/
+- *.pyc
+- *.sqlite
+- *.sqlite-*
+- *.sqlite3
+- events.sqlite*
+- discord-preflight.json
+- verify.json
+- verify.meta.json
+- *secret*
+- *token*
+- *credential*
+- *.log
+# 2. Allow-list.
++ /phantomshift/***
++ /scripts/***
++ /tests/***
++ /docs/***
++ /openclaw-integration/***
++ /skills/***
++ /offline-kit/***
+# fixtures: samples ship; the inbox directory ships empty (its contents may be operator data).
+- /fixtures/inbox/*
++ /fixtures/***
++ /*.md
++ /pyproject.toml
++ /setup.py
++ /setup.cfg
++ /requirements*.txt
++ /.gitignore
+# benchmark results and the readiness summary are evidence worth shipping; run records and the event DB are not.
++ /artifacts/
++ /artifacts/benchmarks/
++ /artifacts/benchmarks/*.json
++ /artifacts/readiness.json
+# 3. Everything else (artifacts/, config/, stray files, unknown directories) stays home.
+- *

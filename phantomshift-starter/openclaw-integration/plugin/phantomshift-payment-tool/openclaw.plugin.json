@@ -1,0 +1,9 @@
+{
+  "id": "phantomshift-payment",
+  "name": "PHANTOMSHIFT Guarded Payment Tool",
+  "version": "0.1.0",
+  "description": "Forwards an untrusted payment proposal to the PHANTOMSHIFT adapter. The adapter, not this tool, decides.",
+  "activation": { "onStartup": true },
+  "contracts": { "tools": ["phantomshift_submit_payment"] },
+  "configSchema": { "type": "object", "properties": {}, "additionalProperties": false }
+}

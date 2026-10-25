@@ -1,0 +1,10 @@
+{
+  "name": "@phantomshift/openclaw-payment-tool",
+  "version": "0.1.0",
+  "description": "SKELETON. Registers one guarded payment-proposal tool that forwards to the PHANTOMSHIFT adapter over HTTP.",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "openclaw.plugin.json"],
+  "openclaw": { "extensions": ["./index.js"] },
+  "peerDependencies": { "openclaw": ">=2026.7.1" }
+}

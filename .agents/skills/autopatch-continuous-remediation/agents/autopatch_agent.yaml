@@ -1,0 +1,33 @@
+name: autopatch-remediation-agent
+description: Autonomous security remediation agent operating inside OpenClaw and OpenShell.
+runtime:
+  framework: openclaw
+  sandbox: openshell
+  local_inference:
+    provider: vllm
+    endpoint: "http://127.0.0.1:8000/v1"
+    model: "nvidia/nemotron-3.5-lightning-30b-nvfp4"
+    fallback_model: "nvidia/nemotron-3-nano-4b-fp8"
+policy:
+  enforcement:
+    fast_path_url: "http://127.0.0.1:7890/api/firewall/before_tool_call"
+    recorder_url: "http://127.0.0.1:7890/api/firewall/after_tool_call"
+    fail_closed: true
+    timeout_ms: 50.0
+  allowed_tools:
+    - phantomshift_submit_payment
+    - lookup_vendor
+  denied_tools:
+    - exec
+    - bash
+    - sh
+    - system_exec
+    - http_post
+    - curl
+    - export_database
+approvals:
+  channel: discord
+  allowed_operators:
+    - operator-1
+    - operator-admin
+  ttl_seconds: 900

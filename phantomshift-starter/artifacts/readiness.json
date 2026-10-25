@@ -1,0 +1,150 @@
+{
+  "generated": "2026-10-25T00:36:41Z",
+  "machine": {
+    "host_role": "preparation server (NOT the GB10)",
+    "arch": "x86_64",
+    "gpus": "2x RTX 3090 (shared, other projects' jobs running)",
+    "os": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39"
+  },
+  "statuses": [
+    "PASS",
+    "FAIL",
+    "NOT_TESTED",
+    "BLOCKED"
+  ],
+  "items": [
+    {
+      "id": "AUD-01",
+      "name": "Existing tests",
+      "status": "PASS",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "python3 -m unittest discover -s tests",
+      "output_ref": "323 tests OK in 39.9 s (this session, 2026-10-25T00:31Z)",
+      "limitations": "fixtures/stubs/in-process; says nothing about GB10, NemoClaw or a real agent",
+      "next_step": "re-run on the GB10 after transfer"
+    },
+    {
+      "id": "AUD-02",
+      "name": "Offline stage manifest",
+      "status": "PASS",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "sha256sum -c manifest.sha256 (in offline-stage/)",
+      "output_ref": "exit 0; 199 files; 48 GB",
+      "limitations": "verified on the prep server only; re-verify after copying to the SSD and again on the GB10",
+      "next_step": "run scripts/package_offline.sh verify on the drive"
+    },
+    {
+      "id": "AUD-03",
+      "name": "Discord token rotation",
+      "status": "FAIL",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "scripts/discord_check.py (read-only)",
+      "output_ref": "token_valid=true: the token that was pasted into chat twice is STILL valid",
+      "limitations": "operator action only; I must not rotate it",
+      "next_step": "operator: Developer Portal > Bot > Reset Token, put new value in .env, re-run discord_check.py"
+    },
+    {
+      "id": "AUD-04",
+      "name": "Git work branch",
+      "status": "BLOCKED",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "git status",
+      "output_ref": "not a git repository",
+      "limitations": "no VCS here; cannot create a branch",
+      "next_step": "git init if wanted; .gitignore already excludes .env"
+    },
+    {
+      "id": "AUD-05",
+      "name": "Processes owned by this project",
+      "status": "PASS",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "ps -u $USER",
+      "output_ref": "no llama-server/phantomshift/openshell/download processes running",
+      "limitations": "other projects' jobs dominate load (avg ~16); guard watcher GREEN",
+      "next_step": "none"
+    },
+    {
+      "id": "H01",
+      "name": "Autonomous always-on trigger (real OpenClaw agent)",
+      "status": "NOT_TESTED",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "scripts/verify_hackathon.py --mode prep",
+      "output_ref": "no event store from a real OpenClaw agent",
+      "limitations": "watch/inbox trigger exists but is a fixture pipeline, not an OpenClaw agent",
+      "next_step": "GB10 day"
+    },
+    {
+      "id": "H02",
+      "name": "Runs on Dell Pro Max GB10",
+      "status": "NOT_TESTED",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "scripts/verify_hackathon.py",
+      "output_ref": "arch=x86_64, RTX 3090",
+      "limitations": "prep host by design",
+      "next_step": "GB10 day"
+    },
+    {
+      "id": "H03",
+      "name": "All inference local on GB10, no remote LLM",
+      "status": "NOT_TESTED",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "scripts/verify_hackathon.py",
+      "output_ref": "no model served now; only a Nano-4B Q4 GGUF ever ran, on CPU here",
+      "limitations": "Lightning NVFP4 never ran anywhere; FP8 Nano never ran",
+      "next_step": "GB10 day: LM-01..LM-08"
+    },
+    {
+      "id": "H04",
+      "name": "NemoClaw + OpenClaw + OpenShell, real sandbox",
+      "status": "NOT_TESTED",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "nemoclaw onboard --no-gpu (rehearsal)",
+      "output_ref": "nemoclaw v0.0.137 + openshell 0.0.116 installed; preflight passed; gateway bind to 172.18.0.1:8080 failed (rootless Docker)",
+      "limitations": "no sandbox has ever been created; this is a host limitation",
+      "next_step": "check docker rootless/bridge on the GB10 first (scripts/gb10_preflight.sh)"
+    },
+    {
+      "id": "H05",
+      "name": "Discord via OpenClaw channel",
+      "status": "NOT_TESTED",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "scripts/verify_hackathon.py",
+      "output_ref": "no OpenClaw channel; REST rehearsal channel exists and is explicitly NOT OpenClaw-managed",
+      "limitations": "bot works; intents Message Content/Server Members OFF",
+      "next_step": "GB10 day: nemoclaw <sb> channels add discord"
+    },
+    {
+      "id": "H06",
+      "name": "Final demo on GB10",
+      "status": "NOT_TESTED",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "scripts/verify_hackathon.py",
+      "output_ref": "no demo.json",
+      "limitations": "event-time",
+      "next_step": "GB10 day"
+    },
+    {
+      "id": "H07",
+      "name": "Docs / claims audit present (our gate)",
+      "status": "PASS",
+      "timestamp": "2026-10-25T00:36:41Z",
+      "machine": "prep server",
+      "command": "scripts/verify_hackathon.py",
+      "output_ref": "docs/CLAIMS_AUDIT.md exists",
+      "limitations": "note: the operator's 'H07 PASS' for offline staging is a different check (AUD-02)",
+      "next_step": "keep CLAIMS_AUDIT current"
+    }
+  ],
+  "note": "Prep-host evidence only. H01-H06 stay NOT_TESTED until observed on the event GB10."
+}

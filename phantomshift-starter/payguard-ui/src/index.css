@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    color: #f3f6f8;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: #090d13;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:rounded-md focus:bg-bg-s2 focus:px-3 focus:py-2 focus:text-sm focus:border focus:border-stroke;
+  }
+}
+
+@layer components {
+  .shell-header {
+    @apply border-b border-stroke bg-bg-s1;
+  }
+
+  .panel {
+    @apply rounded-panel border border-stroke bg-bg-s1;
+  }
+
+  .panel-head {
+    @apply flex items-center justify-between gap-2 px-4 py-3 border-b border-stroke/80;
+  }
+
+  .panel-title {
+    @apply text-[11px] font-semibold uppercase tracking-[0.12em] text-fg-muted;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-1.5 rounded-xl border border-stroke bg-bg-s2/80 px-2.5 py-1.5 text-xs text-fg transition-colors hover:border-stroke-hover hover:bg-bg-s3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan/60;
+  }
+
+  .btn-ghost-active {
+    @apply border-chartreuse/40 bg-chartreuse/[0.08] text-chartreuse;
+  }
+
+  .badge-demo {
+    @apply inline-flex items-center rounded-md border border-amber/35 bg-amber/[0.08] px-2.5 py-1 text-[10px] font-mono font-medium text-amber uppercase tracking-wide;
+  }
+
+  .badge-live {
+    @apply inline-flex items-center rounded-md border border-chartreuse/35 bg-chartreuse/[0.08] px-2.5 py-1 text-[10px] font-mono font-medium text-chartreuse uppercase tracking-wide;
+  }
+
+  .badge-historical {
+    @apply inline-flex items-center rounded-md border border-cyan/30 bg-cyan/[0.06] px-2 py-0.5 text-[10px] font-mono text-cyan;
+  }
+
+  .kpi-value {
+    @apply text-2xl md:text-[28px] font-semibold tabular-nums tracking-tight text-fg;
+  }
+
+  .kpi-label {
+    @apply text-[10px] uppercase tracking-wider text-fg-muted;
+  }
+
+  .incident-card {
+    @apply w-full text-left rounded-xl border border-stroke bg-bg-s2/60 px-3 py-2.5 transition-colors hover:border-stroke-hover;
+  }
+
+  .incident-card-active {
+    @apply border-cyan/40 bg-bg-s3 ring-1 ring-cyan/20;
+  }
+
+  .denial-banner {
+    @apply flex items-center gap-2 rounded-xl border border-coral/35 bg-coral/[0.08] px-3 py-2 text-sm text-coral;
+  }
+
+  .evidence-block {
+    @apply rounded-xl border border-stroke bg-bg-s2/80 p-3 text-fg-muted;
+  }
+
+  .flow-wrap {
+    @apply relative flex-1 min-h-[380px] rounded-xl border border-stroke bg-bg-s2/40 overflow-hidden;
+  }
+
+  .react-flow__node {
+    font-size: 11px;
+  }
+
+  .react-flow__controls {
+    @apply !bg-bg-s2 !border-stroke !shadow-none;
+  }
+
+  .react-flow__controls-button {
+    @apply !bg-bg-s2 !border-stroke !fill-fg-muted;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

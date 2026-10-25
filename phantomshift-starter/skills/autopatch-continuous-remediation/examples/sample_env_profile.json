@@ -1,0 +1,49 @@
+{
+  "host": {
+    "hostname": "gb10-node-01",
+    "machine": "aarch64",
+    "system": "Linux",
+    "release": "6.8.0-101-nvidia-arm64",
+    "is_gb10_arm64": true,
+    "gpus": [
+      "NVIDIA GB10, 96000 MiB"
+    ],
+    "tier": "GB10_PRODUCTION_AIRGAP"
+  },
+  "inference": {
+    "vllm_loopback_active": true,
+    "ollama_loopback_active": false,
+    "staged_weights": {
+      "nemotron_30b_nvfp4": true,
+      "nemotron_4b_fp8": true,
+      "manifest_present": true,
+      "stage_path": "/workspace/offline-stage"
+    },
+    "preferred_model": "Nemotron-3.5-Lightning-30B"
+  },
+  "stack": {
+    "binaries": {
+      "nemoclaw": true,
+      "openclaw": true,
+      "openshell": true,
+      "python3": true
+    },
+    "docker": {
+      "installed": true,
+      "rootless": false
+    }
+  },
+  "channels": {
+    "discord": {
+      "token_configured": true,
+      "guild_id_configured": true,
+      "operator_id_configured": true
+    },
+    "simulated_channel_available": true
+  },
+  "recommended_ports": {
+    "ui_server": 8765,
+    "adapter_firewall": 7890,
+    "local_vllm": 8000
+  }
+}

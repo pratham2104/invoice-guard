@@ -1,0 +1,35 @@
+# Custom NemoClaw preset: let the sandbox reach exactly ONE host endpoint.
+# Format: docs/network-policy/create-custom-policy-presets.mdx and the shipped
+#   refs/NemoClaw/nemoclaw-blueprint/policies/presets/observability-otlp-local.yaml (same host bridge pattern).
+# Apply (preview first):
+#   nemoclaw <sandbox> policy add --from-file ./policy/phantomshift-adapter-preset.yaml --dry-run
+#   nemoclaw <sandbox> policy add --from-file ./policy/phantomshift-adapter-preset.yaml --yes
+# Remove: nemoclaw <sandbox> policy remove phantomshift-adapter --yes
+#
+# SKELETON, NOT APPLIED ANYWHERE. Things to confirm on site (see README section 4):
+#  * the port (7890 is arbitrary; it must not collide with NemoClaw ports 8000/8080/8081/11434-11438/18789+)
+#  * `allowed_ips`: narrow it to the single address `getent hosts host.openshell.internal` prints inside
+#    the sandbox (for example 172.17.0.1/32). The source permits `allowed_ips` ONLY on the host
+#    `host.openshell.internal`; any other host with allowed_ips is rejected.
+#  * `binaries`: replace with the exact executable path `openshell term` reports for the blocked request.
+preset:
+  name: phantomshift-adapter
+  description: "PHANTOMSHIFT guarded payment adapter on the host (POST /api/adapter/submit only)"
+
+network_policies:
+  phantomshift_adapter:
+    name: phantomshift_adapter
+    endpoints:
+      - host: host.openshell.internal
+        port: 7890
+        protocol: rest
+        enforcement: enforce
+        allowed_ips:
+          - 172.17.0.1/32        # PLACEHOLDER: set to the real bridge gateway address on site
+        rules:
+          - allow: { method: POST, path: "/api/adapter/submit" }
+          - allow: { method: POST, path: "/api/firewall/before_tool_call" }
+          - allow: { method: POST, path: "/api/firewall/after_tool_call" }
+    binaries:
+      - { path: /usr/local/bin/node }   # plugin path (tool runs inside the OpenClaw gateway process); confirm in `openshell term`
+      - { path: /usr/bin/python3 }      # only needed for the skill fallback script; delete if you use the plugin only

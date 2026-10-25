@@ -1,0 +1,29 @@
+{
+  "checked": "2026-10-25T10:26:42+0000",
+  "sends_messages": false,
+  "satisfies_R03": false,
+  "note": "OpenClaw-managed channel on the GB10 is still required",
+  "ids_wellformed": {
+    "server": true,
+    "user": true
+  },
+  "token_valid": true,
+  "bot": {
+    "username": "Chetas_BOT_Security",
+    "id_suffix": "2716"
+  },
+  "in_target_server": true,
+  "text_channels": [
+    "approvals",
+    "audit-evidence",
+    "general",
+    "live-attacks",
+    "parallel-worlds",
+    "phantomshift-control"
+  ],
+  "intents": {
+    "message_content": false,
+    "guild_members": false
+  },
+  "operator_is_member": true
+}

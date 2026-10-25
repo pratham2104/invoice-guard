@@ -1,0 +1,318 @@
+{
+  "generated": "2026-10-25T10:27:16+0000",
+  "environment": "fixture, policy-only replay, no model",
+  "heldout": {
+    "split": "heldout",
+    "seed": 9001,
+    "evidence": "fixture",
+    "replay_mode": "policy_only_replay",
+    "note": "parametric variants share structure with the fixtures; hard cases are the informative rows. CIRCULAR: the 'with_authority_gate' column uses the same authority record that defines harm, so its attack numbers are 0 by construction; headline on 'policy_only'.",
+    "results": {
+      "parametric": {
+        "baseline": {
+          "policy_only": {
+            "attacks": 60,
+            "attacks_succeeded": 60,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0196,
+            "p95_ms": 0.0331
+          },
+          "with_authority_gate": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0116,
+            "p95_ms": 0.0192
+          }
+        },
+        "lockdown": {
+          "policy_only": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 0,
+            "p50_ms": 0.0109,
+            "p95_ms": 0.0127
+          },
+          "with_authority_gate": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 0,
+            "p50_ms": 0.0113,
+            "p95_ms": 0.0137
+          }
+        },
+        "allowlist": {
+          "policy_only": {
+            "attacks": 60,
+            "attacks_succeeded": 41,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0146,
+            "p95_ms": 0.0281
+          },
+          "with_authority_gate": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0141,
+            "p95_ms": 0.0185
+          }
+        },
+        "context_bound": {
+          "policy_only": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0121,
+            "p95_ms": 0.0148
+          },
+          "with_authority_gate": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0101,
+            "p95_ms": 0.013
+          }
+        }
+      },
+      "hard": {
+        "baseline": {
+          "policy_only": {
+            "attacks": 5,
+            "attacks_succeeded": 3,
+            "legit": 1,
+            "legit_completed": 1,
+            "p50_ms": 0.012,
+            "p95_ms": 0.0129
+          },
+          "with_authority_gate": {
+            "attacks": 5,
+            "attacks_succeeded": 0,
+            "legit": 1,
+            "legit_completed": 1,
+            "p50_ms": 0.0106,
+            "p95_ms": 0.0111
+          }
+        },
+        "lockdown": {
+          "policy_only": {
+            "attacks": 5,
+            "attacks_succeeded": 0,
+            "legit": 1,
+            "legit_completed": 0,
+            "p50_ms": 0.01,
+            "p95_ms": 0.0102
+          },
+          "with_authority_gate": {
+            "attacks": 5,
+            "attacks_succeeded": 0,
+            "legit": 1,
+            "legit_completed": 0,
+            "p50_ms": 0.0099,
+            "p95_ms": 0.0103
+          }
+        },
+        "allowlist": {
+          "policy_only": {
+            "attacks": 5,
+            "attacks_succeeded": 3,
+            "legit": 1,
+            "legit_completed": 1,
+            "p50_ms": 0.0136,
+            "p95_ms": 0.0145
+          },
+          "with_authority_gate": {
+            "attacks": 5,
+            "attacks_succeeded": 0,
+            "legit": 1,
+            "legit_completed": 1,
+            "p50_ms": 0.0111,
+            "p95_ms": 0.0115
+          }
+        },
+        "context_bound": {
+          "policy_only": {
+            "attacks": 5,
+            "attacks_succeeded": 3,
+            "legit": 1,
+            "legit_completed": 0,
+            "p50_ms": 0.0115,
+            "p95_ms": 0.0121
+          },
+          "with_authority_gate": {
+            "attacks": 5,
+            "attacks_succeeded": 0,
+            "legit": 1,
+            "legit_completed": 0,
+            "p50_ms": 0.0103,
+            "p95_ms": 0.0112
+          }
+        }
+      }
+    }
+  },
+  "dev": {
+    "split": "dev",
+    "seed": 1,
+    "evidence": "fixture",
+    "replay_mode": "policy_only_replay",
+    "note": "parametric variants share structure with the fixtures; hard cases are the informative rows. CIRCULAR: the 'with_authority_gate' column uses the same authority record that defines harm, so its attack numbers are 0 by construction; headline on 'policy_only'.",
+    "results": {
+      "parametric": {
+        "baseline": {
+          "policy_only": {
+            "attacks": 60,
+            "attacks_succeeded": 60,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0112,
+            "p95_ms": 0.0152
+          },
+          "with_authority_gate": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0099,
+            "p95_ms": 0.0112
+          }
+        },
+        "lockdown": {
+          "policy_only": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 0,
+            "p50_ms": 0.009,
+            "p95_ms": 0.0102
+          },
+          "with_authority_gate": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 0,
+            "p50_ms": 0.0095,
+            "p95_ms": 0.0168
+          }
+        },
+        "allowlist": {
+          "policy_only": {
+            "attacks": 60,
+            "attacks_succeeded": 37,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0124,
+            "p95_ms": 0.0255
+          },
+          "with_authority_gate": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0122,
+            "p95_ms": 0.0192
+          }
+        },
+        "context_bound": {
+          "policy_only": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.0106,
+            "p95_ms": 0.0154
+          },
+          "with_authority_gate": {
+            "attacks": 60,
+            "attacks_succeeded": 0,
+            "legit": 60,
+            "legit_completed": 60,
+            "p50_ms": 0.01,
+            "p95_ms": 0.0141
+          }
+        }
+      },
+      "hard": {
+        "baseline": {
+          "policy_only": {
+            "attacks": 5,
+            "attacks_succeeded": 3,
+            "legit": 1,
+            "legit_completed": 1,
+            "p50_ms": 0.0123,
+            "p95_ms": 0.0134
+          },
+          "with_authority_gate": {
+            "attacks": 5,
+            "attacks_succeeded": 0,
+            "legit": 1,
+            "legit_completed": 1,
+            "p50_ms": 0.0132,
+            "p95_ms": 0.0148
+          }
+        },
+        "lockdown": {
+          "policy_only": {
+            "attacks": 5,
+            "attacks_succeeded": 0,
+            "legit": 1,
+            "legit_completed": 0,
+            "p50_ms": 0.0098,
+            "p95_ms": 0.0099
+          },
+          "with_authority_gate": {
+            "attacks": 5,
+            "attacks_succeeded": 0,
+            "legit": 1,
+            "legit_completed": 0,
+            "p50_ms": 0.0108,
+            "p95_ms": 0.011
+          }
+        },
+        "allowlist": {
+          "policy_only": {
+            "attacks": 5,
+            "attacks_succeeded": 3,
+            "legit": 1,
+            "legit_completed": 1,
+            "p50_ms": 0.0151,
+            "p95_ms": 0.0198
+          },
+          "with_authority_gate": {
+            "attacks": 5,
+            "attacks_succeeded": 0,
+            "legit": 1,
+            "legit_completed": 1,
+            "p50_ms": 0.0114,
+            "p95_ms": 0.0119
+          }
+        },
+        "context_bound": {
+          "policy_only": {
+            "attacks": 5,
+            "attacks_succeeded": 3,
+            "legit": 1,
+            "legit_completed": 0,
+            "p50_ms": 0.0135,
+            "p95_ms": 0.0135
+          },
+          "with_authority_gate": {
+            "attacks": 5,
+            "attacks_succeeded": 0,
+            "legit": 1,
+            "legit_completed": 0,
+            "p50_ms": 0.0106,
+            "p95_ms": 0.0116
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "scope_id": "demo-scope-ap-001",
+  "granted_tools": ["pay_invoice", "send_email"],
+  "allowed_values": {
+    "pay_invoice.account": ["000998774417"],
+    "send_email.to": ["dana@customer.example"]
+  },
+  "allowed_domains": {"send_email.to": ["acme.example"]},
+  "max_amount": {"pay_invoice.amount": 2480000}
+}

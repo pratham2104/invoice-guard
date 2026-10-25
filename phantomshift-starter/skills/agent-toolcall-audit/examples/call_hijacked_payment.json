@@ -1,0 +1,6 @@
+{
+  "tool": "pay_invoice",
+  "args": {"vendor_id": "V-102", "amount": 2480000, "account": "000123459921"},
+  "provenance": {"vendor_id": "user", "amount": "user", "account": "user"},
+  "approved": true
+}

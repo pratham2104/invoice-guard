@@ -1,0 +1,39 @@
+{
+  "collected": "2026-10-25T10:50:06+0000",
+  "arch": "x86_64",
+  "os": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+  "gpu": [
+    "NVIDIA GeForce RTX 3090, 535.288.01, 24576 MiB",
+    "NVIDIA GeForce RTX 3090, 535.288.01, 24576 MiB"
+  ],
+  "ram_gib": 125.5,
+  "disk_free_gib": 509.5,
+  "python": "3.13.12",
+  "tools": {
+    "docker": {
+      "path": "/usr/bin/docker",
+      "version": "Docker version 29.8.1, build 4a63305"
+    },
+    "nemoclaw": {
+      "path": "/home/923873155/.local/bin/nemoclaw",
+      "version": "nemoclaw v0.0.137"
+    },
+    "openshell": {
+      "path": "/home/923873155/.local/bin/openshell",
+      "version": "openshell 0.0.116"
+    },
+    "openclaw": null,
+    "ollama": null,
+    "vllm": null,
+    "node": {
+      "path": "/home/923873155/.nvm/versions/node/v22.22.2/bin/node",
+      "version": "v22.22.2"
+    },
+    "git": {
+      "path": "/usr/bin/git",
+      "version": "git version 2.43.0"
+    }
+  },
+  "mode": "prep",
+  "note": "read-only probes; this is the preparation host unless gpu says GB10"
+}

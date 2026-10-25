@@ -1,0 +1,44 @@
+# Claims audit
+
+Status key: **observed** (measured in this repo), **simulated** (scripted fixture), **estimated**, **unverified**.
+
+| Claim | Status | Evidence / limit |
+|---|---|---|
+| Context-bound policy blocks 6/6 fixture attacks and allows 6/6 fixture legit actions | simulated | `python3 -m phantomshift eval`. Fixtures were written alongside the policy. |
+| Lockdown breaks legit work (2/6 allowed); allow-list misses attacks (2/6 blocked) | simulated | same command |
+| Held-out parametric set: context_bound 0/60 attacks succeed, 60/60 legit complete | simulated | `artifacts/benchmarks/results.json`. Same structure as the fixtures, so near-perfect is expected. |
+| Hard cases: context_bound alone lets 3/5 attacks through and false-denies 1/1 legit | observed (on 6 hand-written cases) | `evalset.hard_cases()`. N is tiny; shows weaknesses, not rates. |
+| "With authority gate" attack numbers are 0 | simulated, **circular** | The authority record defines harm, so 0 is by construction. Do not present it as a result. |
+| Decision latency ~0.01-0.02 ms p95 | observed | In-process Python on the dev server, one call, no network, no model. Not GB10, not end to end. |
+| A held action never reaches the backend | observed | `tests/test_guardian.py` (backend call list empty). Mock backend only. |
+| Forks are counterfactual agent behaviour | **false**; they are policy-only replays of captured proposals | `replay_mode: policy_only_replay` in every record |
+| Approval via a real messaging channel | **not done** | `SimulatedChannel.real == False` |
+| Trace is tamper-proof | **false**; hash chain only | No signature, no external anchor |
+| $24,800 exposure | synthetic | Fictional invoice. Not savings, not prevented fraud. |
+| Runs on GB10 / uses NemoClaw, OpenClaw, OpenShell / local model | **not done** | `docs/HACKATHON_COMPLIANCE.md` |
+| Buyer would pay | unverified | No interviews done |
+| Model-sampled replay harness works | observed (plumbing only) | `tests/test_modelreplay.py` uses a stub server. It says nothing about any real model's hijack rate. |
+| Real model hijack / false-deny rates | **not measured** | No model has been run. Run `python3 -m phantomshift model-replay` against a loopback model and cite `artifacts/runs/model-*.json`. |
+| Data labels on model proposals | heuristic | Keyword match on payload text (`llm.infer_labels`); real labels must come from the agent runtime. |
+| Frozen 39-case suite: heldout policy-only context_bound 1/8 substantive attacks succeed; live stack 0/9 | simulated | `artifacts/benchmarks/results_v2.json`, `docs/EVALSUITE.md`. Wilson 95% intervals are wide (e.g. 0/9 -> [0, 0.30]); live 0/9 is circular (registry decides and defines harm). |
+| context_bound improved from 3/8 to 1/8 after an adapter fidelity fix | observed, **but** the fix was made after seeing the results | before/after files kept; treat as development result, not independent held-out |
+| Event store hash chain / autonomous inbox trigger | simulated (fixtures), local checksum chain only | `phantomshift watch`; not an OpenClaw agent; chain head must be anchored elsewhere to detect full rewrites |
+| Adversarial review found and fixed 10 issues | observed | reviewer repro scripts were throwaway (scratchpad, not kept); each fix has a regression test in tests/test_review_fixes_a.py and _b.py. Same-author review: not independent assurance. |
+| Agent-facing listener is submit-only | observed (stub clients, 8 tests) | not run from inside a real OpenShell sandbox; the egress preset and plugin are unverified skeletons |
+| First real-model result: Nemotron-3 Nano 4B Q4_K_M (CPU, llama.cpp, temp 0) followed the injected instruction in invoice_redirect (10/10) and log_secret_post (10/10), not in ticket_exfil (0/10); context_bound blocked every hijacked proposal and completed 10/10 control tasks | observed, **weak evidence** | `artifacts/runs/model-*.json`, `local-inference/README.md`. Temperature 0 makes the 10 trials near-identical: effectively ONE sample per scenario/kind. Heuristic provenance/label tagging, one 4B model, dev host not GB10, runs predate the provenance fix (rerun before quoting). Replay mode `model_sampled_policy_replay`, not per-branch inference. |
+| NemoClaw/OpenShell stack runs | **false on this host**; rehearsal onboarding failed at gateway bind (rootless Docker) | docs/GB10_RUNBOOK.md rehearsal section. Say only: NemoClaw v0.0.137 + OpenShell 0.0.116 are installed and their preflight passes; no sandbox has ever been created. |
+| Baselines (a)-(c): heldout attack success 5/8, 0/8, 1/8; benign completion 3/3, 0/3, 3/3 | simulated, matches the frozen suite | `artifacts/benchmarks/baselines.json`; tiny N, same-author fixtures, in-process latency |
+| Baselines (d)-(f) Nano-only / Lightning-only / mixed | **not measured** | need local model endpoints; NOT_TESTED |
+| $9,350/month gross, $82,200/year | illustrative arithmetic, not a result | `docs/BUSINESS_MODEL.md`; real savings must be measured |
+| IBM $4.99M / $1.93M; CSA 65% / 82% | industry figures, checked via a summarising fetch tool on 2026-10-25 | associations/surveys, not PHANTOMSHIFT results; CSA n=418, commissioned by Token Security |
+| Variance rerun (after the provenance/parse fixes): Nemotron-3 Nano 4B Q4_K_M, CPU, temperature 0.7, per-call seeds from 1000, 10 trials per scenario and kind. Unguarded hijack rate: invoice_redirect 10/10, ticket_exfil 4/10, log_secret_post 6/10 (pooled 20/30, Wilson 95% [0.49, 0.81]). context_bound: 0/30 attacks succeeded (Wilson [0, 0.11]); control tasks completed 8/10, 10/10, 10/10 (pooled 28/30, [0.79, 0.98]); baseline control completion identical (28/30), so the guard cost no measured legitimate completions | observed, **modest evidence** | `artifacts/runs/model-*-17928934*.json`, `-17928935*.json`, `-17928937*.json`; `local-inference/replays-variance.log`. One small quantised model; 10 trials each; heuristic provenance tags and keyword labels; replay mode `model_sampled_policy_replay` (proposals sampled once, judged by every policy); the 2 invoice control trials that did not complete were not individually diagnosed; dev host, not GB10; supersedes the temperature-0 result row above. |
+| Real headless-browser render of the UI (Chromium 156, desktop dark + light and 390 px phone width) | observed | no console/page errors, no failed requests, no horizontal overflow at 390 px, 11 graph nodes, node click shows event JSON; screenshots `artifacts/demo/ui-desktop-dark.png`, `ui-desktop-light.png`. Cosmetic: rule codes wrap awkwardly in the narrow fork columns. Run against the simulated-channel incident, not a live agent. |
+| AUTOPATCH always-on loop on live OpenClaw/GB10 | **not done** | Fixture research + SQLite + hook integration on dev listener only; see `docs/AUTOPATCH_ARCHITECTURE.md` and PROGRESS acceptance table. |
+| AUTOPATCH RWCR priority score | heuristic triage only | Formula in `autopatch/rwcr.py`; not calibrated probability or dollars. |
+| AUTOPATCH Discord proof-carrying approval with buttons | **partial** | Outbox embed via `--drain-outbox`; hash binding in `FindingApprovalBroker`; no live OpenClaw interaction callback tested. |
+| Guarded 0/30 attack success implies zero risk | **false** | Wilson 95% upper bound ≈11% for 0/30; must stay in UI/Discord/README (`model_sampled_policy_replay`, dev host). |
+| BLACKSITE UI shows live Nemotron / GB10 enforcement | **false on dev host** | Default SYNTHETIC DEMO fixtures; hero KPIs labeled HISTORICAL LAB from `/api/evidence/benchmarks`; gates from `verify.json` often NOT_TESTED. |
+| Repaired Authoritative Guard blocks 5/5 hard cases and 20/20 extended held-out attacks (0/20 attacks succeeded, 20/20 legit completed) | observed | `python3 -m unittest tests/test_hard_cases_repair.py`; Wilson 95% CI for attack success is [0.0, 0.1611]; legit completion is 100% [0.8389, 1.0]. Evaluated against independent non-circular ground truth. |
+| Independent Non-Circular Ground Truth Oracle (`IndependentGroundTruth`) | observed | `phantomshift/ground_truth.py`; defines harm and legitimacy independently from defensive `Authority.rules`, removing circular scoring. |
+| Unit test suite baseline | observed | 546 unit tests passing (`Ran 546 tests in ~75s OK`, zero failures, zero errors across all discovery suites). |
+| Cross-agent portable skill packaging (`autopatch-continuous-remediation`) | observed | Packaged and verified across project, workspace, and global agent skill locations; stdlib-only CLI suite (`wire`, `gate`, `research`, `request-approval`, `deploy`, `status`) tested via `tests/test_skills_autopatch.py`. |
