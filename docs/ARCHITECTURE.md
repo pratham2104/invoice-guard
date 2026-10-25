@@ -72,11 +72,25 @@ against it without reading your code.
 - OpenAI-compatible API served by vLLM on the GB10 (port TBC by T01 — expected `localhost:8000`).
 - Model id: `nvidia/Qwen3.6-35B-A3B-NVFP4`. Tool calling on, 262k context.
 
-### Database schema
-- *(T03 owner: publish tables here.)*
+### Database schema (`src/db/schema.sql`, Node's built-in `node:sqlite`)
+- Open: `import { openDb, loadFixtures } from "./src/db/index.js"`; `openDb(":memory:")` in tests.
+- Load demo data: `npm run db:load` → `data/invoice-guard.db` (git-ignored).
+- `vendors(id, name, domain, address, phone_on_file, billing_day, terms, invoice_prefix)`:
+  `phone_on_file` is the ONLY number callbacks may use.
+- `vendor_contacts(vendor_id, name, email, role)`
+- `vendor_banks(vendor_id, bank_name, routing, account, remit_address, active, verified_at, verified_by)`:
+  trusted bank on file, one active row per vendor.
+- `purchase_orders(number, vendor_id, description, annual_limit, monthly_min, monthly_max)`
+- `invoices(id, vendor_id, invoice_number, invoice_date, po_number, amount, bank_name, routing, account, remit_address, status, source_email_id)`
+- `invoice_lines(invoice_id, line_no, description, qty, unit_price, amount)`
+- `payments(id, invoice_id, vendor_id, amount, paid_on, routing, account, method)`
+- `emails(id, vendor_id, from_addr, from_name, reply_to, to_addr, date, subject, body, attachments JSON, kind history|incoming, scenario)`
+- `holds(id, invoice_id, email_id, vendor_id, reason, findings JSON, status held|released|rejected, created_at, resolved_at, resolved_by)`:
+  written only by the rules engine; `resolved_by` is always a human.
+- `callbacks(id, hold_id, vendor_id, phone, script, status open|confirmed_fraud|confirmed_legit|no_answer, outcome, created_at, completed_at)`
 
 ### API routes
-- *(T03 owner: publish routes here.)*
+- Not built yet. Express routes are open as **T03b** on the board.
 
 ### Findings format (fingerprint + vision → rules)
 - *(T05/T06 owners: agree a JSON shape here before building, e.g.
