@@ -47,7 +47,6 @@ export function CaseMain({ d, alert, busy, onCallback, onApprove, onReject, onNe
   return (
     <div className="stack" ref={scroller}>
       <Hero d={d} vendor={vendor} tone={tone} risky={risky} onSeeInvoice={d.invoice.current ? () => setDrawer(true) : null} />
-      <Timeline d={d} alert={alert} flags={flags} mark={mark} vendor={vendor} />
 
       <div id="proof" className="anchor">
         {kind === "domain" && <DomainProof d={d} mark={mark} />}
@@ -134,7 +133,8 @@ function Hero({ d, vendor, tone, risky, onSeeInvoice }: {
 type StepState = "done" | "now" | "next";
 interface Step { key: string; title: string; sub: string; state: StepState; panel: ReactNode }
 
-function Timeline({ d, alert, flags, mark, vendor }: { d: CaseDetail; alert: AlertItem | null; flags: ChangeRow[]; mark: string; vendor: string }) {
+// Hidden from held cases (Pratham, 16:30); kept so it can be restored.
+export function Timeline({ d, alert, flags, mark, vendor }: { d: CaseDetail; alert: AlertItem | null; flags: ChangeRow[]; mark: string; vendor: string }) {
   const c = d.case;
   const ev = d.audit.events;
   const find = (a: string) => [...ev].reverse().find((e) => e.action === a);
