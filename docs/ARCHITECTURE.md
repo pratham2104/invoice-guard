@@ -127,5 +127,23 @@ interface Finding {
   number, or missing vendor/amount/yes-no, falls back to the template).
 - **Nothing is sent.** T09 delivers `text` to `recipient.contact` (Slack DM / in-app) and records the yes/no reply.
 
-- Suggested rule for T04 (not decided yet): HOLD if any `high`, or 2+ `medium`, or any finding
-  from `bank_change_request`. A finding with severity `unknown` never clears a hold.
+### Decision format (T04, `src/rules/index.ts`), ported from prerna-1's prototype `_finish`
+```ts
+decide(findings: Finding[], ctx?: { hasInvoice?: boolean }): Decision
+messageChecks(msg, authResults?): Finding[]   // prompt_injection (email text), email_auth_failed (SPF/DKIM/DMARC)
+interface Decision {
+  outcome: "PASS" | "HOLD_FRAUD_RISK" | "HOLD_CONFIRM";
+  nextStep: "none" | "phone_callback" | "requester_confirmation";
+  score: number;        // high 45, medium 20, low 5, info/unknown 0; capped at 100
+  severity: Severity;   // worst finding
+  reasons: string[];    // plain sentences, no invoice/bank data
+  top: Finding[];       // up to 3
+  findings: Finding[];
+}
+```
+Policy, in order: **HOLD_FRAUD_RISK** if any high, any bank/remit change (`bank_change_request`,
+`first_bank_change`, `bank_mismatch`, `remit_change`, `payment_change_from_unknown_sender`), score ≥ 40, or an
+unknown vendor sending an invoice → phone callback to `vendors.phone_on_file`. Else **HOLD_CONFIRM** if any finding has
+`action: confirm_with_requester` or is a money/rhythm anomaly (`bill_too_soon`, `fixed_amount_changed`,
+`one_time_bill`, `no_billing_history`, `amount_out_of_range`, `po_mismatch`, `invoice_out_of_sequence`) → requester
+confirmation. Else **PASS**. `unknown` findings add no points and never clear a hold. The model never decides.
