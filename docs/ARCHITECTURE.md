@@ -206,3 +206,14 @@ AWAITING_* ─recordConfirmation(no)──▶ REJECTED ;  any non-terminal ─re
   `processDir(db, dir, opts)` runs every `.eml` in filename order. Idempotent by Message-ID.
 - `npm run demo`: fresh `data/demo.db`, all of `data/emails/incoming`, prints a table. Uses the model only if `LLM_BASE_URL` is set.
 
+### Local-inference proof (T17, `src/verify/`): `npm run verify-local`
+- Checks, each `pass | fail | warn | skip` (skip = not on this machine): GPU + memory in use (`nvidia-smi`; GB10 reports
+  `[N/A]`, so per-process memory is summed) · LLM port listens on loopback only (`ss`/`lsof`, plus the Docker container) ·
+  weights in `$HF_HOME/hub` (size, shards) · `GET /v1/models` lists `LLM_MODEL` · chat completion with timing · tool call
+  (`lookup_vendor`) · IN-ATTACK-3 through the real pipeline still `HOLD_FRAUD_RISK`, hidden text found, agent approve refused,
+  no approve/release tool defined · egress audit (cloud AI key and proxy variable NAMES only, `LLM_BASE_URL` via `isLocalHost`) ·
+  `nemoclaw <sandbox> status` route `inference.local → local`.
+- Writes `artifacts/verify-local.json` (git-ignored); `artifacts/verify-local.sample.json` is a committed real run. Exit 1 on any fail.
+- `banner()` (used by `npm run demo`): model URL + id, "no cloud AI keys" (live env check), and the agent route only if the
+  last artifact proved it.
+

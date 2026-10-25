@@ -10,3 +10,4 @@ build/
 .DS_Store
 ._*
 recordings/
+artifacts/verify-local.json

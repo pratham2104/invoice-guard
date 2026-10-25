@@ -6,6 +6,7 @@ import { openDb, loadFixtures, REPO_ROOT } from "../db/index.js";
 import { processDir } from "./index.js";
 import { verifyAuditChain, listCases } from "../cases/index.js";
 import { listAlerts } from "../alerts/index.js";
+import { banner } from "../verify/index.js";
 
 const envFile = join(REPO_ROOT, ".env");
 if (existsSync(envFile)) process.loadEnvFile(envFile);
@@ -16,8 +17,7 @@ const db = openDb(dbPath);
 loadFixtures(db);
 
 const useLlm = !!process.env.LLM_BASE_URL;
-console.log(`Invoice Guard demo · model: ${useLlm ? process.env.LLM_BASE_URL : "off (rules only; set LLM_BASE_URL to use the GB10)"}` +
-            ` · Slack: ${process.env.SLACK_WEBHOOK_URL ? "on" : "off"}\n`);
+console.log(`Invoice Guard demo · ${banner()} · Slack: ${process.env.SLACK_WEBHOOK_URL || process.env.SLACK_BOT_TOKEN ? "on" : "off"}\n`);
 
 const results = await processDir(db, join(REPO_ROOT, "data", "emails", "incoming"), { llm: useLlm ? undefined : false });
 

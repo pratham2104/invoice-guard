@@ -15,6 +15,8 @@ Updated: 14:40 PT
 - Merged prerna-1's Python prototype (prototype/ap-guard/) as reference.
 - T04 rules (`src/rules/`), T09 alerts (`src/alerts/`), T15 pipeline + cases (`src/pipeline/`, `src/cases/`): all ported from prerna-1's prototype onto our fingerprint. `npm run demo` runs everything. 88 tests.
 
+- T17 `npm run verify-local` (src/verify/), demo banner.
+
 ## Blocked on
 - Qwen language checks need the GB10 model (T01). They are mocked in tests and never run against real vLLM.
 
