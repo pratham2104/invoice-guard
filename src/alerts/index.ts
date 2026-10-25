@@ -121,10 +121,27 @@ export function listAlerts(db: DB, limit = 50): any[] {
   return db.prepare("SELECT * FROM alerts ORDER BY id DESC LIMIT ?").all(limit) as any[];
 }
 
-/** Build, post (if configured) and record. Returns what happened. */
-export async function raiseAlert(db: DB, a: Parameters<typeof buildAlert>[0], opts: Parameters<typeof postToSlack>[1] = {}) {
+/**
+ * Build, post (if configured) and record. Returns what happened.
+ * Slack route: the bot (chat.postMessage case card with buttons) when SLACK_BOT_TOKEN + SLACK_CHANNEL_ID are set or a
+ * `bot` is passed; otherwise the webhook (T09). Pass `bot: null` to force the webhook path.
+ */
+export async function raiseAlert(db: DB, a: Parameters<typeof buildAlert>[0],
+                                 opts: Parameters<typeof postToSlack>[1] & { bot?: { client: import("./slack.js").ChatClient; channel: string } | null } = {}) {
   const alert = buildAlert(a);
-  const slack = await postToSlack(alert, opts);
+  let slack: SlackResult;
+  const { botFromEnv, postCaseCard } = await import("./slack.js");
+  const bot = opts.bot === undefined ? await botFromEnv() : opts.bot;
+  if (bot) {
+    try {
+      const r = await postCaseCard(bot.client, bot.channel, db, a.caseId);
+      slack = r.sent ? { sent: true } : { sent: false, reason: `chat.postMessage: ${r.error ?? "failed"}` };
+    } catch (e) {
+      slack = { sent: false, reason: `chat.postMessage: ${(e as Error).message}` };
+    }
+  } else {
+    slack = await postToSlack(alert, opts);
+  }
   const id = recordAlert(db, alert, slack);
   return { id, alert, slack };
 }

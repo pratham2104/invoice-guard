@@ -15,7 +15,8 @@
     "demo": "tsx src/pipeline/demo.ts",
     "vision": "tsx src/vision/cli.ts",
     "api": "tsx src/api/server.ts",
-    "verify-local": "tsx src/verify/cli.ts"
+    "verify-local": "tsx src/verify/cli.ts",
+    "slack": "tsx src/alerts/slack-cli.ts"
   },
   "license": "MIT",
   "devDependencies": {
@@ -27,6 +28,8 @@
   },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.100",
+    "@slack/bolt": "^4.4.0",
+    "@slack/web-api": "^7.19.0",
     "express": "^5.1.0",
     "mailparser": "^3.7.4",
     "pdfjs-dist": "^4.10.38"

@@ -185,7 +185,20 @@ confirmation. Else **PASS**. `unknown` findings add no points and never clear a 
   (`id, case_id, created_at, vendor_name, outcome, state, headline, reason, slack_sent, slack_note`). `listAlerts(db)` reads the feed.
 - Content: vendor, decision, top 1–3 reasons as fixed plain phrases (`PHRASES`), case id, state. Never invoice
   numbers, amounts, sender addresses or bank numbers; `scrub()` strips any digit run of 5+ and any address as a backstop.
-- Webhook only: no interactive buttons (they need a public URL). Humans act on cases in the app/CLI.
+- Slack route: the **bot** when `SLACK_BOT_TOKEN` + `SLACK_CHANNEL_ID` are set (T18), else the **webhook** (T09).
+
+### Slack bot + buttons (T18, `src/alerts/slack.ts`, `npm run slack`)
+- `caseCard(db, caseId)` → Block Kit card: case id, decision, vendor, state, top reasons (fixed phrases), next step, and
+  buttons by state: OPEN → *Start verification*; AWAITING_VENDOR/REQUESTER → *Vendor/Requester confirmed legit*,
+  *Confirmed fraud*; READY_FOR_APPROVAL → *Approve release*. No invoice data, amounts, addresses or bank numbers.
+- `postCaseCard(client, channel, db, caseId)` posts via `chat.postMessage`; `raiseAlert()` uses it automatically.
+- `npm run slack` starts a Socket Mode listener (no public URL needed). Button press → `handleAction()` → `src/cases`
+  (`startVerification`, `recordConfirmation`, `approve`), so every control applies: Slack user IDs map to IG users via
+  `SLACK_USERS`, roles via `IG_USERS`; unmapped users, the agent, non-managers approving and self-approval are refused
+  (ephemeral "Blocked" reply). On success the card is updated in place. `--demo` processes the inbox and posts a card per
+  hold; `--post-open` posts cards for OPEN cases.
+- Tokens: `SLACK_BOT_TOKEN` (xoxb- only; xoxp- refused), `SLACK_APP_TOKEN` (xapp-), loaded from
+  `~/.invoice-guard-slack.env` (warns unless chmod 600). Never printed.
 
 ### Case workflow (T15, `src/cases/index.ts`), ported from prerna-1's `cases.py`
 ```
