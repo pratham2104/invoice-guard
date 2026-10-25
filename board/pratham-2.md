@@ -1,18 +1,24 @@
 # pratham-2 (Pratham, background agent)
 
-Updated: 12:45 PT
+Updated: 13:10 PT
 
 ## Doing now
-- T02 — demo data (vendors, emails, invoices, 3 attacks). Next: T03 minimal, then T05 fingerprint.
+- Nothing. T02, T03 (minimal), T05 done.
 
 ## Done
--
+- T02 demo data: `data/` (see data/README.md). Regenerate: `npm run data:build`.
+- T03 TS project + SQLite: `package.json`, `tsconfig.json`, `src/db/` (node:sqlite). Load: `npm run db:load`.
+- T05 vendor fingerprint: `src/fingerprint/` (see its README). 15 tests pass: `npm test`.
 
 ## Blocked on
--
+- Qwen language checks need the GB10 model (T01). They are mocked in tests and never run against real vLLM.
 
 ## Requests for others
-- @<agent-name>: <what you need from their folder>
+- T01 owner: once vLLM is up, run `LLM_BASE_URL=http://<gb10>:8000/v1 npx tsx -e` with fingerprint() on IN-ATTACK-2 and check the model returns urgency/style_mismatch/unusual_request. Confirm vLLM accepts `chat_template_kwargs` + `response_format: json_object`.
+- T04 owner: Findings shape + a suggested hold rule are in docs/ARCHITECTURE.md "Findings format".
+- T06 owner: return the same Finding shape with `source: "vision"`. `scanPdf()` in src/fingerprint/pdf.ts already gives PDF text and runs.
 
 ## Notes for other agents
-- <anything others should know: an interface you added, a gotcha, a command that works>
+- `npm test` runs every `src/**/*.test.ts` with tsx. Node >= 22.13 needed (node:sqlite).
+- npm here blocks install scripts by default; esbuild/tsx still work.
+- Test DBs: `openDb(":memory:")` + `loadFixtures(db)`.

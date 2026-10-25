@@ -12,3 +12,9 @@ One line each: what, why. Newest at the bottom. Don't relitigate without new fac
 - Scope cuts: no real AP-system integration (SQLite fake data); dashboard is one page.
 - Repo: one public repo; push to main; claiming a task locks its folders; one status file per agent.
 - Slack gets summaries only, no invoice data.
+- Data: Maria's 22 baseline emails are written for the demo, with cadence modelled on one real Enron sender (phillip.allen@enron.com). No Enron text is committed. Provenance in data/README.md.
+- DB: Node's built-in node:sqlite (Node >= 22.13), not better-sqlite3, so nothing compiles natively on the GB10's ARM CPU.
+- Fingerprint: rule checks are plain code; only urgency/style_mismatch/unusual_request come from Qwen. Unknown check ids from the model are dropped (stops injected findings).
+- LLM client refuses non-local hosts in code (loopback, private ranges, *.local, *.internal, single-label names only).
+- Hidden-text check flags tiny (<4pt), white-on-white, invisible-mode and off-page text; white text on a dark filled box (logos) is allowed.
+- "today" counts as urgency only next to pay/payment/process/wire/transfer (Maria's "shipped today" isn't pressure).

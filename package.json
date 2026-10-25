@@ -18,5 +18,8 @@
     "@types/node": "^22.18.8",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^4.10.38"
   }
 }

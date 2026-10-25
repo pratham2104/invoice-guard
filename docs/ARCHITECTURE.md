@@ -93,5 +93,19 @@ against it without reading your code.
 - Not built yet. Express routes are open as **T03b** on the board.
 
 ### Findings format (fingerprint + vision → rules)
-- *(T05/T06 owners: agree a JSON shape here before building, e.g.
-  `{ source, field, expected, actual, severity, explanation }`.)*
+Defined in `src/fingerprint/types.ts`. T06 (vision) should return the same shape with `source: "vision"`.
+```ts
+interface Finding {
+  check: string;        // stable id, e.g. "lookalike_domain", "bank_mismatch", "style_mismatch"
+  expected: string;     // the vendor's normal
+  actual: string;       // what this message shows
+  severity: "high" | "medium" | "low" | "info" | "unknown";  // unknown = check couldn't run
+  explanation: string;  // one sentence for the AP clerk
+  source?: "rule" | "llm" | "vision";
+}
+```
+- Fingerprint entry point: `fingerprint(db, msg, { llm?: LlmClient | false })` in
+  `src/fingerprint/index.ts` → `{ vendorId, impersonating, profile, findings }`.
+  Full check list: `src/fingerprint/README.md`.
+- Suggested rule for T04 (not decided yet): HOLD if any `high`, or 2+ `medium`, or any finding
+  from `bank_change_request`. A finding with severity `unknown` never clears a hold.
