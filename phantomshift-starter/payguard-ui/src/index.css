@@ -23,67 +23,67 @@
 
 @layer components {
   .shell-header {
-    @apply border-b border-stroke bg-bg-s1;
+    @apply border-b border-stroke bg-bg-s1/95 backdrop-blur-md;
   }
 
   .panel {
-    @apply rounded-panel border border-stroke bg-bg-s1;
+    @apply rounded-panel border border-stroke bg-bg-s1/90 backdrop-blur-sm shadow-lg;
   }
 
   .panel-head {
-    @apply flex items-center justify-between gap-2 px-4 py-3 border-b border-stroke/80;
+    @apply flex items-center justify-between gap-2 px-4 py-3 border-b border-stroke/80 bg-bg-s2/40;
   }
 
   .panel-title {
-    @apply text-[11px] font-semibold uppercase tracking-[0.12em] text-fg-muted;
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-muted font-mono;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-1.5 rounded-xl border border-stroke bg-bg-s2/80 px-2.5 py-1.5 text-xs text-fg transition-colors hover:border-stroke-hover hover:bg-bg-s3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan/60;
+    @apply inline-flex items-center gap-1.5 rounded-lg border border-stroke bg-bg-s2/80 px-2.5 py-1.5 text-xs text-fg transition-all hover:border-stroke-hover hover:bg-bg-s3 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan/60 active:scale-95;
   }
 
   .btn-ghost-active {
-    @apply border-chartreuse/40 bg-chartreuse/[0.08] text-chartreuse;
+    @apply border-halberd-green/50 bg-halberd-green/[0.12] text-halberd-green font-semibold shadow-glowGreen;
   }
 
   .badge-demo {
-    @apply inline-flex items-center rounded-md border border-amber/35 bg-amber/[0.08] px-2.5 py-1 text-[10px] font-mono font-medium text-amber uppercase tracking-wide;
+    @apply inline-flex items-center rounded-md border border-amber/40 bg-amber/[0.1] px-2.5 py-0.5 text-[10px] font-mono font-medium text-amber uppercase tracking-wider;
   }
 
   .badge-live {
-    @apply inline-flex items-center rounded-md border border-chartreuse/35 bg-chartreuse/[0.08] px-2.5 py-1 text-[10px] font-mono font-medium text-chartreuse uppercase tracking-wide;
+    @apply inline-flex items-center rounded-md border border-halberd-green/40 bg-halberd-green/[0.1] px-2.5 py-0.5 text-[10px] font-mono font-medium text-halberd-green uppercase tracking-wider shadow-glowGreen;
   }
 
   .badge-historical {
-    @apply inline-flex items-center rounded-md border border-cyan/30 bg-cyan/[0.06] px-2 py-0.5 text-[10px] font-mono text-cyan;
+    @apply inline-flex items-center rounded-md border border-cyan/40 bg-cyan/[0.08] px-2 py-0.5 text-[10px] font-mono text-cyan;
   }
 
   .kpi-value {
-    @apply text-2xl md:text-[28px] font-semibold tabular-nums tracking-tight text-fg;
+    @apply text-2xl md:text-[26px] font-bold tabular-nums tracking-tight text-white font-mono;
   }
 
   .kpi-label {
-    @apply text-[10px] uppercase tracking-wider text-fg-muted;
+    @apply text-[10px] uppercase tracking-wider text-fg-muted font-mono;
   }
 
   .incident-card {
-    @apply w-full text-left rounded-xl border border-stroke bg-bg-s2/60 px-3 py-2.5 transition-colors hover:border-stroke-hover;
+    @apply w-full text-left rounded-lg border border-stroke bg-bg-s2/70 px-3 py-2.5 transition-all hover:border-stroke-hover hover:bg-bg-s3;
   }
 
   .incident-card-active {
-    @apply border-cyan/40 bg-bg-s3 ring-1 ring-cyan/20;
+    @apply border-halberd-cyan/60 bg-bg-s3 ring-1 ring-halberd-cyan/30 shadow-glowCyan;
   }
 
   .denial-banner {
-    @apply flex items-center gap-2 rounded-xl border border-coral/35 bg-coral/[0.08] px-3 py-2 text-sm text-coral;
+    @apply flex items-center gap-2 rounded-lg border border-coral/40 bg-coral/[0.12] px-3 py-2 text-sm text-coral shadow-glowRed;
   }
 
   .evidence-block {
-    @apply rounded-xl border border-stroke bg-bg-s2/80 p-3 text-fg-muted;
+    @apply rounded-lg border border-stroke bg-bg-s2/90 p-3 text-fg-muted font-mono text-xs;
   }
 
   .flow-wrap {
-    @apply relative flex-1 min-h-[380px] rounded-xl border border-stroke bg-bg-s2/40 overflow-hidden;
+    @apply relative flex-1 min-h-[420px] rounded-lg border border-stroke bg-bg-s2/50 overflow-hidden;
   }
 
   .react-flow__node {
@@ -95,7 +95,7 @@
   }
 
   .react-flow__controls-button {
-    @apply !bg-bg-s2 !border-stroke !fill-fg-muted;
+    @apply !bg-bg-s2 !border-stroke !fill-fg-muted hover:!fill-white;
   }
 }
 

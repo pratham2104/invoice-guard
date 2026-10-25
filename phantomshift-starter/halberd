@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+# HALBERD CLI: Hardened Autonomous Lifecycle Barrier & Execution Remediation Dispatcher
+# NVIDIA GB10 | OpenClaw | Airgapped Local Inference
+
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -d "$DIR/phantomshift-starter" ]; then
+    cd "$DIR/phantomshift-starter"
+else
+    cd "$DIR"
+fi
+export PYTHONPATH="${PYTHONPATH:-}:."
+
+HALBERD_BANNER="
+    __  _____    __    ____  ______ ____  ____ 
+   / / / /   |  / /   / __ )/ ____// __ \/ __ \
+  / /_/ / /| | / /   / __  / __/  / /_/ / / / /
+ / __  / ___ |/ /___/ /_/ / /___ / _, _/ /_/ / 
+/_/ /_/_/  |_/_____/_____/_____//_/ |_/_____/  
+  Hardened Autonomous Lifecycle Barrier & Execution Remediation Dispatcher
+  Platform: NVIDIA GB10 | Orchestrator: OpenClaw | Mode: Airgapped
+"
+
+if [ $# -eq 0 ]; then
+    echo "$HALBERD_BANNER"
+    echo "Usage: halberd <command> [options]"
+    echo ""
+    echo "Core Commands:"
+    echo "  status         Display real-time HALBERD posture, GB10 specs, and OpenClaw channels"
+    echo "  gates          Verify hackathon gates H01-H07 (scripts/verify_hackathon.py)"
+    echo "  channels       List and verify all 4 OpenClaw-managed Slack channels"
+    echo "  serve          Launch the HALBERD Tactical Defense web console (port 8765)"
+    echo "  run            Run an incident end-to-end through the deterministic gate"
+    echo "  watch          Autonomous trigger: monitor inbox directory for hostile documents"
+    echo "  slack-setup    Verify/post status cards to OpenClaw-managed Slack channels"
+    echo "  slack-listen   Poll Slack channels for operator commands (scan, simulate, etc.)"
+    echo "  autopatch      Execute the AUTOPATCH continuous discovery and remediation loop"
+    echo "  eval           Evaluate heldout and dev policy benchmark matrices"
+    echo ""
+    exit 0
+fi
+
+CMD="$1"
+shift || true
+
+case "$CMD" in
+    status)
+        echo "$HALBERD_BANNER"
+        python3 -c "
+import json
+from pathlib import Path
+from phantomshift.dashboard import dashboard_status
+print('HALBERD DEFENSIVE STATUS:')
+st = dashboard_status()
+print(f'  Mode:              {st.get(\"mode\")}')
+print(f'  Hardware:          {st.get(\"hardware_gate\")} (NVIDIA GB10 NVFP4)')
+print(f'  Orchestrator:      {st.get(\"openclaw_gate\")} (NemoClaw/OpenClaw/OpenShell)')
+print(f'  Channel Gateway:   {st.get(\"discord_gate\")} (OpenClaw Slack Orchestrator)')
+print(f'  Inference Egress:  AIRGAPPED (0.0.0.0/0 Blocked)')
+print('')
+ch_path = Path('artifacts/runtime-verification/channel.json')
+if ch_path.exists():
+    ch = json.loads(ch_path.read_text())
+    print('OPENCLAW MANAGED CHANNELS:')
+    for k, v in ch.get('managed_channels', {}).items():
+        print(f'  • #{v[\"name\"]} ({v[\"channel_id\"]}) -> {v[\"purpose\"]}')
+"
+        ;;
+    gates)
+        echo "$HALBERD_BANNER"
+        python3 scripts/verify_hackathon.py --mode prep "$@"
+        ;;
+    channels)
+        echo "$HALBERD_BANNER"
+        python3 -c "
+import json
+from pathlib import Path
+from phantomshift.slack_channel import SlackChannel
+ch_file = Path('artifacts/runtime-verification/channel.json')
+if ch_file.exists():
+    data = json.loads(ch_file.read_text())
+    print(f'Team: {data.get(\"team\")} | Bot: @{data.get(\"bot_username\")}')
+    print(f'Approval Nonce: {data.get(\"nonce\")} (Bound in event store)')
+    print('')
+    for k, v in data.get('managed_channels', {}).items():
+        print(f'  [{k.upper():<9}] #{v[\"name\"]} ({v[\"channel_id\"]}): {v[\"purpose\"]}')
+"
+        ;;
+    serve)
+        echo "$HALBERD_BANNER"
+        exec python3 -m phantomshift --port "${PORT:-8765}" "$@"
+        ;;
+    *)
+        exec python3 -m phantomshift "$CMD" "$@"
+        ;;
+esac

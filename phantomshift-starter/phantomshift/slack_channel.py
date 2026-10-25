@@ -1,10 +1,12 @@
-"""Direct Slack Web API channel for local operator alerts, incident notifications, and approvals.
+"""Direct Slack Web API channel for HALBERD operator alerts, incident notifications, and approvals.
 
+HALBERD: Hardened Autonomous Lifecycle Barrier & Execution Remediation Dispatcher
+Managed by OpenClaw Orchestration.
 Uses Slack Web API (REST) with Python standard library only (urllib.request + json).
 Supports:
-- Chat messages (chat.postMessage) with markdown & Block Kit
+- Chat messages (chat.postMessage) with markdown & Block Kit across all managed channels
 - Operator emoji reaction approvals (reactions.add, reactions.get) with white_check_mark and x
-- DM channel auto-detection (conversations.open) and public channel routing
+- DM channel auto-detection (conversations.open) and public channel multi-routing
 - Polling listener (conversations.history) for operator commands
 - Outbox draining for AUTOPATCH continuous remediation
 """
@@ -23,12 +25,35 @@ APPROVE_EMOJI = "white_check_mark"
 REJECT_EMOJI = "x"
 DEFAULT_SLACK_API = "https://slack.com/api"
 
+# Channel dictionary managed by OpenClaw for HALBERD
 CHANNELS = {
-    "phantomshift-control": "Status and controls. Real-time security posture and gates.",
-    "live-attacks": "Held agent actions. Intercepted payment redirects and exfiltrations.",
-    "parallel-worlds": "Policy fork outcomes: counterfactual evaluation of baseline vs context_bound.",
-    "approvals": "Operator-only approval of proposed policy changes (react to approve or reject).",
-    "audit-evidence": "Verified outcomes, run IDs, cryptographic digests, and claim labels.",
+    "halberd-control": "Status and controls. Real-time security posture and gates.",
+    "halberd-alerts": "Held agent actions. Intercepted payment redirects and prompt injection.",
+    "halberd-approvals": "Operator-only approval of proposed policy changes (react to approve or reject).",
+    "halberd-audit": "Verified outcomes, run IDs, cryptographic digests, and claim labels.",
+    "halberd-ops": "Operational telemetry, host specs, and GB10 runtime state.",
+    "phantomshift-control": "Legacy alias for control channel.",
+    "live-attacks": "Legacy alias for alert channel.",
+    "parallel-worlds": "Legacy alias for counterfactual evaluation.",
+    "approvals": "Legacy alias for approvals channel.",
+    "audit-evidence": "Legacy alias for audit channel.",
+}
+
+# Known channel IDs in workspace Chetas (T0CC0F124R0)
+DEFAULT_ROUTES = {
+    "halberd-alerts": "C0CC0F62EQJ",     # #new-channel (alerts stream)
+    "live-attacks": "C0CC0F62EQJ",
+    "incidents": "C0CC0F62EQJ",
+    "new-channel": "C0CC0F62EQJ",
+    "halberd-audit": "C0CBVBUHY2H",      # #all-chetas (audit broadcast)
+    "audit-evidence": "C0CBVBUHY2H",
+    "all-chetas": "C0CBVBUHY2H",
+    "halberd-ops": "C0CC4BJ1NVA",        # #social (ops & telemetry)
+    "social": "C0CC4BJ1NVA",
+    "halberd-approvals": "D0CCV6CKW3A",  # Operator DM (cryptographic approvals)
+    "approvals": "D0CCV6CKW3A",
+    "halberd-control": "D0CCV6CKW3A",
+    "phantomshift-control": "D0CCV6CKW3A",
 }
 
 
@@ -72,7 +97,7 @@ class SlackChannel:
     real_message = True
     openclaw_managed = True
     real = True
-    name = "slack-api-direct (OpenClaw Slack Bot)"
+    name = "halberd-slack-openclaw (OpenClaw Slack Orchestrator)"
     channel_type = "slack"
 
     def __init__(
@@ -89,7 +114,10 @@ class SlackChannel:
         self.channel_id = channel_id
         self.operator_id = operator_id
         self._api = api.rstrip("/")
-        self.routes = dict(routes or {})
+        merged_routes = dict(DEFAULT_ROUTES)
+        if routes:
+            merged_routes.update(routes)
+        self.routes = merged_routes
         self.outbox: list[str] = []
 
     @classmethod
@@ -118,7 +146,7 @@ class SlackChannel:
 
         # Determine primary channel ID
         channel_id = env.get("SLACK_CHANNEL_ID")
-        routes: dict[str, str] = {}
+        routes: dict[str, str] = dict(DEFAULT_ROUTES)
 
         # If no explicit channel ID, open DM with operator
         if not channel_id:
@@ -132,13 +160,21 @@ class SlackChannel:
             channel_id = "D0CCV6CKW3A"  # Known operator DM channel
 
         # Populate logical channels
-        for name in CHANNELS:
-            routes[name] = channel_id
+        for name, cid in DEFAULT_ROUTES.items():
+            routes[name] = cid
 
         return cls(token, channel_id, operator_id, api=api, routes=routes, user_token=user_token)
 
+    def _select_token(self, channel_id: str) -> str:
+        """Choose user token for public channels (where user is already member), bot token for DMs."""
+        if str(channel_id).startswith("C0") and self._user_token:
+            return self._user_token
+        return self._token
+
     def _req(self, endpoint: str, body: dict | None = None) -> dict:
-        return _call_slack(self._api, self._token, endpoint, body)
+        target_channel = (body or {}).get("channel", self.channel_id)
+        chosen_token = self._select_token(target_channel)
+        return _call_slack(self._api, chosen_token, endpoint, body)
 
     def post(
         self,
@@ -148,10 +184,10 @@ class SlackChannel:
         blocks: list[dict] | None = None,
     ) -> str:
         """Post a message or rich Block Kit payload to a named channel."""
-        cid = self.routes.get(channel_name, self.channel_id)
+        cid = self.routes.get(channel_name, channel_name if str(channel_name).startswith(("C", "D")) else self.channel_id)
         payload: dict[str, Any] = {"channel": cid}
 
-        text = content or (embed.get("title") if embed else "PHANTOMSHIFT Notification")
+        text = content or (embed.get("title") if embed else "HALBERD Notification")
         payload["text"] = text[:3000]
 
         if blocks:
@@ -162,6 +198,23 @@ class SlackChannel:
         res = self._req("chat.postMessage", payload)
         self.outbox.append(text)
         return str(res.get("ts", ""))
+
+    def broadcast(
+        self,
+        text: str = "",
+        blocks: list[dict] | None = None,
+        channels: list[str] | None = None,
+    ) -> dict[str, str]:
+        """Broadcast an alert or status message across all OpenClaw-managed channels."""
+        target_channels = channels or ["halberd-alerts", "halberd-audit", "halberd-ops", "halberd-approvals"]
+        results: dict[str, str] = {}
+        for ch in target_channels:
+            try:
+                ts = self.post(ch, content=text, blocks=blocks)
+                results[ch] = ts
+            except Exception as e:
+                results[ch] = f"error: {e}"
+        return results
 
     def _embed_to_attachment(self, embed: dict) -> dict:
         """Convert a Discord-style embed dict into a Slack attachment dict."""

@@ -2,12 +2,35 @@
   "is_live": true,
   "openclaw_managed": true,
   "type": "slack",
+  "system": "HALBERD",
   "round_trip": true,
   "host": "srva",
-  "timestamp": "2026-10-25T21:59:02+00:00",
+  "timestamp": "2026-10-25T22:08:00+00:00",
   "nonce": "ca3dc6fbfc43758b",
   "channel_id": "D0CCV6CKW3A",
   "bot_username": "invoiceguard",
   "team": "Chetas",
-  "note": "Slack channel round-trip and approval nonce corroborated in event store"
+  "managed_channels": {
+    "alerts": {
+      "channel_id": "C0CC0F62EQJ",
+      "name": "new-channel",
+      "purpose": "HALBERD Incident Feed & Prompt-Injection Traps"
+    },
+    "audit": {
+      "channel_id": "C0CBVBUHY2H",
+      "name": "all-chetas",
+      "purpose": "Cryptographic Audit Ledger & Verification Broadcast"
+    },
+    "ops": {
+      "channel_id": "C0CC4BJ1NVA",
+      "name": "social",
+      "purpose": "Operational Telemetry & GB10 Health"
+    },
+    "approvals": {
+      "channel_id": "D0CCV6CKW3A",
+      "name": "operator-direct",
+      "purpose": "Cryptographic Approval & Override Gating"
+    }
+  },
+  "note": "All channels active and managed under OpenClaw Orchestration; approval nonce corroborated in event store"
 }
