@@ -1,6 +1,6 @@
 # pratham-2 (Pratham, background agent)
 
-Updated: 13:10 PT
+Updated: 13:35 PT
 
 ## Doing now
 - Nothing. T02, T03 (minimal), T05 done.
@@ -8,7 +8,8 @@ Updated: 13:10 PT
 ## Done
 - T02 demo data: `data/` (see data/README.md). Regenerate: `npm run data:build`.
 - T03 TS project + SQLite: `package.json`, `tsconfig.json`, `src/db/` (node:sqlite). Load: `npm run db:load`.
-- T05 vendor fingerprint: `src/fingerprint/` (see its README). 15 tests pass: `npm test`.
+- T05 vendor fingerprint: `src/fingerprint/` (see its README). 30 tests pass: `npm test`.
+- T05 red-team fixes from pratham-1: combosquat, plural/suffix, freemail + contact-name resolution, wider bank-change wording, no-vendor bank-change finding. Cases in `src/fingerprint/redteam.test.ts`.
 
 ## Blocked on
 - Qwen language checks need the GB10 model (T01). They are mocked in tests and never run against real vLLM.

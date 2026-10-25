@@ -18,3 +18,7 @@ One line each: what, why. Newest at the bottom. Don't relitigate without new fac
 - LLM client refuses non-local hosts in code (loopback, private ranges, *.local, *.internal, single-label names only).
 - Hidden-text check flags tiny (<4pt), white-on-white, invisible-mode and off-page text; white text on a dark filled box (logos) is allowed.
 - "today" counts as urgency only next to pay/payment/process/wire/transfer (Maria's "shipped today" isn't pressure).
+- Red-team fixes (T05): a non-contact asking to change payment details is always high (`payment_change_from_unknown_sender`), even with no vendor match. Freemail senders claiming a vendor are high (`freemail_sender`).
+- Vendor resolution needs a FULL vendor name or FULL contact name (display name or address local part); single generic words never match. A subdomain of the vendor's real domain counts as the vendor.
+- Lookalikes now include plurals/suffixes (s, es, inc, llc, billing, payments, invoices, ar, ...) and combosquats (vendor domain inside a longer name, or all vendor-name tokens with one distinctive token).
+- Bank-change wording widened ("different now", "going forward", "from now on", "remittance info", "payment instructions", "details in the attached letter", "remit to:"). Checked against all 22 of Maria's history emails: none trigger it.

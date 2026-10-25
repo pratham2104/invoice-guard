@@ -1,6 +1,6 @@
 // Rule checks: plain code, exact, fast, no model needed. Each returns Findings; none decide.
 import type { Finding, IncomingMessage, VendorProfile, Bank } from "./types.js";
-import { compareDomains, domainOf } from "./domain.js";
+import { compareDomains, domainOf, FREEMAIL } from "./domain.js";
 import { BANK_CHANGE_RE, parseInvoiceText } from "./text.js";
 import type { PdfScan } from "./pdf.js";
 
@@ -16,8 +16,12 @@ export function ruleChecks(profile: VendorProfile, msg: IncomingMessage, pdfScan
   const senderDomain = domainOf(sender);
 
   // --- identity
-  if (senderDomain !== profile.domain) {
-    const cmp = compareDomains(senderDomain, profile.domain);
+  if (senderDomain !== profile.domain && FREEMAIL.has(senderDomain)) {
+    out.push(f("freemail_sender", "high", profile.domain, senderDomain,
+      `Claims to be ${profile.name} but was sent from a free webmail address (${senderDomain}).`));
+  }
+  if (senderDomain !== profile.domain && !senderDomain.endsWith("." + profile.domain) && !FREEMAIL.has(senderDomain)) {
+    const cmp = compareDomains(senderDomain, profile.domain, profile.name);
     if (cmp.lookalike) {
       out.push(f("lookalike_domain", "high", profile.domain, senderDomain,
         `Sent from ${senderDomain}, which imitates ${profile.name}'s real domain ${profile.domain} (${cmp.technique}).`));
@@ -33,7 +37,10 @@ export function ruleChecks(profile: VendorProfile, msg: IncomingMessage, pdfScan
   }
 
   // --- payment details
-  const asksBankChange = !!msg.requestedBank || BANK_CHANGE_RE.test(msg.body) || BANK_CHANGE_RE.test(msg.subject);
+  const asksBankChange = asksPaymentChange(msg);
+  if (asksBankChange && !profile.contacts.some((c) => c.email === sender)) {
+    out.push(paymentChangeFromUnknown(msg, `a known ${profile.name} contact`));
+  }
   if (asksBankChange) {
     out.push(f("bank_change_request", "medium", "no change to payment details", msg.requestedBank ? bankStr(msg.requestedBank) : "asks to change payment details",
       `The message asks to change where ${profile.name} gets paid. Verify by calling ${profile.phoneOnFile} (number on file).`));
@@ -94,6 +101,18 @@ export function ruleChecks(profile: VendorProfile, msg: IncomingMessage, pdfScan
     }
   }
   return out;
+}
+
+/** Does the message ask to change where money goes? Wording, or bank numbers in the body. */
+export function asksPaymentChange(msg: IncomingMessage): boolean {
+  const hasNumbers = !!msg.requestedBank && !!(msg.requestedBank.routing || msg.requestedBank.account);
+  return hasNumbers || BANK_CHANGE_RE.test(msg.body) || BANK_CHANGE_RE.test(msg.subject);
+}
+
+/** High regardless of vendor match: anyone not on file asking to redirect payments. */
+export function paymentChangeFromUnknown(msg: IncomingMessage, expected = "a known vendor contact"): Finding {
+  return f("payment_change_from_unknown_sender", "high", expected, msg.from,
+    `${msg.from} is not a contact on file and is asking to change payment details. Do not change anything; verify by phone using the number on file.`);
 }
 
 function sequenceCheck(known: string[], num: string): Finding | undefined {

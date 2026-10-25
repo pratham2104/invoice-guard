@@ -7,9 +7,9 @@ import type { DB } from "../db/index.js";
 import { REPO_ROOT } from "../db/index.js";
 import type { Finding, IncomingMessage, VendorProfile } from "./types.js";
 import { buildProfile } from "./profile.js";
-import { ruleChecks } from "./rules.js";
+import { ruleChecks, asksPaymentChange, paymentChangeFromUnknown } from "./rules.js";
 import { languageChecks, type LlmClient } from "./llm.js";
-import { compareDomains, domainOf } from "./domain.js";
+import { compareDomains, domainOf, localPartOf, FREEMAIL } from "./domain.js";
 import { scanPdf } from "./pdf.js";
 import { extractBank } from "./text.js";
 
@@ -27,32 +27,55 @@ export interface FingerprintResult {
   findings: Finding[];
 }
 
-/** Which vendor does this message claim to be? Exact domain, then lookalike, then display name. */
+const squash = (s: string) => s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]/g, "");
+
+/**
+ * Which vendor does this message claim to be?
+ *  1. sender domain is the vendor's domain (or a subdomain of it) → that vendor, not impersonating
+ *  2. sender domain is a lookalike of a vendor's domain → that vendor, impersonating
+ *  3. display name contains a vendor's FULL name or a contact's FULL name → impersonating
+ *  4. address local part contains a contact's full name (maria.lopez.acme@gmail.com) → impersonating
+ * A single generic word ("Supply") never matches.
+ */
 export function resolveVendor(db: DB, msg: IncomingMessage): { vendorId: string | null; impersonating: boolean } {
   const vendors = db.prepare("SELECT id, name, domain FROM vendors").all() as { id: string; name: string; domain: string }[];
+  const contacts = db.prepare("SELECT vendor_id, name FROM vendor_contacts").all() as { vendor_id: string; name: string }[];
   const d = domainOf(msg.from);
-  const exact = vendors.find((v) => v.domain === d);
+  const exact = vendors.find((v) => v.domain === d || d.endsWith("." + v.domain));
   if (exact) return { vendorId: exact.id, impersonating: false };
-  const look = vendors.find((v) => compareDomains(d, v.domain).lookalike);
-  if (look) return { vendorId: look.id, impersonating: true };
-  const name = (msg.fromName ?? "").toLowerCase();
-  const byName = vendors.find((v) => name && (name.includes(v.name.toLowerCase()) || v.name.toLowerCase().includes(name)));
-  if (byName) return { vendorId: byName.id, impersonating: true };
-  if (msg.vendorId) return { vendorId: msg.vendorId, impersonating: true };
+  if (!FREEMAIL.has(d)) {
+    const look = vendors.find((v) => compareDomains(d, v.domain, v.name).lookalike);
+    if (look) return { vendorId: look.id, impersonating: true };
+  }
+  const display = squash(msg.fromName ?? "");
+  const local = squash(localPartOf(msg.from));
+  const fullName = (n: string) => n.trim().split(/\s+/).length >= 2 && squash(n).length >= 6;
+  const byVendorName = vendors.find((v) => display && squash(v.name).length >= 6 && display.includes(squash(v.name)));
+  if (byVendorName) return { vendorId: byVendorName.id, impersonating: true };
+  const byContact = contacts.find((c) => fullName(c.name) && ((display && display.includes(squash(c.name))) || local.includes(squash(c.name))));
+  if (byContact) return { vendorId: byContact.vendor_id, impersonating: true };
   return { vendorId: null, impersonating: false };
 }
 
 export async function fingerprint(db: DB, msg: IncomingMessage, opts: { llm?: LlmClient | false } = {}): Promise<FingerprintResult> {
   const { vendorId, impersonating } = resolveVendor(db, msg);
-  if (!vendorId) {
-    return { vendorId: null, impersonating: false, profile: null, findings: [{
-      check: "unknown_vendor", severity: "info", source: "rule", expected: "a vendor on file", actual: msg.from,
-      explanation: "Sender doesn't match any vendor on file.",
-    }] };
-  }
-  const profile = buildProfile(db, vendorId)!;
   const scans = await Promise.all((msg.pdfPaths ?? []).map((p) => scanPdf(p)));
   const withBank = { ...msg, requestedBank: msg.requestedBank ?? extractBank(msg.body) };
+  if (!vendorId) {
+    const findings: Finding[] = [{
+      check: "unknown_vendor", severity: "info", source: "rule", expected: "a vendor on file", actual: msg.from,
+      explanation: "Sender doesn't match any vendor on file.",
+    }];
+    // bank-change and hidden-text checks still run without a vendor
+    if (asksPaymentChange(withBank)) findings.push(paymentChangeFromUnknown(withBank));
+    for (const scan of scans) for (const h of scan.hidden) {
+      findings.push({ check: "hidden_pdf_text", severity: "high", source: "rule", expected: "no hidden text",
+        actual: `"${h.text.slice(0, 120)}" (${h.reasons.join(", ")})`,
+        explanation: "The attachment contains text a person can't see. Hidden instructions are ignored: the agent has no approve tool." });
+    }
+    return { vendorId: null, impersonating: false, profile: null, findings };
+  }
+  const profile = buildProfile(db, vendorId)!;
   const findings = ruleChecks(profile, withBank, scans);
   if (opts.llm !== false) findings.push(...(await languageChecks(profile, withBank, opts.llm || undefined)));
   return { vendorId, impersonating, profile, findings };

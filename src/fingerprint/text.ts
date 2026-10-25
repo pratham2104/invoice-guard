@@ -2,8 +2,21 @@
 import type { Bank } from "./types.js";
 
 /** Mentions changing / new bank or remittance details. */
-export const BANK_CHANGE_RE =
-  /\b(new|change[ds]?|changing|update[ds]?|updating|switch(?:ed)?|moved?|corrected)\b[^.\n]{0,40}\b(bank(?:ing)?|account|remit(?:tance)?|routing|ACH|wire)\b|\b(bank(?:ing)?|remit(?:tance)?|routing)\b[^.\n]{0,30}\b(change[ds]?|updated?|new)\b/i;
+const PAY_WORDS = String.raw`(?:bank(?:ing)?|account|remit(?:tance)?|routing|ACH|wire|payments?|pay)`;
+export const BANK_CHANGE_RE = new RegExp([
+  // "new/updated/changed ... bank|account|remittance"
+  String.raw`\b(?:new|change[ds]?|changing|update[ds]?|updating|switch(?:ed)?|moved?|corrected|different)\b[^.\n]{0,40}\b(?:bank(?:ing)?|account|remit(?:tance)?|routing|ACH|wire)\b`,
+  // "bank|remittance|routing ... changed/updated/new/different"
+  String.raw`\b(?:bank(?:ing)?|remit(?:tance)?|routing)\b[^.\n]{0,30}\b(?:change[ds]?|updated?|new|different)\b`,
+  // "remittance/payment/banking info|instructions|details" on their own
+  String.raw`\b(?:remittance|payment|banking|bank|ACH|wire)\s+(?:info|information|instructions|details)\b`,
+  // "going forward / from now on / different now ... remit/pay/bank"  (both orders)
+  String.raw`\b(?:going forward|from now on|different now|effective immediately|with immediate effect)\b[^.\n]{0,60}\b${PAY_WORDS}\b`,
+  String.raw`\b${PAY_WORDS}\b[^.\n]{0,60}\b(?:going forward|from now on|different now)\b`,
+  // "please remit to:" with numbers or an attachment
+  String.raw`\bremit\s+(?:payment\s+)?to\s*:`,
+  String.raw`\b(?:details|instructions|information|letter)\b[^.\n]{0,25}\b(?:attached|enclosed|in the attached)\b[^.\n]{0,40}\b${PAY_WORDS}\b`,
+].join("|"), "i");
 
 /** Pressure words a normal vendor rarely uses. */
 export const URGENT_RE =

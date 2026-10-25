@@ -24,7 +24,8 @@ const r = await fingerprint(db, msg, { llm: false }); // rule checks only (no mo
 
 ## Checks
 
-Rule (`source: "rule"`): `lookalike_domain`, `unknown_sender`, `reply_to_mismatch`,
+Rule (`source: "rule"`): `lookalike_domain`, `freemail_sender`, `payment_change_from_unknown_sender`,
+`unknown_sender`, `reply_to_mismatch`,
 `bank_change_request`, `first_bank_change`, `bank_mismatch`, `remit_change`,
 `duplicate_invoice`, `invoice_out_of_sequence`, `po_mismatch`, `amount_out_of_range`,
 `off_cycle_date`, `hidden_pdf_text`, `unknown_vendor`.
@@ -39,3 +40,17 @@ If the model is unreachable you get one `language_checks` finding with severity 
 `nvidia/Qwen3.6-35B-A3B-NVFP4`). Only loopback, private-range, single-label, `*.local` and
 `*.internal` hosts are accepted. The request sets `chat_template_kwargs.enable_thinking=false`
 and `response_format: json_object`. Neither has been tried against the real vLLM server yet.
+
+## Vendor resolution and lookalikes
+
+`resolveVendor` matches, in order: the vendor's domain or a subdomain of it (not impersonating), a lookalike
+domain, the vendor's full name in the display name, or a contact's full name in the display name or address
+local part (`maria.lopez.acme@gmail.com`). A single generic word ("Supply") never matches.
+
+Lookalike techniques: homoglyph/confusables, hyphenation, TLD swap, subdomain abuse, plural or suffix
+(`acme-supplies`, `acmesupplyinc`, `acme-supply-billing`), combosquat (vendor domain glued inside a longer
+name, or every token of the vendor's name present with at least one distinctive token), and typo.
+
+A sender who isn't a contact on file and asks to change payment details always gets a high
+`payment_change_from_unknown_sender`, even when no vendor matches. Red-team cases live in `redteam.test.ts`:
+add every new bypass there before fixing it.
