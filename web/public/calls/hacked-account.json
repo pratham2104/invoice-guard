@@ -1,0 +1,41 @@
+{
+ "duration": 39.17,
+ "turns": [
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 6.17,
+   "end": 14.83,
+   "text": "Hi, this is Halberd, the automated verification line for the School District's business office. Is this Priya Nair at Greenfield Food Service?"
+  },
+  {
+   "speaker": "vendor",
+   "name": "Priya Nair",
+   "start": 15.58,
+   "end": 17.16,
+   "text": "Yes, this is Priya."
+  },
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 17.76,
+   "end": 25.48,
+   "text": "Thanks, Priya. An email from your address asked us to move Greenfield's payments to Coastline Credit Union. Did you send that request?"
+  },
+  {
+   "speaker": "vendor",
+   "name": "Priya Nair",
+   "start": 26.23,
+   "end": 31.18,
+   "text": "No, I didn't send that. We haven't touched our banking in years."
+  },
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 31.78,
+   "end": 37.82,
+   "text": "Thank you. We've kept your payments going to the account on file. You may want to have someone check your email account."
+  }
+ ],
+ "result": "Vendor said: not us"
+}

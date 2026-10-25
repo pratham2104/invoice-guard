@@ -1,0 +1,27 @@
+{
+ "duration": 29.9,
+ "turns": [
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 6.17,
+   "end": 19.46,
+   "text": "Hi Dr. Ma, this is Halberd, calling for the business office. LabWorks sent a bill for $3,860.00, for Bunsen burners, lab balances and goggles, with no purchase order. Did you order these?"
+  },
+  {
+   "speaker": "vendor",
+   "name": "Dr. Helen Ma",
+   "start": 20.21,
+   "end": 23.22,
+   "text": "Oh, yes, that was me. They're for the new chemistry lab."
+  },
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 23.82,
+   "end": 28.55,
+   "text": "Great, thank you. I'll note that you confirmed it. A manager still approves the payment."
+  }
+ ],
+ "result": "Helen said: yes, I ordered it"
+}

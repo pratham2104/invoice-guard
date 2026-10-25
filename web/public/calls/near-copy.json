@@ -1,0 +1,41 @@
+{
+ "duration": 36.93,
+ "turns": [
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 6.17,
+   "end": 14.02,
+   "text": "Hi, this is Halberd, the automated verification line for the School District's business office. Am I speaking with Bright Bus Lines?"
+  },
+  {
+   "speaker": "vendor",
+   "name": "Tom Reyes",
+   "start": 14.77,
+   "end": 16.31,
+   "text": "Yeah, this is Tom in billing."
+  },
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 16.91,
+   "end": 27.59,
+   "text": "Thanks, Tom. We received invoice #14, for $4,180.00, asking us to pay a new account at Harbor Point Bank. Did Bright Bus Lines send that request?"
+  },
+  {
+   "speaker": "vendor",
+   "name": "Tom Reyes",
+   "start": 28.34,
+   "end": 30.93,
+   "text": "No... that wasn't us. We haven't changed banks."
+  },
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 31.53,
+   "end": 35.58,
+   "text": "Thank you. We won't pay that invoice. Your account on file stays the same."
+  }
+ ],
+ "result": "Vendor said: not us"
+}

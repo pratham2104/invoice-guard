@@ -1,0 +1,41 @@
+{
+ "duration": 33.0,
+ "turns": [
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 6.17,
+   "end": 13.98,
+   "text": "Hi, this is Halberd, the automated verification line for the School District's business office. Is this Kevin Cho at TechNest?"
+  },
+  {
+   "speaker": "vendor",
+   "name": "Kevin Cho",
+   "start": 14.73,
+   "end": 15.52,
+   "text": "Speaking."
+  },
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 16.12,
+   "end": 24.03,
+   "text": "Thanks, Kevin. We received invoice #11, asking us to pay Pacific Western Credit Union. Did TechNest send that invoice?"
+  },
+  {
+   "speaker": "vendor",
+   "name": "Kevin Cho",
+   "start": 24.78,
+   "end": 27.6,
+   "text": "No, that's not ours. We still bank with First Valley."
+  },
+  {
+   "speaker": "agent",
+   "name": "Halberd",
+   "start": 28.2,
+   "end": 31.65,
+   "text": "Thank you. We won't pay it. Your account on file stays the same."
+  }
+ ],
+ "result": "Vendor said: not us"
+}
