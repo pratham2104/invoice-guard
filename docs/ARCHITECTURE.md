@@ -92,8 +92,32 @@ against it without reading your code.
 - `processed_messages(message_id, file, processed_at, outcome, case_id)`: each email processed once.
 - `alerts(...)`: in-app feed, see "Alert format".
 
-### API routes
-- Not built yet. Express routes are open as **T03b** on the board.
+### API routes (T03b, `src/api/`)
+- Run: `npm run api` → `http://127.0.0.1:${PORT_API:-4400}`. Loads `.env` like `npm run demo`; DB `DEMO_DB_PATH` (default
+  `data/demo.db`, kept across restarts). Env: `HOST_API` (default 127.0.0.1), `CORS_ORIGINS` (default
+  `http://localhost:5180,http://127.0.0.1:5180`), `INBOX_WATCH=0` turns the inbox folder watcher off, `LLM_BASE_URL`.
+- `createApi({ dbPath, inboxDir?, invoicesDir?, llmBaseUrl?, slackWebhookUrl?, fetchImpl? })` in `src/api/app.ts` returns
+  `{ app, ingest, reset, startWatching, ... }` (tests use `dbPath: ":memory:"`).
+- JSON, camelCase. Errors are `{ error }`: 400 bad body, 403 control violation, 404 unknown case/file, 409 wrong state.
+- Writes go only through `processEml` (ingest) and `src/cases` (human actions); one write at a time. No route lets the
+  model approve. Every response is masked (6+ digit runs → `••••1234`); bank fields are `routingLast4` / `accountLast4`.
+
+| Route | Returns |
+|---|---|
+| `GET /api/status` | `{ product:"Halberd", org, model:{endpoint,id,up}, mode:"model"\|"rules-only", cloudCalls:0, inbox:{watching,dir}, sandbox:{name:"OpenShell",egress:"local only"}, counts:{heldAmount,held,checkedToday,cleared,awaitingVendor,awaitingRequester} }`. `model.up` = `GET ${LLM_BASE_URL}/models` answers within 1.5 s (cached 10 s; non-local endpoints are never probed and count as down). `held` = non-terminal cases; `heldAmount` = sum of their known invoice amounts; `cleared` = PASS emails + APPROVED cases; `awaitingVendor`/`awaitingRequester` = held cases by `nextStep` (phone_callback / requester_confirmation). |
+| `GET /api/cases` | newest first: `{ id, vendorId, vendorName, invoiceNumber, amount, outcome, nextStep, state, status, severity, score, reason, createdAt, topChecks }`. `amount` is `null` when the email carried no invoice (attack 1). `topChecks` = check ids from `decide().top` (map to words with `PHRASES` in src/alerts). |
+| `GET /api/cases/:id` | `{ case (+resolvedAt, resolvedBy), vendor, bankOnFile, invoice:{current,lastReal}, email, findings, decision:{outcome,nextStep,score,severity,reasons}, callbacks, requesterChecks, audit:{events,chainOk,count} }`. `invoice.current` is parsed from the email's PDF the way the pipeline reads it (fixture invoice fields as a fallback); `lastReal` = the vendor's latest `paid`/`approved` invoice. `pdfUrl` → `/files/invoices/<name>.pdf` when the file exists. `audit.chainOk` verifies the whole global chain. |
+| `GET /api/alerts` | `[{ id, ts, caseId, text, channel:"slack"\|"in-app", sent, vendorName, outcome, state, headline, reason }]` |
+| `GET /api/vendors` | `[{ id, name, domain, phoneOnFile, invoices, lastPaid }]` |
+| `GET /api/users` | `[{ id, role:"manager"\|"clerk" }]` from `IG_USERS` (default janet.kim clerk; omar.reyes, pat.lee managers) |
+| `POST /api/cases/:id/callback` `{ result:"confirmed_fraud"\|"confirmed_legit"\|"no_answer", actor, note? }` | case detail. Starts verification first if the case is OPEN (that actor becomes the verifier). legit → READY_FOR_APPROVAL, fraud → REJECTED, no_answer → stays held (audit event). Also records the requester's yes/no on HOLD_CONFIRM cases. |
+| `POST /api/cases/:id/approve` `{ actor, role }` | case detail. `cases.approve`: manager per the server's user list, state READY_FOR_APPROVAL, not the verifier. `role:"clerk"` → 403. |
+| `POST /api/cases/:id/reject` `{ actor, role, reason? }` | case detail. Manager only (checked against the user list), any non-terminal state. |
+| `POST /api/demo/reset` | fresh DB file + fixtures, no cases: `{ ok, loaded }` |
+| `POST /api/demo/ingest` `{ file? }` | next unprocessed `.eml` in `data/emails/incoming` (or `file`) through `processEml`: `{ processed, caseId, outcome, skipped, mode }`. 409 when nothing is left. Uses the model only when `model.up`. |
+| `GET /api/demo/files` | `[{ file, processed, outcome, caseId }]` |
+| `GET /api/events` | SSE. `event: case` / `alert` with `data: {"id":...}`, `event: status` and `event: reset` with `data: {}`; sent after ingest, callback, approve, reject, reset. |
+| `GET /files/invoices/:name` | PDFs from `data/invoices` only |
 
 ### Findings format (fingerprint + vision → rules)
 Defined in `src/fingerprint/types.ts`. T06 (vision) should return the same shape with `source: "vision"`.

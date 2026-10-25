@@ -9,7 +9,7 @@ Status: `open` → `claimed` → `in-progress` → `done` (or `blocked`).
 | T01 | GB10: NemoClaw + Qwen running, model answers locally | in-progress | pratham-1 | `docs/SETUP.md` | Model copied from USB; installer next |
 | T02 | Fake data: 1 real vendor with 20 normal emails + 3 real invoices, 3 attack emails/invoices, SQLite seed | done | pratham-2 | | See PRODUCT.md "Demo scenarios". Do this first, everything tests against it |
 | T03 | App skeleton: Node/Express API + SQLite schema (vendors, invoices, payments, holds, callbacks) | done | pratham-2 | | Schema + loader + package.json done. Express routes split out as T03b |
-| T03b | Express API routes over the DB (vendors, invoices, holds, callbacks); add deps to package.json | claimed | tyler-1 | `src/api/` | Schema in ARCHITECTURE.md Interfaces |
+| T03b | Express API routes over the DB (vendors, invoices, holds, callbacks); add deps to package.json | done | tyler-1 | `src/api/` | Express API (src/api/): status, cases, case detail, alerts, vendors, callback/approve/reject (manager-only), demo reset/ingest/files, SSE events, invoice PDFs; inbox folder watch; 11 route tests. Run: npm run api (port 4400) |
 | T04 | AP control rules (deterministic pass/hold) | done | pratham-2 | | decide() + messageChecks() ported from prerna-1's prototype; 18 tests |
 | T05 | Vendor fingerprint: profile per vendor + Qwen "what's different" compare | done | pratham-2 | | Rules, red-team, rhythm + requester-confirmation drafts done (47 tests). Qwen paths NOT yet tried on the real GB10 model |
 | T06 | Invoice vision check: Qwen compares new invoice image vs last real one | done | prerna-1 | | Merged. Standalone `npm run vision`; NOT yet wired into src/pipeline + src/rules (see T16) |
