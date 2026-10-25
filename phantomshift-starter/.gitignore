@@ -7,3 +7,6 @@ __pycache__/
 *.pyc
 .venv/
 artifacts/runtime-verification/*.secret
+invoice-guard/node_modules/
+invoice-guard/.env
+invoice-guard/.env.*

@@ -1,0 +1,30 @@
+{
+  "checked": "2026-10-25T21:58:02+0000",
+  "sends_messages": false,
+  "channel_type": "slack",
+  "satisfies_R03": true,
+  "bot_token_configured": true,
+  "user_token_configured": true,
+  "app_token_configured": true,
+  "bot_token_valid": true,
+  "bot": {
+    "username": "invoiceguard",
+    "bot_user_id": "U0CC0KCEZQA",
+    "bot_id": "B0CC4FV9UMA",
+    "team": "Chetas",
+    "team_id": "T0CC0F124R0"
+  },
+  "user_token_valid": true,
+  "operator": {
+    "username": "lucifer.gator",
+    "user_id": "U0CC2HG0A81"
+  },
+  "channels": [
+    "all-chetas",
+    "new-channel",
+    "social"
+  ],
+  "operator_dm_accessible": true,
+  "operator_dm_channel": "D0CCV6CKW3A",
+  "socket_mode_available": true
+}

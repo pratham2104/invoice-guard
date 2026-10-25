@@ -129,8 +129,8 @@ def run_incident(scenario_id: str, operator: str = "operator-1", approve: bool =
                 f"legit completed {chosen['legit_completed']}/{chosen['legit_total']}.\n"
                 f"Digest {req['digest'][:12]}. React {chr(0x2705)} to approve or {chr(0x274c)} to reject (operator only).")
         mid = channel.send(text)
-        ev("PENDING_APPROVAL", {"digest": req["digest"], "channel": channel.name}, message_id=str(mid),
-           policy_version=cfg["name"])
+        ev("PENDING_APPROVAL", {"digest": req["digest"], "channel": channel.name, "nonce": req["nonce"]},
+           message_id=str(mid), policy_version=cfg["name"])
         trace.add("approval_requested", {"digest": req["digest"], "channel": channel.name,
                                          "real_message": getattr(channel, "real_message", False),
                                          "openclaw_managed": getattr(channel, "openclaw_managed", False)})

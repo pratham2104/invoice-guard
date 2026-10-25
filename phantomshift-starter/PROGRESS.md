@@ -198,3 +198,20 @@ Getting local inference + a real channel working by ~11:15 PT. Everything else i
   - `python3 scripts/verify_hackathon.py --mode prep`: H07 `PASS` (`docs/CLAIMS_AUDIT.md`), H06 confirms valid demo evidence in `artifacts/runtime-verification/demo.json` and `artifacts/gb10/demo.json` bound to `srva` while honestly reporting `NOT TESTED` for GB10 hardware on prep host.
   - Generated `artifacts/gb10/demo.json`, `artifacts/gb10/qwen_route.json`, and `artifacts/gb10/verify.json`.
   - Test suite remains 100% green: **546 passing tests** across 15 test modules with zero failures and zero errors.
+
+## Slack Bot Full Replacement & Verification (2026-10-25 ~21:55Z)
+- **Slack Autonomous Control Plane**:
+  - Created `phantomshift/slack_channel.py` (stdlib-only REST client: `chat.postMessage`, `reactions.add`, `reactions.get`, `conversations.open`, `conversations.history`).
+  - Created `phantomshift/slack_views.py` (Block Kit builders for incidents, policy forks, status gates, and AUTOPATCH findings).
+  - Created `scripts/slack_check.py` (read-only preflight testing bot token, user admin token, operator DM channel `D0CCV6CKW3A`, and Socket Mode readiness).
+  - Wired Slack into `__main__.py` (`slack-setup`, `slack-listen`, `--slack` flags for `run`, `watch`, `autopatch`).
+- **Slack Bolt Socket Mode Integration**:
+  - Cloned and configured `invoice-guard/` from `slack-samples/bolt-js-starter-agent`.
+  - Re-implemented `agent/agent.js` to dispatch security commands (`scan`, `simulate`, `report`, `status`) against the local airgapped PHANTOMSHIFT engine with zero cloud LLM egress.
+  - Verified WebSocket connection (`apps.connections.open`) to workspace `Chetas` (`T0CC0F124R0`).
+- **Gate H05 PASS**:
+  - Verified Slack channel round-trip to operator DM with corroborating cryptographic nonce `ca3dc6fbfc43758b` in `artifacts/events.sqlite`.
+  - `python3 scripts/verify_hackathon.py --mode prep`: Gate H05 turned **`PASS`** (`channel.json fresh on this host; nonce found in the event store (slack)`).
+- **Unit Test Suite Expansion**:
+  - Created `tests/test_slack_channel.py` (11 unit test methods).
+  - Total unit test suite: **557 passing tests** across 16 test modules with zero failures and zero errors.

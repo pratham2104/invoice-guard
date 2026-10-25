@@ -22,8 +22,14 @@ def drain_outbox(
             payload = row["payload"]
             channel = row["channel"]
             if channel == "approvals":
-                embed = discord_views.autopatch_finding_embed(payload)
-                post("approvals", embed=embed)
+                self_obj = getattr(post, "__self__", None)
+                if self_obj is not None and getattr(self_obj, "channel_type", "") == "slack":
+                    from .. import slack_views
+                    blocks = slack_views.slack_autopatch_finding_blocks(payload)
+                    post("approvals", blocks=blocks)
+                else:
+                    embed = discord_views.autopatch_finding_embed(payload)
+                    post("approvals", embed=embed)
             else:
                 post(channel, content=f"AUTOPATCH outbox `{row['dedupe_key']}`")
             store.complete_outbox(row["id"], ok=True)

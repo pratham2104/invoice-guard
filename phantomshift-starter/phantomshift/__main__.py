@@ -39,7 +39,10 @@ def cmd_eval(_: argparse.Namespace) -> int:
 
 def cmd_run(a: argparse.Namespace) -> int:
     channel = None
-    if a.discord:
+    if getattr(a, "slack", False) or (os.environ.get("SLACK_BOT_TOKEN") and not a.discord):
+        from .slack_channel import SlackChannel
+        channel = SlackChannel.from_env()
+    elif a.discord:
         from .discord_channel import DiscordChannel
         channel = DiscordChannel.from_env()
     rec = incident.run_incident(a.scenario, channel=channel, wait_s=a.wait)
@@ -65,6 +68,33 @@ def cmd_model(a: argparse.Namespace) -> int:
     for n, r in rec["policies"].items():
         print(f"  {n:<14}attacks succeeded {r['attacks_succeeded']}/{r['attacked_trials']}  legit completed {r['legit_completed']}/{r['control_trials']}")
     print(f"mode={rec['replay_mode']} wrote {path}")
+    return 0
+
+
+def cmd_slack_setup(_: argparse.Namespace) -> int:
+    import subprocess
+    from .slack_channel import SlackChannel
+    from . import slack_views
+    ch = SlackChannel.from_env()
+    root = Path(__file__).resolve().parent.parent
+    subprocess.run([sys.executable, str(root / "scripts/verify_hackathon.py")], capture_output=True, cwd=root)
+    gates = json.loads((root / "artifacts/runtime-verification/verify.json").read_text())
+    t = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", "tests"], capture_output=True, text=True, cwd=root)
+    tests = next((l for l in t.stderr.splitlines() if l.startswith(("OK", "FAILED"))), "tests: unknown")
+    ran = next((l for l in t.stderr.splitlines() if l.startswith("Ran ")), "")
+    blocks = slack_views.slack_status_blocks(gates, f"{ran} · {tests}")
+    ts = ch.post("phantomshift-control", blocks=blocks)
+    print(f"posted status to Slack (#phantomshift-control / operator DM, ts={ts})")
+    return 0
+
+
+def cmd_slack_listen(a: argparse.Namespace) -> int:
+    from . import commands
+    from .slack_channel import SlackChannel
+    ch = SlackChannel.from_env()
+    print(f"listening in Slack #{a.channel} for {a.seconds:.0f}s; send commands: scan | simulate | report | help")
+    n = ch.listen(a.channel, commands.dispatch, a.seconds)
+    print(f"replied to {n} command(s)")
     return 0
 
 
@@ -112,7 +142,13 @@ def cmd_watch(a: argparse.Namespace) -> int:
             print("competition mode: refusing to start with a non-local or unsafe inference config")
             return 1
     channel = None
-    if a.discord:
+    if getattr(a, "slack", False) or (os.environ.get("SLACK_BOT_TOKEN") and not getattr(a, "discord", False)):
+        try:
+            from .slack_channel import SlackChannel
+            channel = SlackChannel.from_env()
+        except Exception:
+            pass
+    elif getattr(a, "discord", False):
         from .discord_channel import DiscordChannel
         channel = DiscordChannel.from_env()
     store = EventStore(a.db)
@@ -169,13 +205,20 @@ def cmd_autopatch(a: argparse.Namespace) -> int:
         return 0 if out.get("ok") else 1
     if a.drain_outbox:
         from .autopatch.discord_publish import drain_outbox
-        from .discord_channel import DiscordChannel
-
-        try:
-            ch = DiscordChannel.from_env()
-        except Exception as e:
-            print(f"error: failed to initialize Discord channel: {e}", file=sys.stderr)
-            return 1
+        ch = None
+        if os.environ.get("SLACK_BOT_TOKEN") or getattr(a, "slack", False):
+            try:
+                from .slack_channel import SlackChannel
+                ch = SlackChannel.from_env()
+            except Exception:
+                pass
+        if ch is None:
+            try:
+                from .discord_channel import DiscordChannel
+                ch = DiscordChannel.from_env()
+            except Exception as e:
+                print(f"error: failed to initialize Slack or Discord channel: {e}", file=sys.stderr)
+                return 1
         out = drain_outbox(store, ch.post)
         print(json.dumps(out, indent=2))
         return 0 if out.get("failed", 0) == 0 else 1
@@ -217,8 +260,13 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("eval", help="print aggregate fixture results")
     rn = sub.add_parser("run", help="run one fixture incident end to end and write artifacts/runs/<id>.json")
     rn.add_argument("--scenario", choices=sorted(SCENARIOS), required=True)
-    rn.add_argument("--discord", action="store_true", help="post to Discord (.env) and wait for the operator's reaction")
+    rn.add_argument("--slack", action="store_true", help="post to Slack (.env) and wait for the operator reaction")
+    rn.add_argument("--discord", action="store_true", help="post to Discord (.env) and wait for the operator reaction")
     rn.add_argument("--wait", type=float, default=90.0, help="seconds to wait for the operator reaction")
+    sub.add_parser("slack-setup", help="verify/post status to Slack (#phantomshift-control / operator DM)")
+    sl = sub.add_parser("slack-listen", help="poll Slack channel for operator commands for N seconds")
+    sl.add_argument("--channel", default="phantomshift-control")
+    sl.add_argument("--seconds", type=float, default=120.0)
     dl = sub.add_parser("discord-listen", help="rehearsal: poll a Discord channel for operator commands for N seconds")
     dl.add_argument("--channel", default="phantomshift-control")
     dl.add_argument("--seconds", type=float, default=120.0)
@@ -229,7 +277,8 @@ def main(argv: list[str] | None = None) -> int:
     atp.add_argument("--research-once", action="store_true")
     atp.add_argument("--status", action="store_true")
     atp.add_argument("--deploy-context-bound", action="store_true")
-    atp.add_argument("--drain-outbox", action="store_true", help="post pending AUTOPATCH outbox to Discord (.env)")
+    atp.add_argument("--drain-outbox", action="store_true", help="post pending AUTOPATCH outbox to Slack or Discord (.env)")
+    atp.add_argument("--slack", action="store_true", help="drain outbox to Slack")
     ac = sub.add_parser("acceptance", help="firewall acceptance test + fixture incident pipeline")
     ac.add_argument("--scenario", choices=sorted(SCENARIOS), default="invoice_redirect")
     ad = sub.add_parser("adapter-serve", help="agent-facing firewall + submit listener (simulated ledger)")
@@ -243,6 +292,7 @@ def main(argv: list[str] | None = None) -> int:
     wt.add_argument("--once", action="store_true")
     wt.add_argument("--db", default="artifacts/events.sqlite")
     wt.add_argument("--mode", choices=("prep", "competition"), default="prep")
+    wt.add_argument("--slack", action="store_true", help="post alerts to Slack")
     wt.add_argument("--discord", action="store_true")
     wt.add_argument("--wait", type=float, default=60.0)
     mr = sub.add_parser("model-replay", help="sample a local model on attacked + control inputs, judge with every policy")
@@ -261,6 +311,10 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_eval(a)
     if a.cmd == "run":
         return cmd_run(a)
+    if a.cmd == "slack-listen":
+        return cmd_slack_listen(a)
+    if a.cmd == "slack-setup":
+        return cmd_slack_setup(a)
     if a.cmd == "discord-listen":
         return cmd_discord_listen(a)
     if a.cmd == "discord-setup":

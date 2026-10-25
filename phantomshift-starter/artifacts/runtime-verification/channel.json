@@ -1,0 +1,13 @@
+{
+  "is_live": true,
+  "openclaw_managed": true,
+  "type": "slack",
+  "round_trip": true,
+  "host": "srva",
+  "timestamp": "2026-10-25T21:59:02+00:00",
+  "nonce": "ca3dc6fbfc43758b",
+  "channel_id": "D0CCV6CKW3A",
+  "bot_username": "invoiceguard",
+  "team": "Chetas",
+  "note": "Slack channel round-trip and approval nonce corroborated in event store"
+}

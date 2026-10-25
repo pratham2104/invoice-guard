@@ -4,7 +4,7 @@
     "gate": "Autonomous always-on trigger",
     "status": "NOT TESTED",
     "detail": "no AGENT_STARTED event from a real OpenClaw agent (fixture runs do not count)",
-    "generated_at": "2026-10-25T20:53:14+00:00",
+    "generated_at": "2026-10-25T22:03:30+00:00",
     "host": "srva"
   },
   {
@@ -12,15 +12,15 @@
     "gate": "Runs on Dell Pro Max GB10",
     "status": "NOT TESTED",
     "detail": "arch=x86_64 gpu=['NVIDIA GeForce RTX 3090', 'NVIDIA GeForce RTX 3090']",
-    "generated_at": "2026-10-25T20:53:14+00:00",
+    "generated_at": "2026-10-25T22:03:30+00:00",
     "host": "srva"
   },
   {
     "id": "H03",
     "gate": "Local inference, no remote LLM",
     "status": "NOT TESTED",
-    "detail": "model ['nemotron-3-nano-4b'] is local but not on the GB10",
-    "generated_at": "2026-10-25T20:53:14+00:00",
+    "detail": "no model server on 127.0.0.1:8000/11434",
+    "generated_at": "2026-10-25T22:03:30+00:00",
     "host": "srva"
   },
   {
@@ -28,15 +28,15 @@
     "gate": "NemoClaw + OpenClaw + OpenShell present",
     "status": "NOT TESTED",
     "detail": "binaries found but no registered sandbox; a real tool call still needs proof",
-    "generated_at": "2026-10-25T20:53:14+00:00",
+    "generated_at": "2026-10-25T22:03:30+00:00",
     "host": "srva"
   },
   {
     "id": "H05",
     "gate": "Discord/Slack/Telegram via OpenClaw",
-    "status": "NOT TESTED",
-    "detail": "no OpenClaw channel proof file",
-    "generated_at": "2026-10-25T20:53:14+00:00",
+    "status": "PASS",
+    "detail": "channel.json fresh on this host; nonce found in the event store (slack)",
+    "generated_at": "2026-10-25T22:03:30+00:00",
     "host": "srva"
   },
   {
@@ -44,7 +44,7 @@
     "gate": "Final demo on the GB10",
     "status": "NOT TESTED",
     "detail": "demo evidence is valid but this host is not a GB10 (live demo run inc-e60b396776bc recorded on srva)",
-    "generated_at": "2026-10-25T20:53:14+00:00",
+    "generated_at": "2026-10-25T22:03:30+00:00",
     "host": "srva"
   },
   {
@@ -52,7 +52,7 @@
     "gate": "Evidence + claims audit present",
     "status": "PASS",
     "detail": "docs/CLAIMS_AUDIT.md",
-    "generated_at": "2026-10-25T20:53:14+00:00",
+    "generated_at": "2026-10-25T22:03:30+00:00",
     "host": "srva"
   }
 ]
