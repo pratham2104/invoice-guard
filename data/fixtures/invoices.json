@@ -648,6 +648,78 @@
     "source_email_id": null
   },
   {
+    "id": "INV-LW-5501",
+    "vendor_id": "V005",
+    "invoice_number": "LW-5501",
+    "invoice_date": "2026-01-20",
+    "po_number": "PO-2026-0150",
+    "amount": 1840.0,
+    "lines": [
+      {
+        "description": "Lab consumables",
+        "qty": 1,
+        "unit_price": 1840.0,
+        "amount": 1840.0
+      }
+    ],
+    "bank": {
+      "bank_name": "Capitol Trust Bank",
+      "routing": "999000666",
+      "account": "2208813377",
+      "remit_address": "9 Research Pkwy, Sacramento, CA 95834"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-LW-5502",
+    "vendor_id": "V005",
+    "invoice_number": "LW-5502",
+    "invoice_date": "2026-04-02",
+    "po_number": "PO-2026-0150",
+    "amount": 612.5,
+    "lines": [
+      {
+        "description": "Lab consumables",
+        "qty": 1,
+        "unit_price": 612.5,
+        "amount": 612.5
+      }
+    ],
+    "bank": {
+      "bank_name": "Capitol Trust Bank",
+      "routing": "999000666",
+      "account": "2208813377",
+      "remit_address": "9 Research Pkwy, Sacramento, CA 95834"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-LW-5503",
+    "vendor_id": "V005",
+    "invoice_number": "LW-5503",
+    "invoice_date": "2026-08-28",
+    "po_number": "PO-2026-0150",
+    "amount": 3275.0,
+    "lines": [
+      {
+        "description": "Lab consumables",
+        "qty": 1,
+        "unit_price": 3275.0,
+        "amount": 3275.0
+      }
+    ],
+    "bank": {
+      "bank_name": "Capitol Trust Bank",
+      "routing": "999000666",
+      "account": "2208813377",
+      "remit_address": "9 Research Pkwy, Sacramento, CA 95834"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
     "id": "INV-BBL-310",
     "vendor_id": "V002",
     "invoice_number": "BBL-310",

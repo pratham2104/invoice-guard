@@ -37,7 +37,10 @@ CREATE TABLE IF NOT EXISTS purchase_orders (
   description   TEXT,
   annual_limit  REAL,
   monthly_min   REAL,
-  monthly_max   REAL
+  monthly_max   REAL,
+  requester_name       TEXT,              -- district staff who ordered: confirm surprise bills with them
+  requester_contact    TEXT,              -- internal email / Slack handle, never the vendor
+  requester_department TEXT
 );
 
 CREATE TABLE IF NOT EXISTS invoices (

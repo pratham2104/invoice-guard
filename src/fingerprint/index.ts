@@ -19,6 +19,8 @@ export { ruleChecks } from "./rules.js";
 export { languageChecks, localLlm, isLocalHost } from "./llm.js";
 export { compareDomains, skeleton } from "./domain.js";
 export { scanPdf } from "./pdf.js";
+export { learnRhythm } from "./profile.js";
+export { draftRequesterConfirmation, findRequester, type RequesterDraft, type Requester } from "./confirm.js";
 
 export interface FingerprintResult {
   vendorId: string | null;

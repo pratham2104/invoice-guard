@@ -4,9 +4,9 @@ Subject: Invoice ACME-1049
 Date: Sat, 01 Aug 2026 09:30:00 -0700
 Message-ID: <e018@demo.invoice-guard>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5451765545499866561=="
+Content-Type: multipart/mixed; boundary="===============9152080479140665662=="
 
---===============5451765545499866561==
+--===============9152080479140665662==
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
@@ -17,7 +17,7 @@ ACME-1049 attached for July. This is the big back-to-school month.
 Thanks,
 Maria
 
---===============5451765545499866561==
+--===============9152080479140665662==
 Content-Type: application/pdf
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="ACME-1049.pdf"
@@ -93,4 +93,4 @@ MDAwMDAwMDU4IDAwMDAwIG4gCjAwMDAwMDAxMTUgMDAwMDAgbiAKMDAwMDAwMDI1MSAwMDAwMCBu
 IAowMDAwMDAzNTY3IDAwMDAwIG4gCjAwMDAwMDM2MzcgMDAwMDAgbiAKdHJhaWxlcgo8PCAvU2l6
 ZSA3IC9Sb290IDEgMCBSID4+CnN0YXJ0eHJlZgozNzEyCiUlRU9GCg==
 
---===============5451765545499866561==--
+--===============9152080479140665662==--

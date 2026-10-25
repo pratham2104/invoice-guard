@@ -10,6 +10,7 @@ export interface Finding {
   severity: Severity;     // "unknown" = the check couldn't run (e.g. model offline)
   explanation: string;    // one plain-English sentence for the AP clerk
   source?: "rule" | "llm" | "vision";
+  action?: "confirm_with_requester" | "callback_vendor";  // suggested next step; never decisive
 }
 
 export interface Bank {
@@ -32,8 +33,9 @@ export interface IncomingMessage {
   invoice?: {
     invoice_number: string;
     invoice_date: string;
-    po_number?: string;
+    po_number?: string | null;
     amount: number;
+    description?: string;
     bank?: Bank;
   };
   requestedBank?: Bank;           // bank details asked for in the email body
@@ -51,6 +53,7 @@ export interface VendorProfile {
   amount: { min: number; max: number; median: number; count: number };
   po: { number: string; monthlyMin: number; monthlyMax: number } | null;
   invoiceNumbers: string[];       // known invoice numbers, oldest first
+  rhythm: Rhythm;
   everRequestedBankChange: boolean;
   style: {
     greetings: string[];          // e.g. "Hi Janet,"
@@ -59,4 +62,14 @@ export interface VendorProfile {
     usesUrgentWords: boolean;
   };
   sampleEmails: { date: string; subject: string; body: string }[];  // most recent baseline
+}
+
+/** How a vendor normally bills, learned from its past invoices. */
+export interface Rhythm {
+  cadence: "monthly" | "quarterly" | "irregular" | "none";
+  intervalDays: number | null;    // median gap between invoices
+  lastInvoiceDate: string | null;
+  expectedNextDate: string | null;
+  fixedAmount: boolean;           // every amount within ±7.5% of the median
+  typicalAmount: number | null;   // median amount
 }

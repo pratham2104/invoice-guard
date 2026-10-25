@@ -31,7 +31,10 @@
       "description": "Annual classroom & office supplies (blanket)",
       "annual_limit": 90000.0,
       "monthly_min": 3000.0,
-      "monthly_max": 9000.0
+      "monthly_max": 9000.0,
+      "requester_name": "Linda Park",
+      "requester_contact": "linda.park@valleyusd.example.org",
+      "requester_department": "Purchasing"
     }
   },
   {
@@ -61,7 +64,10 @@
       "description": "Field-trip charter buses",
       "annual_limit": 40000.0,
       "monthly_min": 1500.0,
-      "monthly_max": 6000.0
+      "monthly_max": 6000.0,
+      "requester_name": "Ray Diaz",
+      "requester_contact": "ray.diaz@valleyusd.example.org",
+      "requester_department": "Athletics & Activities"
     }
   },
   {
@@ -91,7 +97,10 @@
       "description": "Cafeteria food and supplies",
       "annual_limit": 240000.0,
       "monthly_min": 15000.0,
-      "monthly_max": 24000.0
+      "monthly_max": 24000.0,
+      "requester_name": "Sam Ortiz",
+      "requester_contact": "sam.ortiz@valleyusd.example.org",
+      "requester_department": "Nutrition Services"
     }
   },
   {
@@ -121,7 +130,43 @@
       "description": "Managed IT support (monthly retainer)",
       "annual_limit": 30000.0,
       "monthly_min": 2500.0,
-      "monthly_max": 2500.0
+      "monthly_max": 2500.0,
+      "requester_name": "Alex Wong",
+      "requester_contact": "alex.wong@valleyusd.example.org",
+      "requester_department": "Technology"
+    }
+  },
+  {
+    "id": "V005",
+    "name": "LabWorks Science Supply",
+    "domain": "labworks-sci.com",
+    "address": "9 Research Pkwy, Sacramento, CA 95834",
+    "phone_on_file": "(916) 555-0128",
+    "billing_day": null,
+    "terms": "Net 30",
+    "invoice_prefix": "LW-",
+    "bank": {
+      "bank_name": "Capitol Trust Bank",
+      "routing": "999000666",
+      "account": "2208813377",
+      "remit_address": "9 Research Pkwy, Sacramento, CA 95834"
+    },
+    "contacts": [
+      {
+        "name": "Erin Shaw",
+        "email": "orders@labworks-sci.com",
+        "role": "Order desk"
+      }
+    ],
+    "po": {
+      "number": "PO-2026-0150",
+      "description": "Science lab consumables (as needed)",
+      "annual_limit": 10000.0,
+      "monthly_min": 0.0,
+      "monthly_max": 4000.0,
+      "requester_name": "Dr. Helen Ma",
+      "requester_contact": "helen.ma@valleyusd.example.org",
+      "requester_department": "Science (Roosevelt High)"
     }
   }
 ]

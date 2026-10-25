@@ -3,6 +3,7 @@ import type { Finding, IncomingMessage, VendorProfile, Bank } from "./types.js";
 import { compareDomains, domainOf, FREEMAIL } from "./domain.js";
 import { BANK_CHANGE_RE, parseInvoiceText } from "./text.js";
 import type { PdfScan } from "./pdf.js";
+import { daysBetween } from "./profile.js";
 
 const f = (check: string, severity: Finding["severity"], expected: string, actual: string, explanation: string): Finding =>
   ({ check, severity, expected, actual, explanation, source: "rule" });
@@ -74,6 +75,34 @@ export function ruleChecks(profile: VendorProfile, msg: IncomingMessage, pdfScan
       const seq = sequenceCheck(profile.invoiceNumbers, invoice.invoice_number);
       if (seq) out.push(seq);
     }
+    // --- billing rhythm (never decisive on its own; surprise bills go to the requester)
+    const r = profile.rhythm;
+    const isDuplicate = profile.invoiceNumbers.includes(invoice.invoice_number);
+    if (r.cadence === "none") {
+      out.push({ ...f("no_billing_history", "low", "past invoices from this vendor", "first invoice ever",
+        `First invoice ever from ${profile.name}. Confirm with whoever ordered it before paying.`), action: "confirm_with_requester" });
+    } else if (r.cadence === "irregular" || !invoice.po_number) {
+      const why = !invoice.po_number ? "has no PO number" : `${profile.name} bills irregularly`;
+      out.push({ ...f("one_time_bill", "low", invoice.po_number ? "a regular bill" : "an invoice against a PO",
+        invoice.po_number ? `one-off bill on ${invoice.po_number}` : "no PO",
+        `This invoice ${why}. Confirm with the requester that it was ordered.`), action: "confirm_with_requester" });
+    }
+    if (!isDuplicate && (r.cadence === "monthly" || r.cadence === "quarterly") && r.intervalDays && r.lastInvoiceDate && invoice.invoice_date) {
+      const gap = daysBetween(r.lastInvoiceDate, invoice.invoice_date);
+      if (gap >= 0 && gap < r.intervalDays * 0.5) {
+        out.push(f("bill_too_soon", "medium", `about every ${r.intervalDays} days (next expected ${r.expectedNextDate})`,
+          `${gap} days after the last invoice (${r.lastInvoiceDate})`,
+          `${profile.name} bills ${r.cadence}; this invoice came only ${gap} days after the last one.`));
+      }
+    }
+    if (r.fixedAmount && r.typicalAmount) {
+      const off = Math.abs(invoice.amount - r.typicalAmount) / r.typicalAmount;
+      if (off > 0.15) {
+        out.push(f("fixed_amount_changed", "medium", `$${r.typicalAmount.toFixed(2)} every time`, `$${invoice.amount.toFixed(2)}`,
+          `${profile.name} always bills about $${r.typicalAmount.toFixed(2)}; this is ${Math.round(off * 100)}% different.`));
+      }
+    }
+
     if (profile.po && invoice.po_number && invoice.po_number !== profile.po.number) {
       out.push(f("po_mismatch", "medium", profile.po.number, invoice.po_number, "Invoice cites a PO this vendor isn't on."));
     }

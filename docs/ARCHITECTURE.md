@@ -80,7 +80,8 @@ against it without reading your code.
 - `vendor_contacts(vendor_id, name, email, role)`
 - `vendor_banks(vendor_id, bank_name, routing, account, remit_address, active, verified_at, verified_by)`:
   trusted bank on file, one active row per vendor.
-- `purchase_orders(number, vendor_id, description, annual_limit, monthly_min, monthly_max)`
+- `purchase_orders(number, vendor_id, description, annual_limit, monthly_min, monthly_max, requester_name, requester_contact, requester_department)`:
+  the requester is the district staff member who ordered; surprise bills are confirmed with them (internal only).
 - `invoices(id, vendor_id, invoice_number, invoice_date, po_number, amount, bank_name, routing, account, remit_address, status, source_email_id)`
 - `invoice_lines(invoice_id, line_no, description, qty, unit_price, amount)`
 - `payments(id, invoice_id, vendor_id, amount, paid_on, routing, account, method)`
@@ -102,10 +103,29 @@ interface Finding {
   severity: "high" | "medium" | "low" | "info" | "unknown";  // unknown = check couldn't run
   explanation: string;  // one sentence for the AP clerk
   source?: "rule" | "llm" | "vision";
+  action?: "confirm_with_requester" | "callback_vendor";  // suggested next step; never decisive
 }
 ```
 - Fingerprint entry point: `fingerprint(db, msg, { llm?: LlmClient | false })` in
   `src/fingerprint/index.ts` → `{ vendorId, impersonating, profile, findings }`.
   Full check list: `src/fingerprint/README.md`.
+- Billing-rhythm checks (rule, never decisive): `bill_too_soon` (medium), `fixed_amount_changed` (medium),
+  `one_time_bill` (low, action `confirm_with_requester`), `no_billing_history` (low, action `confirm_with_requester`).
+  Learned per vendor in `profile.rhythm`: `{ cadence: monthly|quarterly|irregular|none, intervalDays, lastInvoiceDate,
+  expectedNextDate, fixedAmount, typicalAmount }`.
+
+### Requester confirmation draft (fingerprint → T09 delivery)
+- `draftRequesterConfirmation(db, vendorId, msg, findings, { llm?: LlmClient | false })` in `src/fingerprint/confirm.ts`
+  → `RequesterDraft | null`:
+  ```ts
+  { recipient: { name, contact, department? } | null,  // internal district staff from the PO; null → AP lead
+    poNumber: string | null, text: string, source: "llm" | "template",
+    triggeredBy: string[], note?: string }
+  ```
+- Returns `null` unless a finding has `action: "confirm_with_requester"`. Never addressed to the email sender or the
+  vendor; refuses a requester on the sender's domain. Text never carries bank numbers (model output with a 6+ digit
+  number, or missing vendor/amount/yes-no, falls back to the template).
+- **Nothing is sent.** T09 delivers `text` to `recipient.contact` (Slack DM / in-app) and records the yes/no reply.
+
 - Suggested rule for T04 (not decided yet): HOLD if any `high`, or 2+ `medium`, or any finding
   from `bank_change_request`. A finding with severity `unknown` never clears a hold.

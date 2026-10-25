@@ -27,7 +27,8 @@ interface VendorFx {
   id: string; name: string; domain: string; address: string; phone_on_file: string;
   billing_day: number; terms: string; invoice_prefix: string; bank: Bank;
   contacts: { name: string; email: string; role: string }[];
-  po: { number: string; description: string; annual_limit: number; monthly_min: number; monthly_max: number };
+  po: { number: string; description: string; annual_limit: number; monthly_min: number; monthly_max: number;
+        requester_name?: string; requester_contact?: string; requester_department?: string };
 }
 interface InvoiceFx {
   id: string; vendor_id: string; invoice_number: string; invoice_date: string; po_number: string;
@@ -56,12 +57,14 @@ export function loadFixtures(db: DB, dir = FIXTURES_DIR): Record<string, number>
     const v = db.prepare("INSERT INTO vendors VALUES (?,?,?,?,?,?,?,?)");
     const c = db.prepare("INSERT INTO vendor_contacts VALUES (?,?,?,?)");
     const b = db.prepare("INSERT INTO vendor_banks (vendor_id,bank_name,routing,account,remit_address,active,verified_at,verified_by) VALUES (?,?,?,?,?,1,?,?)");
-    const po = db.prepare("INSERT INTO purchase_orders VALUES (?,?,?,?,?,?)");
+    const po = db.prepare(`INSERT INTO purchase_orders (number, vendor_id, description, annual_limit, monthly_min, monthly_max,
+      requester_name, requester_contact, requester_department) VALUES (?,?,?,?,?,?,?,?,?)`);
     for (const x of vendors) {
       v.run(x.id, x.name, x.domain, x.address, x.phone_on_file, x.billing_day, x.terms, x.invoice_prefix);
       for (const k of x.contacts) c.run(x.id, k.name, k.email, k.role);
       b.run(x.id, x.bank.bank_name, x.bank.routing, x.bank.account, x.bank.remit_address ?? null, "2025-01-15", "onboarding");
-      po.run(x.po.number, x.id, x.po.description, x.po.annual_limit, x.po.monthly_min, x.po.monthly_max);
+      po.run(x.po.number, x.id, x.po.description, x.po.annual_limit, x.po.monthly_min, x.po.monthly_max,
+             x.po.requester_name ?? null, x.po.requester_contact ?? null, x.po.requester_department ?? null);
     }
     const i = db.prepare("INSERT INTO invoices VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
     const l = db.prepare("INSERT INTO invoice_lines VALUES (?,?,?,?,?,?)");

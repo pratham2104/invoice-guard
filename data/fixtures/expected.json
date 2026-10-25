@@ -28,6 +28,16 @@
       "unusual_request"
     ]
   },
+  "4-surprise-invoice": {
+    "hold": true,
+    "rule_checks": [
+      "bill_too_soon",
+      "one_time_bill",
+      "off_cycle_date"
+    ],
+    "llm_checks": [],
+    "action": "confirm_with_requester"
+  },
   "3-copied-invoice-hidden-text": {
     "hold": true,
     "rule_checks": [

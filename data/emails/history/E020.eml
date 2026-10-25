@@ -4,9 +4,9 @@ Subject: Invoice ACME-1050
 Date: Tue, 01 Sep 2026 09:31:00 -0700
 Message-ID: <e020@demo.invoice-guard>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5879434797568392313=="
+Content-Type: multipart/mixed; boundary="===============1284884103624446015=="
 
---===============5879434797568392313==
+--===============1284884103624446015==
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
@@ -17,7 +17,7 @@ Invoice ACME-1050 for August is attached. Includes the second wave.
 Thanks,
 Maria
 
---===============5879434797568392313==
+--===============1284884103624446015==
 Content-Type: application/pdf
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="ACME-1050.pdf"
@@ -93,4 +93,4 @@ CjAwMDAwMDAwNTggMDAwMDAgbiAKMDAwMDAwMDExNSAwMDAwMCBuIAowMDAwMDAwMjUxIDAwMDAw
 IG4gCjAwMDAwMDM1NjkgMDAwMDAgbiAKMDAwMDAwMzYzOSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9T
 aXplIDcgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjM3MTQKJSVFT0YK
 
---===============5879434797568392313==--
+--===============1284884103624446015==--
