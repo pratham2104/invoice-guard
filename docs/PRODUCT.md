@@ -7,9 +7,8 @@ from paying fake invoices. It runs entirely on a Dell Pro Max with GB10 — no c
 
 School accounts-payable (AP) teams pay hundreds of vendors with public money, often with
 2–3 staff. Scammers pose as a real vendor and send "new bank details"; the next payment goes
-to them. Example: Manor ISD (Texas) lost ~$2.3M this way in 2019. The FBI reports business
-email compromise losses of roughly $2.8–2.9B a year. *(Both figures from memory — verify
-before putting them on a slide.)*
+to them. Example: Manor ISD (Texas) lost ~$2.3M this way in 2019. FBI IC3: business email compromise losses were $2.7B in 2024. *(Manor ISD figure from
+memory — verify before a slide.)*
 
 The usual tricks:
 - "We switched banks, update our account" from an address one letter off the real vendor's
@@ -56,6 +55,12 @@ local phone system (see TOOLS.md). Only if features 3 and 4 work by 1:30 PM.
   on the GB10 it's a one-time box.
 
 ## Competition — have the answer ready
+
+- **Proofpoint Supplier Threat Protection** and **Abnormal AI VendorBase** already fingerprint
+  vendor *email* behaviour (cloud, Microsoft 365, enterprise pricing). They only see email and
+  warn/block. We join email + AP records (bank on file, PO, payment history) + the invoice
+  itself, and we **hold the payment**. Line: *"Email security tells you an email looks odd.
+  We stop the money."*
 
 - **PaymentWorks** (used by some districts, e.g. Palm Beach) secures bank changes made
   through its vendor portal. Scammers don't use the portal — they email the AP clerk.

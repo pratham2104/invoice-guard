@@ -23,3 +23,18 @@ the box."*
 - Nemotron 3 Super 120B: smarter, but ~3x bigger download and a forum report of thermal
   shutdowns on long inputs. Possible later swap; not today.
 - Cloud LLM APIs: forbidden by the rules and by our design.
+
+## Open-source inspiration (allowed: public open source)
+
+| Piece | Project | What we take |
+|---|---|---|
+| Lookalike domains | dnstwist | Its fuzzing tricks: swaps, homoglyphs (1/l), hyphens, TLD swaps |
+| Unicode tricks | Unicode TR39 confusables | Cyrillic/Latin lookalike letters |
+| Email parsing | mailparser, imapflow (Node) | .eml + Gmail IMAP |
+| Hidden PDF text | pdfjs-dist | Text items with size/position → tiny/off-page/white text |
+| Invoice fields | invoice2data | Field-extraction patterns |
+
+## Datasets (samples only)
+- Writing-style baseline: Enron email corpus (one sender as the "vendor").
+- Invoice images: Voxel51/high-quality-invoice-images-for-ocr (Hugging Face).
+- Scam phrasing: zefang-liu/phishing-email-dataset (Hugging Face).
