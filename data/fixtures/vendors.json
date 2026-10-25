@@ -1,0 +1,127 @@
+[
+  {
+    "id": "V001",
+    "name": "Acme School Supply",
+    "domain": "acme-supply.com",
+    "address": "1200 Industrial Way, Fresno, CA 93721",
+    "phone_on_file": "(559) 555-0142",
+    "billing_day": 1,
+    "terms": "Net 30",
+    "invoice_prefix": "ACME-",
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "contacts": [
+      {
+        "name": "Maria Lopez",
+        "email": "maria.lopez@acme-supply.com",
+        "role": "Account manager"
+      },
+      {
+        "name": "Dan Whitaker",
+        "email": "dan.whitaker@acme-supply.com",
+        "role": "Warehouse lead"
+      }
+    ],
+    "po": {
+      "number": "PO-2026-0117",
+      "description": "Annual classroom & office supplies (blanket)",
+      "annual_limit": 90000.0,
+      "monthly_min": 3000.0,
+      "monthly_max": 9000.0
+    }
+  },
+  {
+    "id": "V002",
+    "name": "Bright Bus Lines",
+    "domain": "brightbus.com",
+    "address": "88 Depot Rd, Clovis, CA 93612",
+    "phone_on_file": "(559) 555-0187",
+    "billing_day": 15,
+    "terms": "Net 15",
+    "invoice_prefix": "BBL-",
+    "bank": {
+      "bank_name": "Sierra Commerce Bank",
+      "routing": "999000333",
+      "account": "7720045519",
+      "remit_address": "88 Depot Rd, Clovis, CA 93612"
+    },
+    "contacts": [
+      {
+        "name": "Tom Reyes",
+        "email": "billing@brightbus.com",
+        "role": "Billing"
+      }
+    ],
+    "po": {
+      "number": "PO-2026-0042",
+      "description": "Field-trip charter buses",
+      "annual_limit": 40000.0,
+      "monthly_min": 1500.0,
+      "monthly_max": 6000.0
+    }
+  },
+  {
+    "id": "V003",
+    "name": "Greenfield Food Service",
+    "domain": "greenfieldfoods.com",
+    "address": "2300 Orchard Ave, Fresno, CA 93725",
+    "phone_on_file": "(559) 555-0119",
+    "billing_day": 5,
+    "terms": "Net 30",
+    "invoice_prefix": "GFS-",
+    "bank": {
+      "bank_name": "Central Ag Credit Union",
+      "routing": "999000444",
+      "account": "3301198820",
+      "remit_address": "2300 Orchard Ave, Fresno, CA 93725"
+    },
+    "contacts": [
+      {
+        "name": "Priya Nair",
+        "email": "ar@greenfieldfoods.com",
+        "role": "Accounts receivable"
+      }
+    ],
+    "po": {
+      "number": "PO-2026-0009",
+      "description": "Cafeteria food and supplies",
+      "annual_limit": 240000.0,
+      "monthly_min": 15000.0,
+      "monthly_max": 24000.0
+    }
+  },
+  {
+    "id": "V004",
+    "name": "TechNest IT Services",
+    "domain": "technest-it.com",
+    "address": "45 Shaw Ave Suite 210, Fresno, CA 93704",
+    "phone_on_file": "(559) 555-0163",
+    "billing_day": 1,
+    "terms": "Net 30",
+    "invoice_prefix": "TN-",
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "5590061243",
+      "remit_address": "45 Shaw Ave Suite 210, Fresno, CA 93704"
+    },
+    "contacts": [
+      {
+        "name": "Kevin Cho",
+        "email": "kevin@technest-it.com",
+        "role": "Owner"
+      }
+    ],
+    "po": {
+      "number": "PO-2026-0071",
+      "description": "Managed IT support (monthly retainer)",
+      "annual_limit": 30000.0,
+      "monthly_min": 2500.0,
+      "monthly_max": 2500.0
+    }
+  }
+]

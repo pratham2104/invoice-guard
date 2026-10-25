@@ -1,0 +1,23 @@
+From: Maria Lopez <maria.lopez@acme-supp1y.com>
+To: ap@valleyusd.example.org
+Reply-To: maria.lopez@acme-supp1y.com
+Subject: Updated banking details - Acme School Supply
+Date: Sat, 24 Oct 2026 21:47:00 -0700
+Message-ID: <in-attack-1@demo.invoice-guard>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Hi Janet,
+
+We have moved our accounts to a new bank. Please update our remittance detail=
+s before the next payment run so invoice ACME-1051 goes to the new account:
+
+Bank: Coastline Credit Union
+Routing: 999000222
+Account: 8820017745
+
+Please confirm once updated.
+
+Thanks,
+Maria

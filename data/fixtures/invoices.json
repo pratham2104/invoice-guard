@@ -1,0 +1,938 @@
+[
+  {
+    "id": "INV-ACME-1040",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1040",
+    "invoice_date": "2025-11-01",
+    "po_number": "PO-2026-0117",
+    "amount": 4210.5,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 12,
+        "unit_price": 42.0,
+        "amount": 504.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 43,
+        "unit_price": 14.5,
+        "amount": 623.5
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 24,
+        "unit_price": 31.2,
+        "amount": 748.8
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 47,
+        "unit_price": 18.75,
+        "amount": 881.25
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 45,
+        "unit_price": 22.4,
+        "amount": 1008.0
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 444.95,
+        "amount": 444.95
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1041",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1041",
+    "invoice_date": "2025-12-01",
+    "po_number": "PO-2026-0117",
+    "amount": 3875.0,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 11,
+        "unit_price": 42.0,
+        "amount": 462.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 40,
+        "unit_price": 14.5,
+        "amount": 580.0
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 22,
+        "unit_price": 31.2,
+        "amount": 686.4
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 43,
+        "unit_price": 18.75,
+        "amount": 806.25
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 41,
+        "unit_price": 22.4,
+        "amount": 918.4
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 421.95,
+        "amount": 421.95
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1042",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1042",
+    "invoice_date": "2026-01-01",
+    "po_number": "PO-2026-0117",
+    "amount": 5120.25,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 14,
+        "unit_price": 42.0,
+        "amount": 588.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 52,
+        "unit_price": 14.5,
+        "amount": 754.0
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 29,
+        "unit_price": 31.2,
+        "amount": 904.8
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 57,
+        "unit_price": 18.75,
+        "amount": 1068.75
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 54,
+        "unit_price": 22.4,
+        "amount": 1209.6
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 595.1,
+        "amount": 595.1
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1043",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1043",
+    "invoice_date": "2026-02-01",
+    "po_number": "PO-2026-0117",
+    "amount": 6840.0,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 19,
+        "unit_price": 42.0,
+        "amount": 798.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 70,
+        "unit_price": 14.5,
+        "amount": 1015.0
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 39,
+        "unit_price": 31.2,
+        "amount": 1216.8
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 76,
+        "unit_price": 18.75,
+        "amount": 1425.0
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 73,
+        "unit_price": 22.4,
+        "amount": 1635.2
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 750.0,
+        "amount": 750.0
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1044",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1044",
+    "invoice_date": "2026-03-01",
+    "po_number": "PO-2026-0117",
+    "amount": 7310.75,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 20,
+        "unit_price": 42.0,
+        "amount": 840.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 75,
+        "unit_price": 14.5,
+        "amount": 1087.5
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 42,
+        "unit_price": 31.2,
+        "amount": 1310.4
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 81,
+        "unit_price": 18.75,
+        "amount": 1518.75
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 78,
+        "unit_price": 22.4,
+        "amount": 1747.2
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 806.9,
+        "amount": 806.9
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1045",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1045",
+    "invoice_date": "2026-04-01",
+    "po_number": "PO-2026-0117",
+    "amount": 4980.0,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 14,
+        "unit_price": 42.0,
+        "amount": 588.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 51,
+        "unit_price": 14.5,
+        "amount": 739.5
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 28,
+        "unit_price": 31.2,
+        "amount": 873.6
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 55,
+        "unit_price": 18.75,
+        "amount": 1031.25
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 53,
+        "unit_price": 22.4,
+        "amount": 1187.2
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 560.45,
+        "amount": 560.45
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1046",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1046",
+    "invoice_date": "2026-05-01",
+    "po_number": "PO-2026-0117",
+    "amount": 3420.4,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 9,
+        "unit_price": 42.0,
+        "amount": 378.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 35,
+        "unit_price": 14.5,
+        "amount": 507.5
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 19,
+        "unit_price": 31.2,
+        "amount": 592.8
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 38,
+        "unit_price": 18.75,
+        "amount": 712.5
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 36,
+        "unit_price": 22.4,
+        "amount": 806.4
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 423.2,
+        "amount": 423.2
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1047",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1047",
+    "invoice_date": "2026-06-01",
+    "po_number": "PO-2026-0117",
+    "amount": 8150.0,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 23,
+        "unit_price": 42.0,
+        "amount": 966.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 84,
+        "unit_price": 14.5,
+        "amount": 1218.0
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 47,
+        "unit_price": 31.2,
+        "amount": 1466.4
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 91,
+        "unit_price": 18.75,
+        "amount": 1706.25
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 87,
+        "unit_price": 22.4,
+        "amount": 1948.8
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 844.55,
+        "amount": 844.55
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1048",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1048",
+    "invoice_date": "2026-07-01",
+    "po_number": "PO-2026-0117",
+    "amount": 8890.3,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 25,
+        "unit_price": 42.0,
+        "amount": 1050.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 91,
+        "unit_price": 14.5,
+        "amount": 1319.5
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 51,
+        "unit_price": 31.2,
+        "amount": 1591.2
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 99,
+        "unit_price": 18.75,
+        "amount": 1856.25
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 95,
+        "unit_price": 22.4,
+        "amount": 2128.0
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 945.35,
+        "amount": 945.35
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1049",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1049",
+    "invoice_date": "2026-08-01",
+    "po_number": "PO-2026-0117",
+    "amount": 5640.0,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 16,
+        "unit_price": 42.0,
+        "amount": 672.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 58,
+        "unit_price": 14.5,
+        "amount": 841.0
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 32,
+        "unit_price": 31.2,
+        "amount": 998.4
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 63,
+        "unit_price": 18.75,
+        "amount": 1181.25
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 60,
+        "unit_price": 22.4,
+        "amount": 1344.0
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 603.35,
+        "amount": 603.35
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1050",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1050",
+    "invoice_date": "2026-09-01",
+    "po_number": "PO-2026-0117",
+    "amount": 6025.8,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 17,
+        "unit_price": 42.0,
+        "amount": 714.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 62,
+        "unit_price": 14.5,
+        "amount": 899.0
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 34,
+        "unit_price": 31.2,
+        "amount": 1060.8
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 67,
+        "unit_price": 18.75,
+        "amount": 1256.25
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 64,
+        "unit_price": 22.4,
+        "amount": 1433.6
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 662.15,
+        "amount": 662.15
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-ACME-1051",
+    "vendor_id": "V001",
+    "invoice_number": "ACME-1051",
+    "invoice_date": "2026-10-01",
+    "po_number": "PO-2026-0117",
+    "amount": 6420.0,
+    "lines": [
+      {
+        "description": "Copy paper, 8.5x11, case of 10 reams",
+        "qty": 18,
+        "unit_price": 42.0,
+        "amount": 756.0
+      },
+      {
+        "description": "Dry-erase markers, assorted, box of 12",
+        "qty": 66,
+        "unit_price": 14.5,
+        "amount": 957.0
+      },
+      {
+        "description": "Composition notebooks, pack of 24",
+        "qty": 37,
+        "unit_price": 31.2,
+        "amount": 1154.4
+      },
+      {
+        "description": "No. 2 pencils, box of 144",
+        "qty": 71,
+        "unit_price": 18.75,
+        "amount": 1331.25
+      },
+      {
+        "description": "Construction paper, assorted, 500 sheets",
+        "qty": 68,
+        "unit_price": 22.4,
+        "amount": 1523.2
+      },
+      {
+        "description": "Glue sticks, classroom pack of 30 (and misc. supplies)",
+        "qty": 1,
+        "unit_price": 698.15,
+        "amount": 698.15
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "4410023378",
+      "remit_address": "PO Box 4410, Fresno, CA 93744"
+    },
+    "status": "approved",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-BBL-310",
+    "vendor_id": "V002",
+    "invoice_number": "BBL-310",
+    "invoice_date": "2026-06-15",
+    "po_number": "PO-2026-0042",
+    "amount": 2400.0,
+    "lines": [
+      {
+        "description": "Field-trip charter buses",
+        "qty": 1,
+        "unit_price": 2400.0,
+        "amount": 2400.0
+      }
+    ],
+    "bank": {
+      "bank_name": "Sierra Commerce Bank",
+      "routing": "999000333",
+      "account": "7720045519",
+      "remit_address": "88 Depot Rd, Clovis, CA 93612"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-BBL-311",
+    "vendor_id": "V002",
+    "invoice_number": "BBL-311",
+    "invoice_date": "2026-07-15",
+    "po_number": "PO-2026-0042",
+    "amount": 3950.0,
+    "lines": [
+      {
+        "description": "Field-trip charter buses",
+        "qty": 1,
+        "unit_price": 3950.0,
+        "amount": 3950.0
+      }
+    ],
+    "bank": {
+      "bank_name": "Sierra Commerce Bank",
+      "routing": "999000333",
+      "account": "7720045519",
+      "remit_address": "88 Depot Rd, Clovis, CA 93612"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-BBL-312",
+    "vendor_id": "V002",
+    "invoice_number": "BBL-312",
+    "invoice_date": "2026-08-15",
+    "po_number": "PO-2026-0042",
+    "amount": 1820.0,
+    "lines": [
+      {
+        "description": "Field-trip charter buses",
+        "qty": 1,
+        "unit_price": 1820.0,
+        "amount": 1820.0
+      }
+    ],
+    "bank": {
+      "bank_name": "Sierra Commerce Bank",
+      "routing": "999000333",
+      "account": "7720045519",
+      "remit_address": "88 Depot Rd, Clovis, CA 93612"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-BBL-313",
+    "vendor_id": "V002",
+    "invoice_number": "BBL-313",
+    "invoice_date": "2026-09-15",
+    "po_number": "PO-2026-0042",
+    "amount": 4400.0,
+    "lines": [
+      {
+        "description": "Field-trip charter buses",
+        "qty": 1,
+        "unit_price": 4400.0,
+        "amount": 4400.0
+      }
+    ],
+    "bank": {
+      "bank_name": "Sierra Commerce Bank",
+      "routing": "999000333",
+      "account": "7720045519",
+      "remit_address": "88 Depot Rd, Clovis, CA 93612"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-GFS-7701",
+    "vendor_id": "V003",
+    "invoice_number": "GFS-7701",
+    "invoice_date": "2026-06-05",
+    "po_number": "PO-2026-0009",
+    "amount": 18420.1,
+    "lines": [
+      {
+        "description": "Cafeteria food and supplies",
+        "qty": 1,
+        "unit_price": 18420.1,
+        "amount": 18420.1
+      }
+    ],
+    "bank": {
+      "bank_name": "Central Ag Credit Union",
+      "routing": "999000444",
+      "account": "3301198820",
+      "remit_address": "2300 Orchard Ave, Fresno, CA 93725"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-GFS-7702",
+    "vendor_id": "V003",
+    "invoice_number": "GFS-7702",
+    "invoice_date": "2026-07-05",
+    "po_number": "PO-2026-0009",
+    "amount": 21330.55,
+    "lines": [
+      {
+        "description": "Cafeteria food and supplies",
+        "qty": 1,
+        "unit_price": 21330.55,
+        "amount": 21330.55
+      }
+    ],
+    "bank": {
+      "bank_name": "Central Ag Credit Union",
+      "routing": "999000444",
+      "account": "3301198820",
+      "remit_address": "2300 Orchard Ave, Fresno, CA 93725"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-GFS-7703",
+    "vendor_id": "V003",
+    "invoice_number": "GFS-7703",
+    "invoice_date": "2026-08-05",
+    "po_number": "PO-2026-0009",
+    "amount": 19875.0,
+    "lines": [
+      {
+        "description": "Cafeteria food and supplies",
+        "qty": 1,
+        "unit_price": 19875.0,
+        "amount": 19875.0
+      }
+    ],
+    "bank": {
+      "bank_name": "Central Ag Credit Union",
+      "routing": "999000444",
+      "account": "3301198820",
+      "remit_address": "2300 Orchard Ave, Fresno, CA 93725"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-GFS-7704",
+    "vendor_id": "V003",
+    "invoice_number": "GFS-7704",
+    "invoice_date": "2026-09-05",
+    "po_number": "PO-2026-0009",
+    "amount": 22610.4,
+    "lines": [
+      {
+        "description": "Cafeteria food and supplies",
+        "qty": 1,
+        "unit_price": 22610.4,
+        "amount": 22610.4
+      }
+    ],
+    "bank": {
+      "bank_name": "Central Ag Credit Union",
+      "routing": "999000444",
+      "account": "3301198820",
+      "remit_address": "2300 Orchard Ave, Fresno, CA 93725"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-TN-2207",
+    "vendor_id": "V004",
+    "invoice_number": "TN-2207",
+    "invoice_date": "2026-06-01",
+    "po_number": "PO-2026-0071",
+    "amount": 2500.0,
+    "lines": [
+      {
+        "description": "Managed IT support (monthly retainer)",
+        "qty": 1,
+        "unit_price": 2500.0,
+        "amount": 2500.0
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "5590061243",
+      "remit_address": "45 Shaw Ave Suite 210, Fresno, CA 93704"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-TN-2208",
+    "vendor_id": "V004",
+    "invoice_number": "TN-2208",
+    "invoice_date": "2026-07-01",
+    "po_number": "PO-2026-0071",
+    "amount": 2500.0,
+    "lines": [
+      {
+        "description": "Managed IT support (monthly retainer)",
+        "qty": 1,
+        "unit_price": 2500.0,
+        "amount": 2500.0
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "5590061243",
+      "remit_address": "45 Shaw Ave Suite 210, Fresno, CA 93704"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-TN-2209",
+    "vendor_id": "V004",
+    "invoice_number": "TN-2209",
+    "invoice_date": "2026-08-01",
+    "po_number": "PO-2026-0071",
+    "amount": 2500.0,
+    "lines": [
+      {
+        "description": "Managed IT support (monthly retainer)",
+        "qty": 1,
+        "unit_price": 2500.0,
+        "amount": 2500.0
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "5590061243",
+      "remit_address": "45 Shaw Ave Suite 210, Fresno, CA 93704"
+    },
+    "status": "paid",
+    "source_email_id": null
+  },
+  {
+    "id": "INV-TN-2210",
+    "vendor_id": "V004",
+    "invoice_number": "TN-2210",
+    "invoice_date": "2026-09-01",
+    "po_number": "PO-2026-0071",
+    "amount": 2500.0,
+    "lines": [
+      {
+        "description": "Managed IT support (monthly retainer)",
+        "qty": 1,
+        "unit_price": 2500.0,
+        "amount": 2500.0
+      }
+    ],
+    "bank": {
+      "bank_name": "First Valley Bank",
+      "routing": "999000111",
+      "account": "5590061243",
+      "remit_address": "45 Shaw Ave Suite 210, Fresno, CA 93704"
+    },
+    "status": "paid",
+    "source_email_id": null
+  }
+]

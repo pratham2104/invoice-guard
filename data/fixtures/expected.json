@@ -1,0 +1,43 @@
+{
+  "control": {
+    "hold": false,
+    "rule_checks": [],
+    "llm_checks": []
+  },
+  "1-lookalike-domain": {
+    "hold": true,
+    "rule_checks": [
+      "lookalike_domain",
+      "unknown_sender",
+      "bank_change_request",
+      "first_bank_change"
+    ],
+    "llm_checks": []
+  },
+  "2-hacked-real-email": {
+    "hold": true,
+    "rule_checks": [
+      "bank_change_request",
+      "first_bank_change",
+      "bank_mismatch",
+      "off_cycle_date"
+    ],
+    "llm_checks": [
+      "urgency",
+      "style_mismatch",
+      "unusual_request"
+    ]
+  },
+  "3-copied-invoice-hidden-text": {
+    "hold": true,
+    "rule_checks": [
+      "lookalike_domain",
+      "unknown_sender",
+      "bank_mismatch",
+      "remit_change",
+      "duplicate_invoice",
+      "hidden_pdf_text"
+    ],
+    "llm_checks": []
+  }
+}

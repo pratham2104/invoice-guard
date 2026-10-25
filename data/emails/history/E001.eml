@@ -1,0 +1,16 @@
+From: Maria Lopez <maria.lopez@acme-supply.com>
+To: janet.kim@valleyusd.example.org
+Subject: Invoice ACME-1040
+Date: Sat, 01 Nov 2025 09:30:00 -0700
+Message-ID: <e001@demo.invoice-guard>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+Hi Janet,
+
+Attached is invoice ACME-1040 for October deliveries against PO-2026-0117.
+Let me know if any line doesn't match what the schools received.
+
+Thanks,
+Maria

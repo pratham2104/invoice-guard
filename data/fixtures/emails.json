@@ -1,0 +1,334 @@
+[
+  {
+    "id": "E001",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2025-11-01T09:30:00-07:00",
+    "subject": "Invoice ACME-1040",
+    "body": "Hi Janet,\n\nAttached is invoice ACME-1040 for October deliveries against PO-2026-0117.\nLet me know if any line doesn't match what the schools received.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1040.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E002",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2025-11-12T14:05:00-07:00",
+    "subject": "Backorder on glue sticks",
+    "body": "Janet,\n\nGlue sticks are backordered until the 20th. I split the order so the rest ships Friday.\nYou won't be billed for the glue until it arrives.\n\nThanks,\nMaria",
+    "attachments": [],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E003",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2025-12-01T09:31:00-07:00",
+    "subject": "Invoice ACME-1041",
+    "body": "Hi Janet,\n\nInvoice ACME-1041 is attached. This covers November, including the glue sticks that came in late.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1041.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E004",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2025-12-15T11:20:00-07:00",
+    "subject": "Holiday delivery schedule",
+    "body": "Janet,\n\nOur warehouse closes Dec 24 through Jan 2. Anything ordered after the 18th ships on the 5th.\nCan you pass this to the school secretaries?\n\nThanks,\nMaria",
+    "attachments": [],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E005",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-01-01T09:30:00-07:00",
+    "subject": "Invoice ACME-1042",
+    "body": "Hi Janet,\n\nAttached is ACME-1042 for December. Smaller than usual because of the break.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1042.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E006",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-01-14T16:40:00-07:00",
+    "subject": "Re: Lincoln Elementary order",
+    "body": "Janet,\n\nI checked with Dan in the warehouse. Lincoln's order went out Tuesday and was signed for by the front office.\nIf they can't find it, have them call me and I'll trace it.\n\nThanks,\nMaria",
+    "attachments": [],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E007",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-02-01T09:30:00-07:00",
+    "subject": "Invoice ACME-1043",
+    "body": "Hi Janet,\n\nInvoice ACME-1043 attached, January deliveries, PO-2026-0117.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1043.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E008",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-02-19T10:15:00-07:00",
+    "subject": "Updated price list",
+    "body": "Janet,\n\nOur supplier raised copy paper by $1.50 a case starting March. Everything else stays the same.\nThe updated price list is attached. Your PO pricing is locked through June.\n\nThanks,\nMaria",
+    "attachments": [],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E009",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-03-01T09:32:00-07:00",
+    "subject": "Invoice ACME-1044",
+    "body": "Hi Janet,\n\nAttached is ACME-1044 for February. Testing season supplies pushed it up a bit.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1044.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E010",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-03-23T13:50:00-07:00",
+    "subject": "Re: W-9",
+    "body": "Janet,\n\nA signed W-9 for 2026 is attached. Nothing changed from last year.\n\nThanks,\nMaria",
+    "attachments": [],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E011",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-04-01T09:30:00-07:00",
+    "subject": "Invoice ACME-1045",
+    "body": "Hi Janet,\n\nInvoice ACME-1045 attached for March. Let me know if you need it split by school.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1045.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E012",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-04-08T15:10:00-07:00",
+    "subject": "Split by school",
+    "body": "Janet,\n\nHere is March broken out by school. Roosevelt and Kennedy were the big ones.\nI can do this every month if it helps your budget people.\n\nThanks,\nMaria",
+    "attachments": [],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E013",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-05-01T09:31:00-07:00",
+    "subject": "Invoice ACME-1046",
+    "body": "Hi Janet,\n\nACME-1046 is attached for April, split by school like we talked about.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1046.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E014",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-05-20T12:25:00-07:00",
+    "subject": "Summer ordering",
+    "body": "Janet,\n\nIf the schools want supplies in place for August, orders need to be in by July 10.\nI'll send a reminder to the principals in June.\n\nThanks,\nMaria",
+    "attachments": [],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E015",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-06-01T09:30:00-07:00",
+    "subject": "Invoice ACME-1047",
+    "body": "Hi Janet,\n\nAttached is ACME-1047 for May.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1047.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E016",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-07-01T09:30:00-07:00",
+    "subject": "Invoice ACME-1048",
+    "body": "Hi Janet,\n\nInvoice ACME-1048 for June is attached. Mostly end-of-year restocking.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1048.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E017",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-07-09T10:45:00-07:00",
+    "subject": "Re: back-to-school orders",
+    "body": "Janet,\n\nGot orders from 9 of the 12 schools. Still waiting on Jefferson, Adams and the middle school.\nCan you nudge them? Otherwise they ship with the second wave in late August.\n\nThanks,\nMaria",
+    "attachments": [],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E018",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-08-01T09:30:00-07:00",
+    "subject": "Invoice ACME-1049",
+    "body": "Hi Janet,\n\nACME-1049 attached for July. This is the big back-to-school month.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1049.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E019",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-08-26T14:30:00-07:00",
+    "subject": "Second wave shipped",
+    "body": "Janet,\n\nThe second wave went out today. Jefferson and Adams should have theirs by Thursday.\n\nThanks,\nMaria",
+    "attachments": [],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E020",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-09-01T09:31:00-07:00",
+    "subject": "Invoice ACME-1050",
+    "body": "Hi Janet,\n\nInvoice ACME-1050 for August is attached. Includes the second wave.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1050.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E021",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-09-17T11:05:00-07:00",
+    "subject": "Re: damaged boxes",
+    "body": "Janet,\n\nSorry about the crushed boxes at Kennedy. I've credited the two cases on next month's invoice.\nDan is talking to the carrier.\n\nThanks,\nMaria",
+    "attachments": [],
+    "kind": "history",
+    "scenario": null
+  },
+  {
+    "id": "E022",
+    "vendor_id": "V001",
+    "from": "maria.lopez@acme-supply.com",
+    "from_name": "Maria Lopez",
+    "reply_to": null,
+    "to": "janet.kim@valleyusd.example.org",
+    "date": "2026-10-01T09:30:00-07:00",
+    "subject": "Invoice ACME-1051",
+    "body": "Hi Janet,\n\nAttached is ACME-1051 for September. The credit for the two Kennedy cases is on line 6.\n\nThanks,\nMaria",
+    "attachments": [
+      "ACME-1051.pdf"
+    ],
+    "kind": "history",
+    "scenario": null
+  }
+]

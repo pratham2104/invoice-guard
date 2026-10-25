@@ -1,0 +1,92 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 3266 >>
+stream
+0.07 0.2 0.4 rg 50 712 90 40 re f
+BT 1 1 1 rg /F2 20 Tf 62 726 Td (ACME) Tj ET
+BT 0.07 0.2 0.4 rg /F2 14 Tf 150 736 Td (Acme School Supply) Tj ET
+BT 0.35 0.35 0.35 rg /F1 9 Tf 150 722 Td (1200 Industrial Way, Fresno, CA 93721) Tj ET
+BT 0.07 0.2 0.4 rg /F2 20 Tf 440 736 Td (INVOICE) Tj ET
+BT 0 0 0 rg /F2 9 Tf 420 712 Td (Invoice #) Tj ET
+BT 0 0 0 rg /F1 9 Tf 480 712 Td (ACME-1051) Tj ET
+BT 0 0 0 rg /F2 9 Tf 420 698 Td (Date) Tj ET
+BT 0 0 0 rg /F1 9 Tf 480 698 Td (2026-10-01) Tj ET
+BT 0 0 0 rg /F2 9 Tf 420 684 Td (PO) Tj ET
+BT 0 0 0 rg /F1 9 Tf 480 684 Td (PO-2026-0117) Tj ET
+BT 0 0 0 rg /F2 9 Tf 420 670 Td (Terms) Tj ET
+BT 0 0 0 rg /F1 9 Tf 480 670 Td (Net 30) Tj ET
+BT 0.35 0.35 0.35 rg /F2 9 Tf 50 670 Td (BILL TO) Tj ET
+BT 0 0 0 rg /F2 10 Tf 50 656 Td (Valley Unified School District) Tj ET
+BT 0 0 0 rg /F1 10 Tf 50 643 Td (Accounts Payable) Tj ET
+BT 0 0 0 rg /F1 10 Tf 50 630 Td (500 Education Blvd, Fresno, CA 93710) Tj ET
+0.93 0.95 0.98 rg 50 586 512 18 re f
+BT 0 0 0 rg /F2 9 Tf 56 590 Td (Description) Tj ET
+BT 0 0 0 rg /F2 9 Tf 360 590 Td (Qty) Tj ET
+BT 0 0 0 rg /F2 9 Tf 410 590 Td (Unit) Tj ET
+BT 0 0 0 rg /F2 9 Tf 490 590 Td (Amount) Tj ET
+BT 0 0 0 rg /F1 9 Tf 56 568 Td (1. Copy paper, 8.5x11, case of 10 reams) Tj ET
+BT 0 0 0 rg /F1 9 Tf 360 568 Td (18) Tj ET
+BT 0 0 0 rg /F1 9 Tf 410 568 Td (42.00) Tj ET
+BT 0 0 0 rg /F1 9 Tf 490 568 Td (756.00) Tj ET
+BT 0 0 0 rg /F1 9 Tf 56 552 Td (2. Dry-erase markers, assorted, box of 12) Tj ET
+BT 0 0 0 rg /F1 9 Tf 360 552 Td (66) Tj ET
+BT 0 0 0 rg /F1 9 Tf 410 552 Td (14.50) Tj ET
+BT 0 0 0 rg /F1 9 Tf 490 552 Td (957.00) Tj ET
+BT 0 0 0 rg /F1 9 Tf 56 536 Td (3. Composition notebooks, pack of 24) Tj ET
+BT 0 0 0 rg /F1 9 Tf 360 536 Td (37) Tj ET
+BT 0 0 0 rg /F1 9 Tf 410 536 Td (31.20) Tj ET
+BT 0 0 0 rg /F1 9 Tf 490 536 Td (1,154.40) Tj ET
+BT 0 0 0 rg /F1 9 Tf 56 520 Td (4. No. 2 pencils, box of 144) Tj ET
+BT 0 0 0 rg /F1 9 Tf 360 520 Td (71) Tj ET
+BT 0 0 0 rg /F1 9 Tf 410 520 Td (18.75) Tj ET
+BT 0 0 0 rg /F1 9 Tf 490 520 Td (1,331.25) Tj ET
+BT 0 0 0 rg /F1 9 Tf 56 504 Td (5. Construction paper, assorted, 500 sheets) Tj ET
+BT 0 0 0 rg /F1 9 Tf 360 504 Td (68) Tj ET
+BT 0 0 0 rg /F1 9 Tf 410 504 Td (22.40) Tj ET
+BT 0 0 0 rg /F1 9 Tf 490 504 Td (1,523.20) Tj ET
+BT 0 0 0 rg /F1 9 Tf 56 488 Td (6. Glue sticks, classroom pack of 30 \(and misc. supplies\)) Tj ET
+BT 0 0 0 rg /F1 9 Tf 360 488 Td (1) Tj ET
+BT 0 0 0 rg /F1 9 Tf 410 488 Td (698.15) Tj ET
+BT 0 0 0 rg /F1 9 Tf 490 488 Td (698.15) Tj ET
+0.93 0.95 0.98 rg 380 456 182 22 re f
+BT 0 0 0 rg /F2 10 Tf 390 462 Td (TOTAL DUE \(USD\)) Tj ET
+BT 0 0 0 rg /F2 10 Tf 490 462 Td (6,420.00) Tj ET
+0.07 0.2 0.4 RG 50 200 300 78 re S
+BT 0.07 0.2 0.4 rg /F2 9 Tf 60 262 Td (REMIT PAYMENT BY ACH TO) Tj ET
+BT 0 0 0 rg /F1 9 Tf 60 246 Td (Bank: First Valley Bank) Tj ET
+BT 0 0 0 rg /F1 9 Tf 60 233 Td (Routing: 999000111    Account: 4410023378) Tj ET
+BT 0 0 0 rg /F1 9 Tf 60 220 Td (Remit address: PO Box 4410, Fresno, CA 93744) Tj ET
+BT 0.35 0.35 0.35 rg /F1 8 Tf 60 207 Td (Reference the invoice number with your payment.) Tj ET
+BT 0.35 0.35 0.35 rg /F1 8 Tf 50 90 Td (Questions about this invoice? Maria Lopez  \(559\) 555-0142  maria.lopez@acme-supply.com) Tj ET
+BT 0.35 0.35 0.35 rg /F1 8 Tf 50 78 Td (Thank you for supporting Valley schools.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000003569 00000 n 
+0000003639 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3714
+%%EOF

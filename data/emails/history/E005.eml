@@ -1,0 +1,15 @@
+From: Maria Lopez <maria.lopez@acme-supply.com>
+To: janet.kim@valleyusd.example.org
+Subject: Invoice ACME-1042
+Date: Thu, 01 Jan 2026 09:30:00 -0700
+Message-ID: <e005@demo.invoice-guard>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+Hi Janet,
+
+Attached is ACME-1042 for December. Smaller than usual because of the break.
+
+Thanks,
+Maria
