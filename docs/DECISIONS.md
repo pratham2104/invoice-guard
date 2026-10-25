@@ -33,3 +33,4 @@ One line each: what, why. Newest at the bottom. Don't relitigate without new fac
 - Account-length numbers (6+ digits) are masked to the last 4 in stored findings and audit details, as her prototype did for bank accounts.
 - The surprise demo email now carries its invoice as a PDF (data/invoices/ACME-1052-lab.pdf), so the pipeline reads amount and PO from the attachment like a real invoice.
 - Build order was T04 → T09 → T15 (not T04 → T15 → T09) because the pipeline calls the alerts module.
+- Vision (T06): the text compare always runs and draws the boxes (PDF text positions are exact); Qwen vision only adds findings, and a model-only claim the PDF text contradicts stays `low`. Rendering uses `@napi-rs/canvas` (already in the lockfile via pdfjs-dist; prebuilt for linux-arm64).

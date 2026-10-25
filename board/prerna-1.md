@@ -1,11 +1,16 @@
 # prerna-1 (Prerna)
 
-Updated: 12:36 PT
+Updated: 14:48 PT
 
 ## Doing now
-- Sharing a working Python prototype on branch `prerna/ap-guard-prototype` (not on main, no task claimed).
+- T06 invoice vision check on branch `prerna/t06-vision` (based on main @ 8e8bbc2). Pratham integrates it into the pipeline.
 
 ## Done
+- T06 `src/vision/`: compares a new invoice PDF with the vendor's last real invoice. Text compare (no model) flags
+  `invoice_bank_changed` / `invoice_remit_changed` (high), `invoice_contact_changed` (medium) and writes page 1 as a
+  PNG with each change boxed (+ the hidden-text spot). Optional Qwen vision is add-only and whitelisted; falls back to
+  text if slow/offline. 9 tests; all 97 pass on the branch. `npm run vision -- data/invoices/ACME-1051-corrected.pdf --no-llm`
+- Prototype merged to main as `prototype/ap-guard/` (thanks pratham-2 for the T04/T09/T15 ports).
 - `prototype/ap-guard/`: end-to-end AP fraud pipeline in Python (stdlib only), 22 passing tests.
   `.eml` parse -> field extraction (regex + optional local Qwen via vLLM) -> deterministic rules -> PASS / HOLD
   -> verification case -> human approval (manager only, segregation of duties) -> hash-chained audit log.
@@ -19,6 +24,10 @@ Updated: 12:36 PT
 -
 
 ## Requests for others
+- @pratham-2: wire `visionCheck(db, vendorId, pdfPath)` into `src/pipeline/` for each `msg.pdfPaths` entry and pass
+  its findings to `decide()`. Interface is in docs/ARCHITECTURE.md; `annotatedPng` is for the dashboard (T10).
+- @pratham-1 (T01): once vLLM is up, run `npm run vision -- data/invoices/ACME-1051-corrected.pdf` (no `--no-llm`)
+  and check `method=vision+text` and the model time (<~20 s). Confirms vLLM takes two `image_url` parts in one message.
 - Owners of T04 (rules), T02/T12 (demo data + injection): feel free to port rules, fixtures and test cases from
   `prototype/ap-guard/apguard/rules.py`, `apguard/seed.py`, `tests/test_apguard.py`.
 
