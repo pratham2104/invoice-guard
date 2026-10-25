@@ -144,3 +144,27 @@ test("invoice fields can be read straight off the PDF (no structured invoice in 
   const checks = r.findings.map((f) => f.check);
   for (const c of ["bank_mismatch", "duplicate_invoice", "hidden_pdf_text"]) assert.ok(checks.includes(c), `missing ${c}: ${checks}`);
 });
+
+test("vendor with no email history: style is never judged (T19 false-positive fix)", async () => {
+  const db = freshDb();
+  const x = incoming.find((m) => m.id === "IN-NORMAL-1");   // Bright Bus: no history emails
+  let prompt = "";
+  const mock: LlmClient = { async complete(messages) {
+    prompt = messages.map((m) => m.content).join("\n");
+    return '{"findings":[{"check":"style_mismatch","expected":"","actual":"","severity":"high","explanation":"no past emails to compare"}]}';
+  } };
+  const r = await fingerprint(db, messageFromFixture(x), { llm: mock });
+  assert.match(prompt, /do NOT judge writing style/);
+  assert.ok(!prompt.includes("PAST EMAILS"));
+  assert.deepEqual(r.findings.map((f) => f.check), []);
+});
+
+test("vendor with a baseline still gets the style check", async () => {
+  const db = freshDb();
+  const x = incoming.find((m) => m.id === "IN-ATTACK-2");
+  let prompt = "";
+  const mock: LlmClient = { async complete(messages) { prompt = messages[1].content; return '{"findings":[{"check":"style_mismatch","expected":"Hi Janet","actual":"Dear AP Team","severity":"medium","explanation":"x"}]}'; } };
+  const r = await fingerprint(db, messageFromFixture(x), { llm: mock });
+  assert.match(prompt, /PAST EMAILS \(trusted\)/);
+  assert.ok(r.findings.some((f) => f.check === "style_mismatch"));
+});
