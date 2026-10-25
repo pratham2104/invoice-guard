@@ -270,7 +270,7 @@ def main(argv: list[str] | None = None) -> int:
     dl = sub.add_parser("discord-listen", help="rehearsal: poll a Discord channel for operator commands for N seconds")
     dl.add_argument("--channel", default="phantomshift-control")
     dl.add_argument("--seconds", type=float, default=120.0)
-    sub.add_parser("discord-setup", help="create PHANTOMSHIFT channels in the Discord server and post status")
+    sub.add_parser("discord-setup", help="create HALBERD channels in the Discord server and post status")
     atp = sub.add_parser("autopatch", help="AUTOPATCH research loop and policy deploy (fixture)")
     atp.add_argument("--db", default="artifacts/autopatch.sqlite")
     atp.add_argument("--scenario", choices=sorted(SCENARIOS), default="invoice_redirect")

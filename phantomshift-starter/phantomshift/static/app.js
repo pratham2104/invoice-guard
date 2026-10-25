@@ -1,5 +1,5 @@
 "use strict";
-/* PHANTOMSHIFT console. Every value from the API is rendered as a DOM text node via
+/* HALBERD console. Every value from the API is rendered as a DOM text node via
    the el()/sv() helpers, never parsed as markup, so fixture text cannot inject HTML. */
 
 const $ = (id) => document.getElementById(id);
@@ -594,7 +594,7 @@ async function init() {
     list = await api("/api/scenarios");
   } catch (err) {
     $("banner").append(el("div", { class: "err" }, el("strong", {}, "Could not load scenarios: "), err.message,
-      " Is the PHANTOMSHIFT server still running?"));
+      " Is the HALBERD server still running?"));
     for (const id of ["control-body", "graph-body", "futures-body", "fix-body", "measure-body"]) {
       setBody(id, el("div", { class: "panel" }, "Nothing to show until the scenario list loads."), false);
     }

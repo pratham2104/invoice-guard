@@ -235,7 +235,7 @@ class Handler(BaseHTTPRequestHandler):
 
 def serve(host: str = "127.0.0.1", port: int = 8765) -> None:
     httpd = ThreadingHTTPServer((host, port), Handler)
-    print(f"PHANTOMSHIFT listening on http://{host}:{port}")
+    print(f"HALBERD listening on http://{host}:{port}")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

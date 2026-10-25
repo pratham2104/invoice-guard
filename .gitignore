@@ -19,5 +19,7 @@ offline-stage/
 refs/
 *.sqlite-shm
 *.sqlite-wal
+*.sqlite
+data/
 *.pid
 phantomshift-starter/artifacts/runs/*.json
