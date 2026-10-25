@@ -12,7 +12,8 @@ Status: `open` → `claimed` → `in-progress` → `done` (or `blocked`).
 | T03b | Express API routes over the DB (vendors, invoices, holds, callbacks); add deps to package.json | claimed | tyler-1 | `src/api/` | Schema in ARCHITECTURE.md Interfaces |
 | T04 | AP control rules (deterministic pass/hold) | done | pratham-2 | | decide() + messageChecks() ported from prerna-1's prototype; 18 tests |
 | T05 | Vendor fingerprint: profile per vendor + Qwen "what's different" compare | done | pratham-2 | | Rules, red-team, rhythm + requester-confirmation drafts done (47 tests). Qwen paths NOT yet tried on the real GB10 model |
-| T06 | Invoice vision check: Qwen compares new invoice image vs last real one | open | | `src/vision/` | Test speed/accuracy by 12:30; fallback = compare text fields |
+| T06 | Invoice vision check: Qwen compares new invoice image vs last real one | done | prerna-1 | | Merged. Standalone `npm run vision`; NOT yet wired into src/pipeline + src/rules (see T16) |
+| T16 | Wire T06 vision findings into the pipeline + rules (demo table + dashboard image) | open | | `src/pipeline/`, `src/rules/` | Qwen vision works on our vLLM (multimodal loaded) |
 | T07 | OpenClaw tools: lookup_vendor, check_invoice, hold_payment, post_alert, create_callback_task | open | | `agent/` | No release tool, by design |
 | T08 | Inbox watcher: folder of .eml/PDF (backup) + Gmail IMAP (live demo) | open | | `src/inbox/` | |
 | T09 | Alerts: Slack summary (no invoice data) + in-app alert feed | done | pratham-2 | | Slack webhook summary + in-app alerts feed (port of prerna-1's case_blocks); 5 tests |
