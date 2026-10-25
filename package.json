@@ -16,7 +16,8 @@
     "vision": "tsx src/vision/cli.ts",
     "api": "tsx src/api/server.ts",
     "verify-local": "tsx src/verify/cli.ts",
-    "slack": "tsx src/alerts/slack-cli.ts"
+    "slack": "tsx src/alerts/slack-cli.ts",
+    "call": "tsx voice/call.ts"
   },
   "license": "MIT",
   "devDependencies": {
