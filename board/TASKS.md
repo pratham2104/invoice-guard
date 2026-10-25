@@ -15,9 +15,10 @@ Status: `open` → `claimed` → `in-progress` → `done` (or `blocked`).
 | T06 | Invoice vision check: Qwen compares new invoice image vs last real one | open | | `src/vision/` | Test speed/accuracy by 12:30; fallback = compare text fields |
 | T07 | OpenClaw tools: lookup_vendor, check_invoice, hold_payment, post_alert, create_callback_task | open | | `agent/` | No release tool, by design |
 | T08 | Inbox watcher: folder of .eml/PDF (backup) + Gmail IMAP (live demo) | open | | `src/inbox/` | |
-| T09 | Alerts: Slack summary (no invoice data) + in-app alert feed | in-progress | pratham-2 | `src/alerts/` | Slack webhook summary (port of prerna-1's case_blocks) + in-app feed |
+| T09 | Alerts: Slack summary (no invoice data) + in-app alert feed | done | pratham-2 | | Slack webhook summary + in-app alerts feed (port of prerna-1's case_blocks); 5 tests |
 | T10 | React dashboard, ONE page: held payments, vendor card with red "what's different", invoice side-by-side | open | | `web/` | |
 | T11 | Voice callback: Asterisk + call bridge + whisper.cpp + Piper | open | | `voice/` | GATED: only start if T05 + T06 work end to end by 1:30 |
 | T12 | Prompt-injection invoice demo (hidden "approve this" text gets ignored) | open | | `data/attacks/`, `tests/` | Coordinate with T02 owner |
 | T13 | Overnight self-test (agent attacks itself) | open | | `src/selftest/` | STRETCH: only if T05 + T06 done by 2:30, else a slide |
 | T14 | Submission: demo video < 2 min, write-up, deck, NVIDIA form answers | open | | `submission/` | Record on the box before 5:15 |
+| T15 | Pipeline + case workflow: .eml → fingerprint → rules → case + audit + alert; case state machine, roles, hash-chained audit (port of prerna-1's cases.py); `npm run demo` | in-progress | pratham-2 | `src/pipeline/`, `src/cases/`, `src/db/`, `data/` | Schema adds case columns + audit_events + processed_messages |

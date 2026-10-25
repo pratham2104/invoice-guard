@@ -147,3 +147,12 @@ unknown vendor sending an invoice → phone callback to `vendors.phone_on_file`.
 `action: confirm_with_requester` or is a money/rhythm anomaly (`bill_too_soon`, `fixed_amount_changed`,
 `one_time_bill`, `no_billing_history`, `amount_out_of_range`, `po_mismatch`, `invoice_out_of_sequence`) → requester
 confirmation. Else **PASS**. `unknown` findings add no points and never clear a hold. The model never decides.
+
+### Alert format (T09, `src/alerts/index.ts`), ported from prerna-1's `case_blocks`
+- `raiseAlert(db, { caseId, vendorName, outcome, state, top })` → builds the alert, posts it to `SLACK_WEBHOOK_URL`
+  if set (Slack hooks URLs only), and records it in the in-app `alerts` table
+  (`id, case_id, created_at, vendor_name, outcome, state, headline, reason, slack_sent, slack_note`). `listAlerts(db)` reads the feed.
+- Content: vendor, decision, top 1–3 reasons as fixed plain phrases (`PHRASES`), case id, state. Never invoice
+  numbers, amounts, sender addresses or bank numbers; `scrub()` strips any digit run of 5+ and any address as a backstop.
+- Webhook only: no interactive buttons (they need a public URL). Humans act on cases in the app/CLI.
+
