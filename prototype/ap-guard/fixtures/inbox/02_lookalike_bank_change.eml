@@ -1,0 +1,22 @@
+From: Dana Whitfield <dana.whitfield@acmeindustrlal.example>
+To: ap@ridgeview-usd.example
+Subject: URGENT: updated banking details - Acme Industrial Supply
+Date: Sun, 25 Oct 2026 08:12:00 +0000
+Message-ID: <179295697679.20520.14038268176979762688.02_lookalike_bank_change@fixtures.example>
+Authentication-Results:
+ mx.ridgeview-usd.example; spf=fail; dkim=none; dmarc=fail
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Hi,
+
+Please note Acme Industrial Supply has changed banks. Our new bank details ar=
+e:
+Account number: 000999888777
+Routing number: 021000021
+
+Invoice INV-6603 for PO-3107, amount due $9,640.00, is overdue. Please pay im=
+mediately to the new account today to avoid late fees.
+
+Dana Whitfield

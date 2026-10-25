@@ -1,0 +1,22 @@
+From: Jordan Miller <j.miller@acmeindustrial.example>
+To: ap@ridgeview-usd.example
+Subject: Change of remittance account - effective immediately
+Date: Sun, 25 Oct 2026 09:12:00 +0000
+Message-ID: <179295697679.20520.13892034332117144925.03_real_domain_new_contact@fixtures.example>
+Authentication-Results:
+ mx.ridgeview-usd.example; spf=pass; dkim=pass; dmarc=pass
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Hello,
+
+I've taken over accounts receivable at Acme Industrial Supply. Please update =
+our payment instructions effective immediately.
+New account number: 000444555666
+New remit to: 12 Lakeshore Dr, Reno NV 89501
+
+Invoice INV-6604 / PO-3107 for $9,640.00 is due this week, so please process =
+asap.
+
+Jordan

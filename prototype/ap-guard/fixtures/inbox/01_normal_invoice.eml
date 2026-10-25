@@ -1,0 +1,33 @@
+From: Tom Reyes <tom.reyes@summitbusparts.example>
+To: ap@ridgeview-usd.example
+Subject: Invoice INV-5521 for PO-2041
+Date: Sun, 25 Oct 2026 08:12:00 +0000
+Message-ID:
+ <179295697679.20520.12206617776779034268.01_normal_invoice@fixtures.example>
+Authentication-Results:
+ mx.ridgeview-usd.example; spf=pass; dkim=pass; dmarc=pass
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============7553653941504588496=="
+
+--===============7553653941504588496==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello AP team,
+
+Attached is invoice INV-5521 against PO-2041.
+Total due: $4,860.00, net 30.
+
+Thanks,
+Tom Reyes
+Summit Bus Parts
+
+--===============7553653941504588496==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="INV-5521.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQgZmFrZQ==
+
+--===============7553653941504588496==--
