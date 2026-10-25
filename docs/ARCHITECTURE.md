@@ -115,6 +115,11 @@ interface Finding {
   `one_time_bill` (low, action `confirm_with_requester`), `no_billing_history` (low, action `confirm_with_requester`).
   Learned per vendor in `profile.rhythm`: `{ cadence: monthly|quarterly|irregular|none, intervalDays, lastInvoiceDate,
   expectedNextDate, fixedAmount, typicalAmount }`.
+- Vision entry point (T06): `visionCheck(db, vendorId, pdfPath, { qwen?: VisionClient | false })` in
+  `src/vision/index.ts` → `{ method, referencePdf, findings, regions, annotatedPng }`. Checks:
+  `invoice_bank_changed` (high), `invoice_remit_changed` (high), `invoice_contact_changed` (medium),
+  `invoice_visual_change` (low, model-only), `invoice_compare` (unknown). `annotatedPng` is page 1 of
+  the new invoice with each change boxed (for T10). Not wired into `src/pipeline/` yet. Details: `src/vision/README.md`.
 
 ### Requester confirmation draft (fingerprint → T09 delivery)
 - `draftRequesterConfirmation(db, vendorId, msg, findings, { llm?: LlmClient | false })` in `src/fingerprint/confirm.ts`

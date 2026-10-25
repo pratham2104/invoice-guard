@@ -12,7 +12,8 @@
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
     "db:load": "tsx src/db/load.ts",
     "data:build": "python3 data/scripts/build_data.py",
-    "demo": "tsx src/pipeline/demo.ts"
+    "demo": "tsx src/pipeline/demo.ts",
+    "vision": "tsx src/vision/cli.ts"
   },
   "license": "MIT",
   "devDependencies": {
@@ -22,6 +23,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.100",
     "mailparser": "^3.7.4",
     "pdfjs-dist": "^4.10.38"
   }
